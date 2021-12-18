@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Exchange, ExchangeEnum } from '../../domain/entities/exchange.entity';
 import { IExchangeApiRepository } from '../../domain/repositories/exchange-api.repository.interface';
 import { HttpService } from 'nestjs-http-promise';
-import { FtxApiRepository } from './ftx-api.repository';
+import { FtxApiRepository } from './exchange-api/ftx-api.repository';
 
 interface IExchangeAuthParams {
   apiKey: string;

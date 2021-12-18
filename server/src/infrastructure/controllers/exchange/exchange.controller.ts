@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Inject, HttpCode } from '@nestjs/common';
+import { Body, Controller, Post, Inject } from '@nestjs/common';
 import { VerifyExchangeApiKeyUseCase } from '../../../usecases/exchange/verify-exchange.usecase';
 import { UsecasesProxyModule } from '../../usecases-proxy/usecases-proxy.module';
 import { UseCaseProxy } from '../../usecases-proxy/usecases-proxy';

@@ -6,9 +6,9 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 
-import { IExchangeApiRepository } from '../../domain/repositories/exchange-api.repository.interface';
-import { IExchangeAuthParams } from './exchange-api.repository';
-import { Exchange } from '../../domain/entities/exchange.entity';
+import { IExchangeApiRepository } from '../../../domain/repositories/exchange-api.repository.interface';
+import { IExchangeAuthParams } from '../exchange-api.repository';
+import { Exchange } from '../../../domain/entities/exchange.entity';
 import { HttpService } from 'nestjs-http-promise';
 
 const FTX_API_BASE_URL = 'https://ftx.com/api';
