@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 enum ExchangeEnum {
   'BINANCE' = 'binance',
@@ -8,19 +8,21 @@ enum ExchangeEnum {
 
 @Schema()
 class Exchange {
-  @Prop()
+  _id: Types.ObjectId;
+
+  @Prop({ type: String, required: true })
   name: ExchangeEnum;
 
-  @Prop()
+  @Prop({ type: String, required: true, unique: true })
   label: string;
 
-  @Prop()
+  @Prop({ type: String, required: true })
   apiKey: string;
 
-  @Prop()
+  @Prop({ type: String, required: true })
   apiSecret: string;
 
-  @Prop()
+  @Prop({ type: String })
   subaccountName?: string;
 }
 

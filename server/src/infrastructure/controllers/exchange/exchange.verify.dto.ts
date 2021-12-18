@@ -1,20 +1,10 @@
-import { IsEnum, IsOptional, IsString } from 'class-validator';
-import { ExchangeEnum } from 'src/domain/entities/exchange.entity';
+import { IsMongoId, IsNotEmpty } from 'class-validator';
+import { Types } from 'mongoose';
 
 class CheckExchangeApiKeyDTO {
-  @IsString()
-  @IsEnum(ExchangeEnum)
-  name: ExchangeEnum;
-
-  @IsString()
-  apiKey: string;
-
-  @IsString()
-  apiSecret: string;
-
-  @IsOptional()
-  @IsString()
-  subaccountName?: string;
+  @IsNotEmpty()
+  @IsMongoId()
+  id: string | Types.ObjectId;
 }
 
 export { CheckExchangeApiKeyDTO };

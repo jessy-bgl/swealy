@@ -1,16 +1,14 @@
 import { IExchangeApiRepository } from '../../domain/repositories/exchange-api.repository.interface';
-import { Exchange, ExchangeEnum } from '../../domain/entities/exchange.entity';
+import { IExchangeDbRepository } from '../../domain/repositories/exchange-db.repository.interface';
 
 class VerifyExchangeApiKeyUseCase {
-  constructor(private readonly exchangeApiRepository: IExchangeApiRepository) {}
+  constructor(
+    private readonly exchangeDbRepository: IExchangeDbRepository,
+    private readonly exchangeApiRepository: IExchangeApiRepository,
+  ) {}
 
-  execute = (apiKey: string, apiSecret: string, subaccountName: string) => {
-    // TODO : get Exchange in DB before passing it in params
-    const exchange = new Exchange();
-    exchange.name = ExchangeEnum.FTX;
-    exchange.apiKey = apiKey;
-    exchange.apiSecret = apiSecret;
-    exchange.subaccountName = subaccountName;
+  execute = async (id: string) => {
+    const exchange = await this.exchangeDbRepository.fetchOne(id);
     return this.exchangeApiRepository.checkApiKeyValidity(exchange);
   };
 }

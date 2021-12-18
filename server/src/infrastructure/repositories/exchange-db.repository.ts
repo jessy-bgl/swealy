@@ -16,8 +16,31 @@ class ExchangeDbRepository implements IExchangeDbRepository {
     private readonly exchangeModel: Model<ExchangeDocument>,
   ) {}
 
+  async fetch(): Promise<Exchange[]> {
+    try {
+      const exchanges = await this.exchangeModel.find().lean();
+      return exchanges;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async fetchOne(id: string): Promise<Exchange> {
+    try {
+      const exchange = await this.exchangeModel.findById(id).lean();
+      return exchange;
+    } catch (e) {
+      throw e;
+    }
+  }
+
   create(createExchangeDTO: CreateExchangeDTO): Promise<Exchange> {
-    throw new Error('Method not implemented.');
+    try {
+      const exchange = new this.exchangeModel(createExchangeDTO);
+      return exchange.save();
+    } catch (e) {
+      throw e;
+    }
   }
 
   update(updateExchangeDTO: UpdateExchangeDTO): Promise<Exchange> {

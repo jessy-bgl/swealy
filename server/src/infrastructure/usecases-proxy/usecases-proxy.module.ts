@@ -1,16 +1,21 @@
 import { DynamicModule, Module } from '@nestjs/common';
 
+import { HttpCustomModule } from '../config/axios/http.module';
+
 import { ExchangeApiRepository } from '../repositories/exchange-api.repository';
 import { RepositoriesModule } from '../repositories/repositories.module';
+import { ExchangeDbRepository } from '../repositories/exchange-db.repository';
 
+import { FetchExchangesUseCase } from '../../usecases/exchange/fetch-exchanges.usecase';
+import { AddExchangeUseCase } from '../../usecases/exchange/add-exchange.usecase';
 import { VerifyExchangeApiKeyUseCase } from '../../usecases/exchange/verify-exchange.usecase';
 import { UseCaseProxy } from './usecases-proxy';
-import { HttpCustomModule } from '../config/axios/http.module';
 
 @Module({
   imports: [HttpCustomModule, RepositoriesModule],
 })
 export class UsecasesProxyModule {
+  static FETCH_EXCHANGES_USECASE_PROXY = 'fetchExchangesUsecaseProxy';
   static ADD_EXCHANGE_USECASE_PROXY = 'addExchangeUsecaseProxy';
   static DELETE_EXCHANGE_USECASE_PROXY = 'deleteExchangeUsecaseProxy';
   static UPDATE_EXCHANGE_USECASE_PROXY = 'updateExchangeUsecaseProxy';
@@ -22,13 +27,34 @@ export class UsecasesProxyModule {
       imports: [HttpCustomModule],
       providers: [
         {
-          inject: [ExchangeApiRepository],
+          inject: [ExchangeDbRepository],
+          provide: UsecasesProxyModule.FETCH_EXCHANGES_USECASE_PROXY,
+          useFactory: (repository: ExchangeDbRepository) =>
+            new UseCaseProxy(new FetchExchangesUseCase(repository)),
+        },
+        {
+          inject: [ExchangeDbRepository],
+          provide: UsecasesProxyModule.ADD_EXCHANGE_USECASE_PROXY,
+          useFactory: (repository: ExchangeDbRepository) =>
+            new UseCaseProxy(new AddExchangeUseCase(repository)),
+        },
+        {
+          inject: [ExchangeDbRepository, ExchangeApiRepository],
           provide: UsecasesProxyModule.VERIFY_EXCHANGE_USECASE_PROXY,
-          useFactory: (repository: ExchangeApiRepository) =>
-            new UseCaseProxy(new VerifyExchangeApiKeyUseCase(repository)),
+          useFactory: (
+            dbRepository: ExchangeDbRepository,
+            apiRepository: ExchangeApiRepository,
+          ) =>
+            new UseCaseProxy(
+              new VerifyExchangeApiKeyUseCase(dbRepository, apiRepository),
+            ),
         },
       ],
-      exports: [UsecasesProxyModule.VERIFY_EXCHANGE_USECASE_PROXY],
+      exports: [
+        UsecasesProxyModule.FETCH_EXCHANGES_USECASE_PROXY,
+        UsecasesProxyModule.ADD_EXCHANGE_USECASE_PROXY,
+        UsecasesProxyModule.VERIFY_EXCHANGE_USECASE_PROXY,
+      ],
     };
   }
 }

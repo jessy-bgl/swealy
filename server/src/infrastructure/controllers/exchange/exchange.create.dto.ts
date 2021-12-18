@@ -6,17 +6,21 @@ class CreateExchangeDTO {
   @IsEnum(ExchangeEnum)
   name: string;
 
-  @IsOptional()
-  @IsString()
-  label: string;
-
   @IsNotEmpty()
   @IsString()
-  publicKey: string;
+  apiKey: string;
 
   @IsNotEmpty()
   @IsString()
   apiSecret: string;
+
+  @IsNotEmpty()
+  @IsString()
+  label: string;
+
+  @IsOptional()
+  @IsString()
+  subaccountName?: string;
 }
 
 export { CreateExchangeDTO };
