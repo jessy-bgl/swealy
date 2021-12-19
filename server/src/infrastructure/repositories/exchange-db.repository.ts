@@ -43,8 +43,20 @@ class ExchangeDbRepository implements IExchangeDbRepository {
     }
   }
 
-  update(updateExchangeDTO: UpdateExchangeDTO): Promise<Exchange> {
-    throw new Error('Method not implemented.');
+  async update(
+    id: string,
+    updateExchangeDTO: UpdateExchangeDTO,
+  ): Promise<Exchange> {
+    try {
+      const exchange = await this.exchangeModel.findOneAndUpdate(
+        { _id: id },
+        updateExchangeDTO,
+        { new: true },
+      );
+      return exchange;
+    } catch (e) {
+      throw e;
+    }
   }
 
   delete(id: string): Promise<Exchange> {

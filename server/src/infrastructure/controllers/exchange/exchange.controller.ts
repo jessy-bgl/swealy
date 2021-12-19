@@ -1,13 +1,22 @@
-import { Body, Controller, Post, Inject, Get, Param } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Inject,
+  Get,
+  Param,
+  Put,
+} from '@nestjs/common';
 
-import { CheckExchangeApiKeyDTO } from './exchange.verify.dto';
-import { CreateExchangeDTO } from './exchange.create.dto';
-
+import { UsecasesProxyModule } from '../../usecases-proxy/usecases-proxy.module';
 import { VerifyExchangeApiKeyUseCase } from '../../../usecases/exchange/verify-exchange.usecase';
 import { FetchExchangesUseCase } from '../../../usecases/exchange/fetch-exchanges.usecase';
 import { AddExchangeUseCase } from '../../../usecases/exchange/add-exchange.usecase';
 import { UseCaseProxy } from '../../usecases-proxy/usecases-proxy';
-import { UsecasesProxyModule } from '../../usecases-proxy/usecases-proxy.module';
+import { UpdateExchangeUseCase } from '../../../usecases/exchange/update-exchange.usecase';
+
+import { CreateExchangeDTO } from './exchange.create.dto';
+import { UpdateExchangeDTO } from './exchange.update.dto';
 
 @Controller('exchange')
 class ExchangeController {
@@ -18,6 +27,8 @@ class ExchangeController {
     private readonly fetchExchangesUsecase: UseCaseProxy<FetchExchangesUseCase>,
     @Inject(UsecasesProxyModule.ADD_EXCHANGE_USECASE_PROXY)
     private readonly addExchangeUsecase: UseCaseProxy<AddExchangeUseCase>,
+    @Inject(UsecasesProxyModule.UPDATE_EXCHANGE_USECASE_PROXY)
+    private readonly updateExchangeUsecase: UseCaseProxy<UpdateExchangeUseCase>,
   ) {}
 
   @Get()
@@ -28,6 +39,16 @@ class ExchangeController {
   @Post()
   async addExchange(@Body() createExchangeDTO: CreateExchangeDTO) {
     return this.addExchangeUsecase.getInstance().execute(createExchangeDTO);
+  }
+
+  @Put(':id')
+  async updateExchange(
+    @Param('id') id: string,
+    @Body() updateExchangeDTO: UpdateExchangeDTO,
+  ) {
+    return this.updateExchangeUsecase
+      .getInstance()
+      .execute(id, updateExchangeDTO);
   }
 
   @Get(':id/check')

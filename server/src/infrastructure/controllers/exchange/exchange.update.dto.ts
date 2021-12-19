@@ -12,6 +12,10 @@ class UpdateExchangeDTO {
   @IsOptional()
   @IsString()
   apiSecret?: string;
+
+  @IsOptional()
+  @IsString()
+  subaccountName?: string;
 }
 
 export { UpdateExchangeDTO };
