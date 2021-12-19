@@ -11,6 +11,7 @@ import { FetchExchangesUseCase } from '../../usecases/exchange/fetch-exchanges.u
 import { AddExchangeUseCase } from '../../usecases/exchange/add-exchange.usecase';
 import { VerifyExchangeApiKeyUseCase } from '../../usecases/exchange/verify-exchange.usecase';
 import { UpdateExchangeUseCase } from '../../usecases/exchange/update-exchange.usecase';
+import { DeleteExchangeUseCase } from '../../usecases/exchange/delete-exchange.usecase';
 
 @Module({
   imports: [HttpCustomModule, RepositoriesModule],
@@ -46,6 +47,12 @@ export class UsecasesProxyModule {
             new UseCaseProxy(new UpdateExchangeUseCase(repository)),
         },
         {
+          inject: [ExchangeDbRepository],
+          provide: UsecasesProxyModule.DELETE_EXCHANGE_USECASE_PROXY,
+          useFactory: (repository: ExchangeDbRepository) =>
+            new UseCaseProxy(new DeleteExchangeUseCase(repository)),
+        },
+        {
           inject: [ExchangeDbRepository, ExchangeApiRepository],
           provide: UsecasesProxyModule.VERIFY_EXCHANGE_USECASE_PROXY,
           useFactory: (
@@ -61,6 +68,7 @@ export class UsecasesProxyModule {
         UsecasesProxyModule.FETCH_EXCHANGES_USECASE_PROXY,
         UsecasesProxyModule.ADD_EXCHANGE_USECASE_PROXY,
         UsecasesProxyModule.UPDATE_EXCHANGE_USECASE_PROXY,
+        UsecasesProxyModule.DELETE_EXCHANGE_USECASE_PROXY,
         UsecasesProxyModule.VERIFY_EXCHANGE_USECASE_PROXY,
       ],
     };

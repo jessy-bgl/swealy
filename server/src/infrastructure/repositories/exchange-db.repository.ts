@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateExchangeDTO } from '../../infrastructure/controllers/exchange/exchange.create.dto';
@@ -53,14 +53,21 @@ class ExchangeDbRepository implements IExchangeDbRepository {
         updateExchangeDTO,
         { new: true },
       );
+      if (!exchange) throw new NotFoundException();
       return exchange;
     } catch (e) {
       throw e;
     }
   }
 
-  delete(id: string): Promise<Exchange> {
-    throw new Error('Method not implemented.');
+  async delete(id: string): Promise<Exchange> {
+    try {
+      const exchange = await this.exchangeModel.findOneAndDelete({ _id: id });
+      if (!exchange) throw new NotFoundException();
+      return exchange;
+    } catch (e) {
+      throw e;
+    }
   }
 }
 
