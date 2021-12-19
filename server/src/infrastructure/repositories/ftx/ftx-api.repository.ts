@@ -5,25 +5,19 @@ import {
   Injectable,
   InternalServerErrorException,
 } from '@nestjs/common';
+import { HttpService } from 'nestjs-http-promise';
+
+import {
+  HttpMethodsEnum,
+  IMarketsResult,
+} from '../../../domain/repositories/types';
+import { IFtxApiResponse, IFtxAuthHttpHeaders } from './ftx-api.types';
 
 import { IExchangeApiRepository } from '../../../domain/repositories/exchange-api.repository.interface';
 import { IExchangeAuthParams } from '../exchange-api.repository';
 import { Exchange } from '../../../domain/entities/exchange.entity';
-import { HttpService } from 'nestjs-http-promise';
 
 const FTX_API_BASE_URL = 'https://ftx.com/api';
-
-interface IFtxAuthHttpHeaders {
-  'FTX-TS': string;
-  'FTX-KEY': string;
-  'FTX-SIGN': string;
-  'FTX-SUBACCOUNT': string;
-}
-
-enum HttpMethodsEnum {
-  'GET' = 'GET',
-  'POST' = 'POST',
-}
 
 @Injectable()
 class FtxApiRepository implements Partial<IExchangeApiRepository> {
@@ -84,8 +78,29 @@ class FtxApiRepository implements Partial<IExchangeApiRepository> {
     throw new Error('Method not implemented.');
   }
 
-  static getAvailableSpotMarkets(): Promise<string[]> {
-    throw new Error('Method not implemented.');
+  static async getAvailableSpotMarkets(
+    httpService: HttpService,
+  ): Promise<IMarketsResult[]> {
+    try {
+      const res = await httpService.get<IFtxApiResponse<IMarketsResult[]>>(
+        `${FTX_API_BASE_URL}/markets`,
+      );
+
+      if (!res.data || !res.data.success)
+        throw new InternalServerErrorException('FTX api returned an error');
+
+      return res.data.result
+        .filter((d) => d.type === 'spot')
+        .map((d) => ({
+          name: d.name,
+          type: d.type,
+          price: d.price,
+          priceIncrement: d.priceIncrement,
+          sizeIncrement: d.sizeIncrement,
+        }));
+    } catch (e) {
+      throw e;
+    }
   }
 }
 

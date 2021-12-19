@@ -12,6 +12,7 @@ import { AddExchangeUseCase } from '../../usecases/exchange/add-exchange.usecase
 import { VerifyExchangeApiKeyUseCase } from '../../usecases/exchange/verify-exchange.usecase';
 import { UpdateExchangeUseCase } from '../../usecases/exchange/update-exchange.usecase';
 import { DeleteExchangeUseCase } from '../../usecases/exchange/delete-exchange.usecase';
+import { MarketsExchangeApiKeyUseCase } from '../../usecases/exchange/markets-exchange.usecase';
 
 @Module({
   imports: [HttpCustomModule, RepositoriesModule],
@@ -22,6 +23,7 @@ export class UsecasesProxyModule {
   static DELETE_EXCHANGE_USECASE_PROXY = 'deleteExchangeUsecaseProxy';
   static UPDATE_EXCHANGE_USECASE_PROXY = 'updateExchangeUsecaseProxy';
   static VERIFY_EXCHANGE_USECASE_PROXY = 'verifyExchangeUsecaseProxy';
+  static GET_MARKETS_EXCHANGE_USECASE_PROXY = 'getMarketsExchangeUsecaseProxy';
 
   static register(): DynamicModule {
     return {
@@ -63,6 +65,17 @@ export class UsecasesProxyModule {
               new VerifyExchangeApiKeyUseCase(dbRepository, apiRepository),
             ),
         },
+        {
+          inject: [ExchangeDbRepository, ExchangeApiRepository],
+          provide: UsecasesProxyModule.GET_MARKETS_EXCHANGE_USECASE_PROXY,
+          useFactory: (
+            dbRepository: ExchangeDbRepository,
+            apiRepository: ExchangeApiRepository,
+          ) =>
+            new UseCaseProxy(
+              new MarketsExchangeApiKeyUseCase(dbRepository, apiRepository),
+            ),
+        },
       ],
       exports: [
         UsecasesProxyModule.FETCH_EXCHANGES_USECASE_PROXY,
@@ -70,6 +83,7 @@ export class UsecasesProxyModule {
         UsecasesProxyModule.UPDATE_EXCHANGE_USECASE_PROXY,
         UsecasesProxyModule.DELETE_EXCHANGE_USECASE_PROXY,
         UsecasesProxyModule.VERIFY_EXCHANGE_USECASE_PROXY,
+        UsecasesProxyModule.GET_MARKETS_EXCHANGE_USECASE_PROXY,
       ],
     };
   }

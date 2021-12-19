@@ -9,12 +9,14 @@ interface IExchangeApiRepository {
   checkApiKeyValidity(exchange: Exchange): Promise<boolean>;
 
   createSpotOrder(
+    exchange: Exchange,
     type: OrderTypesEnum,
     market: string,
     price: number,
   ): Promise<void>;
 
-  getAvailableSpotMarkets(): Promise<string[]>;
+  // TODO : create a standard type to replace the 'any' type
+  getAvailableSpotMarkets(exchange: Exchange): Promise<any[]>;
 }
 
 export { IExchangeApiRepository, OrderTypesEnum };
