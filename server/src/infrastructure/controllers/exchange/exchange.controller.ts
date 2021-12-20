@@ -16,7 +16,7 @@ import { AddExchangeUseCase } from '../../../usecases/exchange/add-exchange.usec
 import { UseCaseProxy } from '../../usecases-proxy/usecases-proxy';
 import { UpdateExchangeUseCase } from '../../../usecases/exchange/update-exchange.usecase';
 import { DeleteExchangeUseCase } from '../../../usecases/exchange/delete-exchange.usecase';
-import { MarketsExchangeApiKeyUseCase } from '../../../usecases/exchange/markets-exchange.usecase';
+import { PairsExchangeApiKeyUseCase } from '../../../usecases/exchange/fetch-exchange-pairs.usecase';
 
 import { CreateExchangeDTO } from './exchange.create.dto';
 import { UpdateExchangeDTO } from './exchange.update.dto';
@@ -35,7 +35,7 @@ class ExchangeController {
     @Inject(UsecasesProxyModule.VERIFY_EXCHANGE_USECASE_PROXY)
     private readonly verifyExchangeApiKeyUsecase: UseCaseProxy<VerifyExchangeApiKeyUseCase>,
     @Inject(UsecasesProxyModule.GET_MARKETS_EXCHANGE_USECASE_PROXY)
-    private readonly getMarketsExchangeApiKeyUsecase: UseCaseProxy<MarketsExchangeApiKeyUseCase>,
+    private readonly getPairsExchangeApiKeyUsecase: UseCaseProxy<PairsExchangeApiKeyUseCase>,
   ) {}
 
   @Get()
@@ -68,9 +68,9 @@ class ExchangeController {
     return this.verifyExchangeApiKeyUsecase.getInstance().execute(id);
   }
 
-  @Get(':id/markets')
-  async getMarkets(@Param('id') id: string) {
-    return this.getMarketsExchangeApiKeyUsecase.getInstance().execute(id);
+  @Get(':id/pairs')
+  async getPairs(@Param('id') id: string) {
+    return this.getPairsExchangeApiKeyUsecase.getInstance().execute(id);
   }
 }
 

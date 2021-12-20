@@ -3,7 +3,7 @@ enum HttpMethodsEnum {
   'POST' = 'POST',
 }
 
-interface IMarketsResult {
+interface IPairsResult {
   name: string;
   type: string;
   price: number;
@@ -11,5 +11,5 @@ interface IMarketsResult {
   sizeIncrement: number;
 }
 
-export type { IMarketsResult };
+export type { IPairsResult };
 export { HttpMethodsEnum };

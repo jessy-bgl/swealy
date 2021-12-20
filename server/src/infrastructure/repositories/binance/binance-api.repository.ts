@@ -16,7 +16,7 @@ class BinanceApiRepository implements IExchangeApiRepository {
     throw new Error('Method not implemented.');
   }
 
-  getAvailableSpotMarkets(): Promise<string[]> {
+  getAvailableSpotPairs(): Promise<string[]> {
     throw new Error('Method not implemented.');
   }
 }

@@ -9,7 +9,7 @@ import { HttpService } from 'nestjs-http-promise';
 
 import {
   HttpMethodsEnum,
-  IMarketsResult,
+  IPairsResult,
 } from '../../../domain/repositories/types';
 import { IFtxApiResponse, IFtxAuthHttpHeaders } from './ftx-api.types';
 
@@ -78,11 +78,11 @@ class FtxApiRepository implements Partial<IExchangeApiRepository> {
     throw new Error('Method not implemented.');
   }
 
-  static async getAvailableSpotMarkets(
+  static async getAvailableSpotPairs(
     httpService: HttpService,
-  ): Promise<IMarketsResult[]> {
+  ): Promise<IPairsResult[]> {
     try {
-      const res = await httpService.get<IFtxApiResponse<IMarketsResult[]>>(
+      const res = await httpService.get<IFtxApiResponse<IPairsResult[]>>(
         `${FTX_API_BASE_URL}/markets`,
       );
 

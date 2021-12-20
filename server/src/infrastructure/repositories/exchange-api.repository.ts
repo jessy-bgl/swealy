@@ -38,10 +38,10 @@ class ExchangeApiRepository implements IExchangeApiRepository {
     return Promise.reject();
   }
 
-  getAvailableSpotMarkets(exchange: Exchange) {
+  getAvailableSpotPairs(exchange: Exchange) {
     switch (exchange.name) {
       case ExchangeEnum.FTX: {
-        return FtxApiRepository.getAvailableSpotMarkets(this.httpService);
+        return FtxApiRepository.getAvailableSpotPairs(this.httpService);
       }
       default: {
         break;
