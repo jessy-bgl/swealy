@@ -17,6 +17,8 @@ interface IExchangeApiRepository {
 
   // TODO : create a standard type to replace the 'any' type
   getAvailableSpotPairs(exchange: Exchange): Promise<any[]>;
+
+  // TODO : getAvailableSpotFunds
 }
 
 export { IExchangeApiRepository, OrderTypesEnum };
