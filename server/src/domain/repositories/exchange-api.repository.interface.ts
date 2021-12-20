@@ -1,4 +1,4 @@
-import { Exchange } from '../entities/exchange.entity';
+import { Exchange } from '../entities/exchange';
 
 enum OrderTypesEnum {
   LIMIT = 'limit',

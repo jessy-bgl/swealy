@@ -1,6 +1,6 @@
 import { CreateExchangeDTO } from '../../infrastructure/controllers/exchange/exchange.create.dto';
 import { UpdateExchangeDTO } from '../../infrastructure/controllers/exchange/exchange.update.dto';
-import { Exchange } from '../entities/exchange.entity';
+import { Exchange } from '../entities/exchange';
 
 interface IExchangeDbRepository {
   fetch(): Promise<Exchange[]>;

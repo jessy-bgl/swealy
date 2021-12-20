@@ -3,10 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import { ExchangeApiRepository } from './exchange-api.repository';
 import { ExchangeDbRepository } from './exchange-db.repository';
-import {
-  Exchange,
-  ExchangeSchema,
-} from '../../domain/entities/exchange.entity';
+import { Exchange, ExchangeSchema } from '../entities/exchange.entity';
 import { HttpCustomModule } from '../config/axios/http.module';
 
 @Module({

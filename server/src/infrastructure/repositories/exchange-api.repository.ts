@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { HttpService } from 'nestjs-http-promise';
 
 import { FtxApiRepository } from './ftx/ftx-api.repository';
-import { Exchange, ExchangeEnum } from '../../domain/entities/exchange.entity';
+import { Exchange, ExchangeEnum } from '../entities/exchange.entity';
 import {
   IExchangeApiRepository,
   OrderTypesEnum,

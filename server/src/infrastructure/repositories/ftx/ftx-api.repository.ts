@@ -15,7 +15,7 @@ import { IFtxApiResponse, IFtxAuthHttpHeaders } from './ftx-api.types';
 
 import { IExchangeApiRepository } from '../../../domain/repositories/exchange-api.repository.interface';
 import { IExchangeAuthParams } from '../exchange-api.repository';
-import { Exchange } from '../../../domain/entities/exchange.entity';
+import { Exchange } from '../../entities/exchange.entity';
 
 const FTX_API_BASE_URL = 'https://ftx.com/api';
 

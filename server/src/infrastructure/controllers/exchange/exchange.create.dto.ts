@@ -1,5 +1,5 @@
 import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { ExchangeEnum } from '../../../domain/entities/exchange.entity';
+import { ExchangeEnum } from '../../entities/exchange.entity';
 
 class CreateExchangeDTO {
   @IsNotEmpty()
