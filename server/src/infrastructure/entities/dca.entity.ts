@@ -22,7 +22,7 @@ class Dca {
   @Prop({ type: Number, required: true, default: 0 })
   hour: number;
 
-  @Prop({ type: String, required: true })
+  @Prop({ type: Number, required: true })
   amount: number;
 }
 

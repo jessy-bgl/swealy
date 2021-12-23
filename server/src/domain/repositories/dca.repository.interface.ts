@@ -1,9 +1,11 @@
-import { CreateDcaDTO } from '../../infrastructure/controllers/dca/dca.create.dto';
 import { Dca } from '../entities/dca';
+import { UpdateDcaDTO } from '../../infrastructure/controllers/dca/dca.update.dto';
+import { CreateDcaDTO } from '../../infrastructure/controllers/dca/dca.create.dto';
 
 interface IDcaRepository {
   fetch(): Promise<Dca[]>;
   create(createDcaDTO: CreateDcaDTO): Promise<Dca>;
+  update(id: string, updateDcaDTO: UpdateDcaDTO): Promise<Dca>;
 }
 
 export { IDcaRepository };

@@ -16,6 +16,7 @@ import { DeleteExchangeUseCase } from '../../usecases/exchange/delete-exchange.u
 import { PairsExchangeApiKeyUseCase } from '../../usecases/exchange/fetch-exchange-pairs.usecase';
 import { CreateDcaUseCase } from '../../usecases/dca/create-dca.usecase';
 import { FetchDcaUseCase } from '../../usecases/dca/fetch-dca.usecase';
+import { UpdateDcaUseCase } from '../../usecases/dca/update-dca.usecase';
 
 @Module({
   imports: [HttpCustomModule, RepositoriesModule],
@@ -95,6 +96,12 @@ export class UsecasesProxyModule {
           useFactory: (dcaRepository: DcaRepository) =>
             new UseCaseProxy(new CreateDcaUseCase(dcaRepository)),
         },
+        {
+          inject: [DcaRepository],
+          provide: UsecasesProxyModule.UPDATE_DCA_USECASE_PROXY,
+          useFactory: (dcaRepository: DcaRepository) =>
+            new UseCaseProxy(new UpdateDcaUseCase(dcaRepository)),
+        },
       ],
       exports: [
         UsecasesProxyModule.FETCH_EXCHANGES_USECASE_PROXY,
@@ -105,6 +112,7 @@ export class UsecasesProxyModule {
         UsecasesProxyModule.GET_MARKETS_EXCHANGE_USECASE_PROXY,
         UsecasesProxyModule.FETCH_DCA_USECASE_PROXY,
         UsecasesProxyModule.CREATE_DCA_USECASE_PROXY,
+        UsecasesProxyModule.UPDATE_DCA_USECASE_PROXY,
       ],
     };
   }
