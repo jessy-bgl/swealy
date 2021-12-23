@@ -1,4 +1,10 @@
-import { IsMongoId, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsMongoId,
+  IsNotEmpty,
+  IsNumber,
+  IsPositive,
+  IsString,
+} from 'class-validator';
 import { Types } from 'mongoose';
 
 class CreateDcaDTO {
@@ -11,12 +17,15 @@ class CreateDcaDTO {
   pair: string;
 
   @IsNumber()
+  @IsPositive()
   frequencyInDays: number;
 
   @IsNumber()
+  @IsPositive()
   hour: number;
 
   @IsNumber()
+  @IsPositive()
   amount: number;
 }
 

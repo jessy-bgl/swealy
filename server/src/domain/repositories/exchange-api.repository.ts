@@ -17,4 +17,4 @@ interface IExchangeApiRepository {
   // TODO : getAvailableSpotFunds
 }
 
-export { IExchangeApiRepository, OrderTypesEnum };
+export { IExchangeApiRepository };

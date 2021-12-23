@@ -1,15 +1,20 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+
 import { CreateExchangeDTO } from '../../infrastructure/controllers/exchange/exchange.create.dto';
 import { UpdateExchangeDTO } from '../../infrastructure/controllers/exchange/exchange.update.dto';
 import { IExchangeDbRepository } from '../../domain/repositories/exchange-db.repository';
-import { Exchange, ExchangeDocument } from '../entities/exchange.entity';
+import {
+  Exchange as ExchangeModel,
+  ExchangeDocument,
+} from '../entities/exchange.entity';
+import { Exchange } from '../../domain/entities/exchange';
 
 @Injectable()
 class ExchangeDbRepository implements IExchangeDbRepository {
   constructor(
-    @InjectModel(Exchange.name)
+    @InjectModel(ExchangeModel.name)
     private readonly exchangeModel: Model<ExchangeDocument>,
   ) {}
 
