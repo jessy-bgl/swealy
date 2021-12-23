@@ -1,5 +1,5 @@
-import { Exchange } from '../entities/exchange';
-import { OrderTypesEnum } from '../entities/transaction';
+import { Exchange } from '../models/exchange';
+import { OrderTypesEnum } from '../models/transaction';
 
 interface IExchangeApiRepository {
   checkApiKeyValidity(exchange: Exchange): Promise<boolean>;

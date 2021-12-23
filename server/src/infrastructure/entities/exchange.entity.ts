@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
-import { ExchangeEnum } from '../../domain/entities/exchange';
+import { ExchangeEnum } from '../../domain/models/exchange';
 
 @Schema()
 class Exchange {

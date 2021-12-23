@@ -1,5 +1,5 @@
 import { CreateTransactionDTO } from '../../infrastructure/controllers/transaction/transaction.create.dto';
-import { Transaction } from '../entities/transaction';
+import { Transaction } from '../models/transaction';
 
 interface ITransactionRepository {
   fetch(): Promise<Transaction[]>;

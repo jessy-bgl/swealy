@@ -1,6 +1,6 @@
 import { CreateExchangeDTO } from '../../infrastructure/controllers/exchange/exchange.create.dto';
 import { UpdateExchangeDTO } from '../../infrastructure/controllers/exchange/exchange.update.dto';
-import { Exchange } from '../entities/exchange';
+import { Exchange } from '../models/exchange';
 
 // TODO : replace the DTOs as it breaks the clean archi
 interface IExchangeDbRepository {

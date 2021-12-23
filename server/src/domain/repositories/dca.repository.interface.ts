@@ -1,4 +1,4 @@
-import { Dca } from '../entities/dca';
+import { Dca } from '../models/dca';
 import { UpdateDcaDTO } from '../../infrastructure/controllers/dca/dca.update.dto';
 import { CreateDcaDTO } from '../../infrastructure/controllers/dca/dca.create.dto';
 

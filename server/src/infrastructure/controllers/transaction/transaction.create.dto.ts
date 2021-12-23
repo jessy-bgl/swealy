@@ -11,7 +11,7 @@ import {
 } from 'class-validator';
 import { Types } from 'mongoose';
 
-import { OrderTypesEnum } from '../../../domain/entities/transaction';
+import { OrderTypesEnum } from '../../../domain/models/transaction';
 
 class CreateTransactionDTO {
   @IsOptional()

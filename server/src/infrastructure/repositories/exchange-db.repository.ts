@@ -9,7 +9,7 @@ import {
   Exchange as ExchangeModel,
   ExchangeDocument,
 } from '../entities/exchange.entity';
-import { Exchange } from '../../domain/entities/exchange';
+import { Exchange } from '../../domain/models/exchange';
 
 @Injectable()
 class ExchangeDbRepository implements IExchangeDbRepository {

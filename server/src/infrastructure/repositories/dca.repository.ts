@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { IDcaRepository } from '../../domain/repositories/dca.repository.interface';
-import { Dca } from '../../domain/entities/dca';
+import { Dca } from '../../domain/models/dca';
 import { CreateDcaDTO } from '../controllers/dca/dca.create.dto';
 import { UpdateDcaDTO } from '../controllers/dca/dca.update.dto';
 import { Dca as DcaModel, DcaDocument } from '../entities/dca.entity';

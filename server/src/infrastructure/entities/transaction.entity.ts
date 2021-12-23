@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Types, Schema as MongooseSchema } from 'mongoose';
-import { OrderTypesEnum } from '../../domain/entities/transaction';
+import { OrderTypesEnum } from '../../domain/models/transaction';
 import { Dca } from './dca.entity';
 
 @Schema()

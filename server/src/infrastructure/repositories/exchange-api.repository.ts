@@ -7,7 +7,7 @@ import {
   ExchangeEnum,
 } from '../entities/exchange.entity';
 import { IExchangeApiRepository } from '../../domain/repositories/exchange-api.repository';
-import { Exchange } from '../../domain/entities/exchange';
+import { Exchange } from '../../domain/models/exchange';
 
 interface IExchangeAuthParams {
   apiKey: string;
