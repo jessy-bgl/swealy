@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Types, Schema as MongooseSchema } from 'mongoose';
 import { OrderTypesEnum } from '../../domain/entities/transaction';
-import { Exchange } from './exchange.entity';
+import { Dca } from './dca.entity';
 
 @Schema()
 class Transaction {
@@ -19,9 +19,9 @@ class Transaction {
   @Prop({
     type: MongooseSchema.Types.ObjectId,
     required: true,
-    ref: Exchange.name,
+    ref: Dca.name,
   })
-  exchange: Exchange;
+  dca: Dca;
 
   @Prop({ type: String, required: true })
   pair: string;

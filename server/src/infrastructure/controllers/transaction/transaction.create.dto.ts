@@ -27,7 +27,7 @@ class CreateTransactionDTO {
 
   @IsNotEmpty()
   @IsMongoId()
-  exchange: Types.ObjectId;
+  dca: Types.ObjectId;
 
   @IsString()
   @IsNotEmpty()

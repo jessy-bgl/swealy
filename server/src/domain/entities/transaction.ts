@@ -1,4 +1,4 @@
-import { Exchange } from './exchange';
+import { Dca } from './dca';
 
 enum OrderTypesEnum {
   'LIMIT' = 'limit',
@@ -9,7 +9,7 @@ class Transaction {
   datetime: Date;
   success: boolean;
   amount: number;
-  exchange: Exchange;
+  dca: Dca;
   pair: string;
   price: number;
   size: number;
