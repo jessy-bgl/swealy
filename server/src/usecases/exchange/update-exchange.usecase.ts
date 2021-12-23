@@ -1,5 +1,5 @@
 import { UpdateExchangeDTO } from '../../infrastructure/controllers/exchange/exchange.update.dto';
-import { IExchangeDbRepository } from '../../domain/repositories/exchange-db.repository.interface';
+import { IExchangeDbRepository } from '../../domain/repositories/exchange-db.repository';
 
 class UpdateExchangeUseCase {
   constructor(private readonly exchangeDbRepository: IExchangeDbRepository) {}

@@ -1,5 +1,5 @@
-import { IExchangeApiRepository } from '../../domain/repositories/exchange-api.repository.interface';
-import { IExchangeDbRepository } from '../../domain/repositories/exchange-db.repository.interface';
+import { IExchangeApiRepository } from '../../domain/repositories/exchange-api.repository';
+import { IExchangeDbRepository } from '../../domain/repositories/exchange-db.repository';
 
 class VerifyExchangeApiKeyUseCase {
   constructor(

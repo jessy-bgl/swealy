@@ -13,7 +13,7 @@ import {
 } from '../../../domain/repositories/types';
 import { IFtxApiResponse, IFtxAuthHttpHeaders } from './ftx-api.types';
 
-import { IExchangeApiRepository } from '../../../domain/repositories/exchange-api.repository.interface';
+import { IExchangeApiRepository } from '../../../domain/repositories/exchange-api.repository';
 import { IExchangeAuthParams } from '../exchange-api.repository';
 import { Exchange } from '../../entities/exchange.entity';
 

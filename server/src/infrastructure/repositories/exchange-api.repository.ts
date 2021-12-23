@@ -6,7 +6,7 @@ import { Exchange, ExchangeEnum } from '../entities/exchange.entity';
 import {
   IExchangeApiRepository,
   OrderTypesEnum,
-} from '../../domain/repositories/exchange-api.repository.interface';
+} from '../../domain/repositories/exchange-api.repository';
 
 interface IExchangeAuthParams {
   apiKey: string;

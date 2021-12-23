@@ -1,6 +1,6 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import { IExchangeApiRepository } from '../../../domain/repositories/exchange-api.repository.interface';
+import { IExchangeApiRepository } from '../../../domain/repositories/exchange-api.repository';
 
 const baseUrl = 'https://api.binance.com';
 

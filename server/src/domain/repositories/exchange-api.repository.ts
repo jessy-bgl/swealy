@@ -1,9 +1,5 @@
 import { Exchange } from '../entities/exchange';
-
-enum OrderTypesEnum {
-  LIMIT = 'limit',
-  MARKET = 'market',
-}
+import { OrderTypesEnum } from '../entities/transaction';
 
 interface IExchangeApiRepository {
   checkApiKeyValidity(exchange: Exchange): Promise<boolean>;

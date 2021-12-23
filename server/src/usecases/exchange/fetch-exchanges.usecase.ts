@@ -1,4 +1,4 @@
-import { IExchangeDbRepository } from '../../domain/repositories/exchange-db.repository.interface';
+import { IExchangeDbRepository } from '../../domain/repositories/exchange-db.repository';
 
 class FetchExchangesUseCase {
   constructor(private readonly exchangeDbRepository: IExchangeDbRepository) {}
