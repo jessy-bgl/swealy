@@ -15,6 +15,7 @@ import { UsecasesProxyModule } from '../../../infrastructure/usecases-proxy/usec
 import { FetchDcaUseCase } from '../../../usecases/dca/fetch-dca.usecase';
 import { CreateDcaUseCase } from '../../../usecases/dca/create-dca.usecase';
 import { UpdateDcaUseCase } from '../../../usecases/dca/update-dca.usecase';
+import { DeleteDcaUseCase } from '../../../usecases/dca/delete-dca.usecase';
 
 import { CreateDcaDTO } from './dca.create.dto';
 import { UpdateDcaDTO } from './dca.update.dto';
@@ -28,6 +29,8 @@ class DcaController {
     private readonly createDcaUsecase: UseCaseProxy<CreateDcaUseCase>,
     @Inject(UsecasesProxyModule.UPDATE_DCA_USECASE_PROXY)
     private readonly updateDcaUsecase: UseCaseProxy<UpdateDcaUseCase>,
+    @Inject(UsecasesProxyModule.DELETE_DCA_USECASE_PROXY)
+    private readonly deleteDcaUsecase: UseCaseProxy<DeleteDcaUseCase>,
   ) {}
 
   @Get()
@@ -43,6 +46,11 @@ class DcaController {
   @Put(':id')
   updateDca(@Param('id') id: string, @Body() updateDcaDTO: UpdateDcaDTO) {
     return this.updateDcaUsecase.getInstance().execute(id, updateDcaDTO);
+  }
+
+  @Delete(':id')
+  deleteDca(@Param('id') id: string) {
+    return this.deleteDcaUsecase.getInstance().execute(id);
   }
 }
 

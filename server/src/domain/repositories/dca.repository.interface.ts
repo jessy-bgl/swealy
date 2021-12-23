@@ -6,6 +6,7 @@ interface IDcaRepository {
   fetch(): Promise<Dca[]>;
   create(createDcaDTO: CreateDcaDTO): Promise<Dca>;
   update(id: string, updateDcaDTO: UpdateDcaDTO): Promise<Dca>;
+  delete(id: string): Promise<Dca>;
 }
 
 export { IDcaRepository };
