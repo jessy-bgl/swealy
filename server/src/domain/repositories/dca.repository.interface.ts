@@ -2,6 +2,7 @@ import { CreateDcaDTO } from '../../infrastructure/controllers/dca/dca.create.dt
 import { Dca } from '../entities/dca';
 
 interface IDcaRepository {
+  fetch(): Promise<Dca[]>;
   create(createDcaDTO: CreateDcaDTO): Promise<Dca>;
 }
 

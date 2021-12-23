@@ -13,6 +13,15 @@ class DcaRepository implements IDcaRepository {
     private readonly dcaModel: Model<DcaDocument>,
   ) {}
 
+  async fetch(): Promise<Dca[]> {
+    try {
+      const dcas = await this.dcaModel.find().lean();
+      return dcas;
+    } catch (e) {
+      throw e;
+    }
+  }
+
   async create(createDcaDTO: CreateDcaDTO): Promise<Dca> {
     try {
       const dca = new this.dcaModel(createDcaDTO);

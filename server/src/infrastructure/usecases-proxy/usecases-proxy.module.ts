@@ -5,6 +5,7 @@ import { HttpCustomModule } from '../config/axios/http.module';
 import { ExchangeApiRepository } from '../repositories/exchange-api.repository';
 import { RepositoriesModule } from '../repositories/repositories.module';
 import { ExchangeDbRepository } from '../repositories/exchange-db.repository';
+import { DcaRepository } from '../repositories/dca.repository';
 
 import { UseCaseProxy } from './usecases-proxy';
 import { FetchExchangesUseCase } from '../../usecases/exchange/fetch-exchanges.usecase';
@@ -14,7 +15,7 @@ import { UpdateExchangeUseCase } from '../../usecases/exchange/update-exchange.u
 import { DeleteExchangeUseCase } from '../../usecases/exchange/delete-exchange.usecase';
 import { PairsExchangeApiKeyUseCase } from '../../usecases/exchange/fetch-exchange-pairs.usecase';
 import { CreateDcaUseCase } from '../../usecases/dca/create-dca.usecase';
-import { DcaRepository } from '../repositories/dca.repository';
+import { FetchDcaUseCase } from '../../usecases/dca/fetch-dca.usecase';
 
 @Module({
   imports: [HttpCustomModule, RepositoriesModule],
@@ -26,6 +27,7 @@ export class UsecasesProxyModule {
   static UPDATE_EXCHANGE_USECASE_PROXY = 'updateExchangeUsecaseProxy';
   static VERIFY_EXCHANGE_USECASE_PROXY = 'verifyExchangeUsecaseProxy';
   static GET_MARKETS_EXCHANGE_USECASE_PROXY = 'getPairsExchangeUsecaseProxy';
+  static FETCH_DCA_USECASE_PROXY = 'fetchDcaUsecaseProxy';
   static CREATE_DCA_USECASE_PROXY = 'createDcaUsecaseProxy';
   static UPDATE_DCA_USECASE_PROXY = 'updateDcaUsecaseProxy';
   static DELETE_DCA_USECASE_PROXY = 'deleteDcaUsecaseProxy';
@@ -83,6 +85,12 @@ export class UsecasesProxyModule {
         },
         {
           inject: [DcaRepository],
+          provide: UsecasesProxyModule.FETCH_DCA_USECASE_PROXY,
+          useFactory: (dcaRepository: DcaRepository) =>
+            new UseCaseProxy(new FetchDcaUseCase(dcaRepository)),
+        },
+        {
+          inject: [DcaRepository],
           provide: UsecasesProxyModule.CREATE_DCA_USECASE_PROXY,
           useFactory: (dcaRepository: DcaRepository) =>
             new UseCaseProxy(new CreateDcaUseCase(dcaRepository)),
@@ -95,6 +103,7 @@ export class UsecasesProxyModule {
         UsecasesProxyModule.DELETE_EXCHANGE_USECASE_PROXY,
         UsecasesProxyModule.VERIFY_EXCHANGE_USECASE_PROXY,
         UsecasesProxyModule.GET_MARKETS_EXCHANGE_USECASE_PROXY,
+        UsecasesProxyModule.FETCH_DCA_USECASE_PROXY,
         UsecasesProxyModule.CREATE_DCA_USECASE_PROXY,
       ],
     };
