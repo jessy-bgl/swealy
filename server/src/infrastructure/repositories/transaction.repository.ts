@@ -1,35 +1,42 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, Types } from 'mongoose';
+import { Model } from 'mongoose';
 
 import { ITransactionRepository } from '../../domain/repositories/transaction.repository';
 import { Transaction } from '../../domain/models/transaction';
 import { CreateTransactionDTO } from '../controllers/transaction/transaction.create.dto';
 import {
-  Transaction as TransactionModel,
+  Transaction as TransactionEntity,
   TransactionDocument,
 } from '../entities/transaction.entity';
+import { TransactionMapper } from '../mappers/transaction.mapper';
 
 @Injectable()
 class TransactionRepository implements ITransactionRepository {
   constructor(
-    @InjectModel(TransactionModel.name)
-    private readonly transactionModel: Model<TransactionDocument>,
+    @InjectModel(TransactionEntity.name)
+    private readonly transactionEntity: Model<TransactionDocument>,
   ) {}
 
   async fetch(): Promise<Transaction[]> {
     try {
-      const transactions = await this.transactionModel.find().lean();
-      return transactions;
+      const transactions = await this.transactionEntity
+        .find()
+        .populate('dca')
+        .lean();
+      return transactions.map((t) => TransactionMapper.toTransaction(t));
     } catch (e) {
       throw e;
     }
   }
 
-  create(createTransactionDTO: CreateTransactionDTO): Promise<Transaction> {
+  async create(
+    createTransactionDTO: CreateTransactionDTO,
+  ): Promise<Transaction> {
     try {
-      const transaction = new this.transactionModel(createTransactionDTO);
-      return transaction.save();
+      const transaction = new this.transactionEntity(createTransactionDTO);
+      await (await transaction.save()).populate('dca');
+      return TransactionMapper.toTransaction(transaction);
     } catch (e) {
       throw e;
     }
@@ -37,15 +44,28 @@ class TransactionRepository implements ITransactionRepository {
 
   async delete(id: string): Promise<Transaction> {
     try {
-      const transaction = await this.transactionModel.findOneAndDelete({
-        _id: id,
-      });
+      const transaction = await this.transactionEntity
+        .findOneAndDelete({ _id: id })
+        .populate('dca');
       if (!transaction) throw new NotFoundException();
-      return transaction;
+      return TransactionMapper.toTransaction(transaction);
     } catch (e) {
       throw e;
     }
   }
+
+  // async fetchLastDcaTransaction(dcaId: string): Promise<Transaction> {
+  //   try {
+  //     const transactions = await this.transactionEntity
+  //       .find({ 'dca._id': dcaId })
+  //       .sort({ datetime: -1 })
+  //       .limit(1);
+  //     console.log(transactions);
+  //     return transactions[0];
+  //   } catch (e) {
+  //     throw e;
+  //   }
+  // }
 }
 
 export { TransactionRepository };

@@ -11,11 +11,11 @@ import {
   HttpMethodsEnum,
   IPairsResult,
 } from '../../../domain/repositories/types';
+import { Exchange } from '../../../domain/models/exchange';
 import { IFtxApiResponse, IFtxAuthHttpHeaders } from './ftx-api.types';
 
 import { IExchangeApiRepository } from '../../../domain/repositories/exchange-api.repository';
 import { IExchangeAuthParams } from '../exchange-api.repository';
-import { Exchange } from '../../entities/exchange.entity';
 
 const FTX_API_BASE_URL = 'https://ftx.com/api';
 

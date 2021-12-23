@@ -6,6 +6,7 @@ enum OrderTypesEnum {
 }
 
 class Transaction {
+  id: string;
   datetime: Date;
   success: boolean;
   amount: number;

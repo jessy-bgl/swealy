@@ -4,6 +4,7 @@ enum ExchangeEnum {
 }
 
 class Exchange {
+  id: string;
   name: ExchangeEnum;
   label: string;
   apiKey: string;

@@ -6,22 +6,23 @@ import { CreateExchangeDTO } from '../../infrastructure/controllers/exchange/exc
 import { UpdateExchangeDTO } from '../../infrastructure/controllers/exchange/exchange.update.dto';
 import { IExchangeDbRepository } from '../../domain/repositories/exchange-db.repository';
 import {
-  Exchange as ExchangeModel,
+  Exchange as ExchangeEntity,
   ExchangeDocument,
 } from '../entities/exchange.entity';
 import { Exchange } from '../../domain/models/exchange';
+import { ExchangeMapper } from '../mappers/exchange.mapper';
 
 @Injectable()
 class ExchangeDbRepository implements IExchangeDbRepository {
   constructor(
-    @InjectModel(ExchangeModel.name)
-    private readonly exchangeModel: Model<ExchangeDocument>,
+    @InjectModel(ExchangeEntity.name)
+    private readonly exchangeEntity: Model<ExchangeDocument>,
   ) {}
 
   async fetch(): Promise<Exchange[]> {
     try {
-      const exchanges = await this.exchangeModel.find().lean();
-      return exchanges;
+      const exchanges = await this.exchangeEntity.find().lean();
+      return exchanges.map((e) => ExchangeMapper.toExchange(e));
     } catch (e) {
       throw e;
     }
@@ -29,17 +30,18 @@ class ExchangeDbRepository implements IExchangeDbRepository {
 
   async fetchOne(id: string): Promise<Exchange> {
     try {
-      const exchange = await this.exchangeModel.findById(id).lean();
-      return exchange;
+      const exchange = await this.exchangeEntity.findById(id).lean();
+      return ExchangeMapper.toExchange(exchange);
     } catch (e) {
       throw e;
     }
   }
 
-  create(createExchangeDTO: CreateExchangeDTO): Promise<Exchange> {
+  async create(createExchangeDTO: CreateExchangeDTO): Promise<Exchange> {
     try {
-      const exchange = new this.exchangeModel(createExchangeDTO);
-      return exchange.save();
+      const exchange = new this.exchangeEntity(createExchangeDTO);
+      await exchange.save();
+      return ExchangeMapper.toExchange(exchange);
     } catch (e) {
       throw e;
     }
@@ -50,13 +52,13 @@ class ExchangeDbRepository implements IExchangeDbRepository {
     updateExchangeDTO: UpdateExchangeDTO,
   ): Promise<Exchange> {
     try {
-      const exchange = await this.exchangeModel.findOneAndUpdate(
+      const exchange = await this.exchangeEntity.findOneAndUpdate(
         { _id: id },
         updateExchangeDTO,
         { new: true },
       );
       if (!exchange) throw new NotFoundException();
-      return exchange;
+      return ExchangeMapper.toExchange(exchange);
     } catch (e) {
       throw e;
     }
@@ -64,9 +66,9 @@ class ExchangeDbRepository implements IExchangeDbRepository {
 
   async delete(id: string): Promise<Exchange> {
     try {
-      const exchange = await this.exchangeModel.findOneAndDelete({ _id: id });
+      const exchange = await this.exchangeEntity.findOneAndDelete({ _id: id });
       if (!exchange) throw new NotFoundException();
-      return exchange;
+      return ExchangeMapper.toExchange(exchange);
     } catch (e) {
       throw e;
     }

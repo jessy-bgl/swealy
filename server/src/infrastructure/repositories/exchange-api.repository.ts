@@ -2,10 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { HttpService } from 'nestjs-http-promise';
 
 import { FtxApiRepository } from './ftx/ftx-api.repository';
-import {
-  Exchange as ExchangeModel,
-  ExchangeEnum,
-} from '../entities/exchange.entity';
+import { ExchangeEnum } from '../entities/exchange.entity';
 import { IExchangeApiRepository } from '../../domain/repositories/exchange-api.repository';
 import { Exchange } from '../../domain/models/exchange';
 
@@ -19,7 +16,7 @@ interface IExchangeAuthParams {
 class ExchangeApiRepository implements IExchangeApiRepository {
   constructor(private readonly httpService: HttpService) {}
 
-  checkApiKeyValidity(exchange: ExchangeModel): Promise<boolean> {
+  checkApiKeyValidity(exchange: Exchange): Promise<boolean> {
     switch (exchange.name) {
       case ExchangeEnum.FTX: {
         return FtxApiRepository.checkApiKeyValidity(this.httpService, exchange);
