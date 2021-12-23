@@ -7,6 +7,12 @@ class Dca {
   _id: Types.ObjectId;
 
   @Prop({
+    type: Boolean,
+    default: true,
+  })
+  isActive: boolean;
+
+  @Prop({
     type: MongooseSchema.Types.ObjectId,
     required: true,
     ref: Exchange.name,
