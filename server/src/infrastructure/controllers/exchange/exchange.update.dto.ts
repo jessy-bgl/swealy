@@ -1,9 +1,10 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 class UpdateExchangeDTO {
   @IsOptional()
   @IsString()
-  label?: string = '';
+  @IsNotEmpty()
+  label?: string;
 
   @IsOptional()
   @IsString()
