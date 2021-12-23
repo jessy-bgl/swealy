@@ -33,7 +33,7 @@ class ExchangeApiRepository implements IExchangeApiRepository {
     exchange: Exchange,
     type: OrderTypesEnum,
     market: string,
-    price: number,
+    amount: number,
   ): Promise<void> {
     return Promise.reject();
   }

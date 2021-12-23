@@ -23,7 +23,7 @@ class Dca {
   hour: number;
 
   @Prop({ type: String, required: true })
-  price: number;
+  amount: number;
 }
 
 type DcaDocument = Dca & Document;

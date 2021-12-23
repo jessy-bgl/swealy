@@ -5,7 +5,7 @@ class Dca {
   pair: string;
   frequencyInDays: number;
   hour: number;
-  price: number;
+  amount: number;
 }
 
 export { Dca };

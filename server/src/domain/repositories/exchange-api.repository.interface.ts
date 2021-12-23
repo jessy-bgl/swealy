@@ -12,7 +12,7 @@ interface IExchangeApiRepository {
     exchange: Exchange,
     type: OrderTypesEnum,
     market: string,
-    price: number,
+    amount: number,
   ): Promise<void>;
 
   // TODO : create a standard type to replace the 'any' type

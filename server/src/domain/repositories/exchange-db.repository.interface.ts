@@ -2,6 +2,7 @@ import { CreateExchangeDTO } from '../../infrastructure/controllers/exchange/exc
 import { UpdateExchangeDTO } from '../../infrastructure/controllers/exchange/exchange.update.dto';
 import { Exchange } from '../entities/exchange';
 
+// TODO : replace the DTOs as it breaks the clean archi
 interface IExchangeDbRepository {
   fetch(): Promise<Exchange[]>;
   fetchOne(id: string): Promise<Exchange>;

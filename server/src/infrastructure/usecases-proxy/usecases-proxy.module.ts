@@ -13,6 +13,8 @@ import { VerifyExchangeApiKeyUseCase } from '../../usecases/exchange/verify-exch
 import { UpdateExchangeUseCase } from '../../usecases/exchange/update-exchange.usecase';
 import { DeleteExchangeUseCase } from '../../usecases/exchange/delete-exchange.usecase';
 import { PairsExchangeApiKeyUseCase } from '../../usecases/exchange/fetch-exchange-pairs.usecase';
+import { CreateDcaUseCase } from '../../usecases/dca/create-dca.usecase';
+import { DcaRepository } from '../repositories/dca.repository';
 
 @Module({
   imports: [HttpCustomModule, RepositoriesModule],
@@ -24,6 +26,9 @@ export class UsecasesProxyModule {
   static UPDATE_EXCHANGE_USECASE_PROXY = 'updateExchangeUsecaseProxy';
   static VERIFY_EXCHANGE_USECASE_PROXY = 'verifyExchangeUsecaseProxy';
   static GET_MARKETS_EXCHANGE_USECASE_PROXY = 'getPairsExchangeUsecaseProxy';
+  static CREATE_DCA_USECASE_PROXY = 'createDcaUsecaseProxy';
+  static UPDATE_DCA_USECASE_PROXY = 'updateDcaUsecaseProxy';
+  static DELETE_DCA_USECASE_PROXY = 'deleteDcaUsecaseProxy';
 
   static register(): DynamicModule {
     return {
@@ -76,6 +81,12 @@ export class UsecasesProxyModule {
               new PairsExchangeApiKeyUseCase(dbRepository, apiRepository),
             ),
         },
+        {
+          inject: [DcaRepository],
+          provide: UsecasesProxyModule.CREATE_DCA_USECASE_PROXY,
+          useFactory: (dcaRepository: DcaRepository) =>
+            new UseCaseProxy(new CreateDcaUseCase(dcaRepository)),
+        },
       ],
       exports: [
         UsecasesProxyModule.FETCH_EXCHANGES_USECASE_PROXY,
@@ -84,6 +95,7 @@ export class UsecasesProxyModule {
         UsecasesProxyModule.DELETE_EXCHANGE_USECASE_PROXY,
         UsecasesProxyModule.VERIFY_EXCHANGE_USECASE_PROXY,
         UsecasesProxyModule.GET_MARKETS_EXCHANGE_USECASE_PROXY,
+        UsecasesProxyModule.CREATE_DCA_USECASE_PROXY,
       ],
     };
   }
