@@ -21,7 +21,7 @@ class Transaction {
     required: true,
     ref: Dca.name,
   })
-  dca: Dca;
+  dca: Dca | Types.ObjectId;
 
   @Prop({ type: String, required: true })
   pair: string;

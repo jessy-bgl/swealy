@@ -4,6 +4,7 @@ import { Exchange as ExchangeEntity } from '../entities/exchange.entity';
 
 class ExchangeMapper {
   static toExchange(exchangeEntity: ExchangeEntity): Exchange {
+    if (!exchangeEntity) return undefined;
     const exchange = new Exchange();
     exchange.id = exchangeEntity._id.toString();
     exchange.name = exchangeEntity.name;

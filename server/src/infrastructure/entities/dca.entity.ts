@@ -17,7 +17,7 @@ class Dca {
     required: true,
     ref: Exchange.name,
   })
-  exchange: Exchange;
+  exchange: Exchange | Types.ObjectId;
 
   @Prop({ type: String, required: true })
   pair: string;
