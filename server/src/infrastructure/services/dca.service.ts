@@ -17,8 +17,10 @@ export class DcaService {
   async handleDca() {
     const dcas = await this.dcaRepository.fetch();
     dcas.forEach(async (dca) => {
-      // const lastTransaction =
-      //   await this.transactionRepository.fetchLastDcaTransaction(dca);
+      const lastTransaction =
+        await this.transactionRepository.fetchLastDcaTransaction(dca.id);
+      if (lastTransaction) {
+      }
       // TODO :
       // 1 - get last transaction date
       // 2 - if the number of days between the last transaction and

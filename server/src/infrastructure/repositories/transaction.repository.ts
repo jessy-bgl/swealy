@@ -54,18 +54,19 @@ class TransactionRepository implements ITransactionRepository {
     }
   }
 
-  // async fetchLastDcaTransaction(dcaId: string): Promise<Transaction> {
-  //   try {
-  //     const transactions = await this.transactionEntity
-  //       .find({ 'dca._id': dcaId })
-  //       .sort({ datetime: -1 })
-  //       .limit(1);
-  //     console.log(transactions);
-  //     return transactions[0];
-  //   } catch (e) {
-  //     throw e;
-  //   }
-  // }
+  async fetchLastDcaTransaction(dcaId: string): Promise<Transaction> {
+    try {
+      const transactions = await this.transactionEntity
+        .find({ dca: dcaId })
+        .sort({ datetime: -1 })
+        .limit(1)
+        .populate('dca');
+      if (!transactions.length) return undefined;
+      return TransactionMapper.toTransaction(transactions[0]);
+    } catch (e) {
+      throw e;
+    }
+  }
 }
 
 export { TransactionRepository };
