@@ -23,6 +23,7 @@ class TransactionRepository implements ITransactionRepository {
       const transactions = await this.transactionEntity
         .find()
         .populate('dca')
+        .sort({ datetime: -1 })
         .lean();
       return transactions.map((t) => TransactionMapper.toTransaction(t));
     } catch (e) {
