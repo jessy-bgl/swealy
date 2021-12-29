@@ -1,3 +1,8 @@
+import {
+  OrderSidesEnum,
+  OrderTypesEnum,
+} from '../../../domain/models/transaction';
+
 interface IFtxAuthHttpHeaders {
   'FTX-TS': string;
   'FTX-KEY': string;
@@ -10,4 +15,25 @@ interface IFtxApiResponse<T> {
   result: T;
 }
 
-export type { IFtxApiResponse, IFtxAuthHttpHeaders };
+interface IFtxApiPlaceOrderBody {
+  market: string;
+  side: OrderSidesEnum;
+  price: number;
+  type: OrderTypesEnum;
+  size: number;
+}
+
+interface IFtxPlaceOrderResult {
+  createdAt: Date;
+  price: number;
+  size: number;
+  status: string; // TODO : create an enum
+  type: OrderTypesEnum;
+}
+
+export type {
+  IFtxApiResponse,
+  IFtxAuthHttpHeaders,
+  IFtxApiPlaceOrderBody,
+  IFtxPlaceOrderResult,
+};

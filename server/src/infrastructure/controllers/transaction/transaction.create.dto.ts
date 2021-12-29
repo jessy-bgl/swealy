@@ -33,17 +33,20 @@ class CreateTransactionDTO {
   @IsNotEmpty()
   pair: string;
 
+  @IsOptional()
   @IsNumber()
   @IsPositive()
-  price: number;
+  price?: number;
 
+  @IsOptional()
   @IsNumber()
   @IsPositive()
-  size: number;
+  size?: number;
 
+  @IsOptional()
   @IsString()
   @IsEnum(OrderTypesEnum)
-  type: OrderTypesEnum;
+  type?: OrderTypesEnum;
 
   @IsOptional()
   @IsString()

@@ -1,3 +1,5 @@
+import { OrderTypesEnum } from '../models/transaction';
+
 enum HttpMethodsEnum {
   'GET' = 'GET',
   'POST' = 'POST',
@@ -11,5 +13,13 @@ interface IPairsResult {
   sizeIncrement: number;
 }
 
-export type { IPairsResult };
+interface IOrderResult {
+  datetime: Date;
+  price: number;
+  size: number;
+  status: string; // TODO : create an enum
+  type: OrderTypesEnum;
+}
+
+export type { IPairsResult, IOrderResult };
 export { HttpMethodsEnum };

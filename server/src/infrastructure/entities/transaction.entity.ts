@@ -26,14 +26,14 @@ class Transaction {
   @Prop({ type: String, required: true })
   pair: string;
 
-  @Prop({ type: Number, required: true, min: 0 })
-  price: number;
+  @Prop({ type: Number, min: 0 })
+  price?: number;
 
-  @Prop({ type: Number, required: true, min: 0 })
-  size: number;
+  @Prop({ type: Number, min: 0 })
+  size?: number;
 
-  @Prop({ type: String, enum: OrderTypesEnum, required: true })
-  type: OrderTypesEnum;
+  @Prop({ type: String, enum: OrderTypesEnum })
+  type?: OrderTypesEnum;
 
   @Prop({ type: String })
   description?: string;

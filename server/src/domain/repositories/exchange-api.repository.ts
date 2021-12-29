@@ -1,18 +1,13 @@
+import { Dca } from '../models/dca';
 import { Exchange } from '../models/exchange';
-import { OrderTypesEnum } from '../models/transaction';
+import { IOrderResult, IPairsResult } from './types';
 
 interface IExchangeApiRepository {
   checkApiKeyValidity(exchange: Exchange): Promise<boolean>;
 
-  createSpotOrder(
-    exchange: Exchange,
-    type: OrderTypesEnum,
-    market: string,
-    amount: number,
-  ): Promise<void>;
+  createSpotOrder(dca: Dca): Promise<IOrderResult>;
 
-  // TODO : create a standard type to replace the 'any' type
-  getAvailableSpotPairs(exchange: Exchange): Promise<any[]>;
+  getAvailableSpotPairs(exchange: Exchange): Promise<IPairsResult[]>;
 
   // TODO : getAvailableSpotFunds
 }

@@ -5,6 +5,11 @@ enum OrderTypesEnum {
   'MARKET' = 'market',
 }
 
+enum OrderSidesEnum {
+  'BUY' = 'buy',
+  'SELL' = 'sell',
+}
+
 class Transaction {
   id: string;
   datetime: Date;
@@ -18,4 +23,4 @@ class Transaction {
   description?: string;
 }
 
-export { Transaction, OrderTypesEnum };
+export { Transaction, OrderTypesEnum, OrderSidesEnum };
