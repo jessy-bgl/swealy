@@ -2,8 +2,6 @@ FROM node:15.14-alpine
 
 WORKDIR '/app'
 
-COPY ./ ./
-
 CMD ["npm", "run", "start:dev"]
 
 EXPOSE 5000

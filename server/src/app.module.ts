@@ -1,8 +1,21 @@
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from './config/mongoose/database.module';
+import { ScheduleModule } from '@nestjs/schedule';
+
+import { HttpCustomModule } from './infrastructure/config/axios/http.module';
+import { DatabaseModule } from './infrastructure/config/mongoose/database.module';
+import { ControllersModule } from './infrastructure/controllers/controllers.module';
+import { UsecasesProxyModule } from './infrastructure/usecases-proxy/usecases-proxy.module';
+import { ServicesModule } from './infrastructure/services/services.module';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [
+    ScheduleModule.forRoot(),
+    DatabaseModule,
+    HttpCustomModule,
+    UsecasesProxyModule,
+    ControllersModule,
+    ServicesModule,
+  ],
   controllers: [],
   providers: [],
 })
