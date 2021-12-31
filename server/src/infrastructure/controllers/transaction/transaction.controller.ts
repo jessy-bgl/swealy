@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 import { UseCaseProxy } from '../../../infrastructure/usecases-proxy/usecases-proxy';
 import { UsecasesProxyModule } from '../../../infrastructure/usecases-proxy/usecases-proxy.module';
@@ -15,8 +16,9 @@ import { CreateTransactionUseCase } from '../../../usecases/transaction/create-t
 import { DeleteTransactionUseCase } from '../../../usecases/transaction/delete-transaction.usecase';
 import { FetchTransactionUseCase } from '../../../usecases/transaction/fetch-transaction.usecase';
 
-import { CreateTransactionDTO } from './transaction.create.dto';
+import { CreateTransactionDTO } from './transaction.dto';
 
+@ApiTags('transaction')
 @Controller('transaction')
 class TransactionController {
   constructor(

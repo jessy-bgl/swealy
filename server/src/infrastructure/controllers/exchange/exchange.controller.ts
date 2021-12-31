@@ -18,9 +18,10 @@ import { UpdateExchangeUseCase } from '../../../usecases/exchange/update-exchang
 import { DeleteExchangeUseCase } from '../../../usecases/exchange/delete-exchange.usecase';
 import { PairsExchangeApiKeyUseCase } from '../../../usecases/exchange/fetch-exchange-pairs.usecase';
 
-import { CreateExchangeDTO } from './exchange.create.dto';
-import { UpdateExchangeDTO } from './exchange.update.dto';
+import { CreateExchangeDTO, UpdateExchangeDTO } from './exchange.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('exchange')
 @Controller('exchange')
 class ExchangeController {
   constructor(

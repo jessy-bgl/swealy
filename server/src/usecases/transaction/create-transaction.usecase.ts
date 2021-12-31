@@ -1,5 +1,5 @@
 import { ITransactionRepository } from '../../domain/repositories/transaction.repository';
-import { CreateTransactionDTO } from '../../infrastructure/controllers/transaction/transaction.create.dto';
+import { CreateTransactionDTO } from '../../infrastructure/controllers/transaction/transaction.dto';
 
 class CreateTransactionUseCase {
   constructor(private readonly transactionRepository: ITransactionRepository) {}

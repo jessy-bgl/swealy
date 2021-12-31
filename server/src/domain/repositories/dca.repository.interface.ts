@@ -1,7 +1,10 @@
 import { Dca } from '../models/dca';
-import { UpdateDcaDTO } from '../../infrastructure/controllers/dca/dca.update.dto';
-import { CreateDcaDTO } from '../../infrastructure/controllers/dca/dca.create.dto';
+import {
+  CreateDcaDTO,
+  UpdateDcaDTO,
+} from '../../infrastructure/controllers/dca/dca.dto';
 
+// TODO : replace the DTOs as it breaks the clean archi
 interface IDcaRepository {
   fetch(): Promise<Dca[]>;
   create(createDcaDTO: CreateDcaDTO): Promise<Dca>;

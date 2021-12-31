@@ -8,6 +8,7 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
+import { ApiExtraModels, ApiTags } from '@nestjs/swagger';
 
 import { UseCaseProxy } from '../../../infrastructure/usecases-proxy/usecases-proxy';
 import { UsecasesProxyModule } from '../../../infrastructure/usecases-proxy/usecases-proxy.module';
@@ -17,10 +18,11 @@ import { CreateDcaUseCase } from '../../../usecases/dca/create-dca.usecase';
 import { UpdateDcaUseCase } from '../../../usecases/dca/update-dca.usecase';
 import { DeleteDcaUseCase } from '../../../usecases/dca/delete-dca.usecase';
 
-import { CreateDcaDTO } from './dca.create.dto';
-import { UpdateDcaDTO } from './dca.update.dto';
+import { CreateDcaDTO, UpdateDcaDTO } from './dca.dto';
 
 @Controller('dca')
+@ApiTags('dca')
+@ApiExtraModels(CreateDcaDTO, UpdateDcaDTO)
 class DcaController {
   constructor(
     @Inject(UsecasesProxyModule.FETCH_DCA_USECASE_PROXY)

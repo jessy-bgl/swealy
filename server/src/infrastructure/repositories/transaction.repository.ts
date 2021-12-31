@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 
 import { ITransactionRepository } from '../../domain/repositories/transaction.repository';
 import { Transaction } from '../../domain/models/transaction';
-import { CreateTransactionDTO } from '../controllers/transaction/transaction.create.dto';
+import { CreateTransactionDTO } from '../controllers/transaction/transaction.dto';
 import {
   Transaction as TransactionEntity,
   TransactionDocument,

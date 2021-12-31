@@ -1,4 +1,4 @@
-import { UpdateDcaDTO } from '../../infrastructure/controllers/dca/dca.update.dto';
+import { UpdateDcaDTO } from '../../infrastructure/controllers/dca/dca.dto';
 import { IDcaRepository } from '../../domain/repositories/dca.repository.interface';
 
 class UpdateDcaUseCase {
