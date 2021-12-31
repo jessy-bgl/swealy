@@ -20,7 +20,7 @@ class TransactionPresenter {
   pair: string;
   @ApiProperty()
   price: number;
-  @ApiProperty()
+  @ApiProperty({ enum: OrderTypesEnum })
   type: OrderTypesEnum;
   @ApiProperty()
   size: number;

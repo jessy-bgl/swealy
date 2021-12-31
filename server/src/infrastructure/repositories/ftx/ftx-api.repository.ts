@@ -10,7 +10,7 @@ import { HttpService } from 'nestjs-http-promise';
 import {
   HttpMethodsEnum,
   IOrderResult,
-  IPairsResult,
+  IPairResult,
 } from '../../../domain/repositories/types';
 import { Exchange } from '../../../domain/models/exchange';
 import { Dca } from '../../../domain/models/dca';
@@ -133,9 +133,9 @@ class FtxApiRepository implements Partial<IExchangeApiRepository> {
 
   static async getAvailableSpotPairs(
     httpService: HttpService,
-  ): Promise<IPairsResult[]> {
+  ): Promise<IPairResult[]> {
     try {
-      const res = await httpService.get<IFtxApiResponse<IPairsResult[]>>(
+      const res = await httpService.get<IFtxApiResponse<IPairResult[]>>(
         `${FTX_API_BASE_URL}/markets`,
       );
       if (!res.data || !res.data.success)
@@ -165,7 +165,7 @@ class FtxApiRepository implements Partial<IExchangeApiRepository> {
     pair: string,
   ): Promise<number> {
     try {
-      const res = await httpService.get<IFtxApiResponse<IPairsResult>>(
+      const res = await httpService.get<IFtxApiResponse<IPairResult>>(
         `${FTX_API_BASE_URL}/markets/${pair}`,
       );
       if (!res.data || !res.data.success)

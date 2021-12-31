@@ -7,7 +7,13 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiExtraModels,
+  ApiParam,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
 import { UseCaseProxy } from '../../../infrastructure/usecases-proxy/usecases-proxy';
 import { UsecasesProxyModule } from '../../../infrastructure/usecases-proxy/usecases-proxy.module';
@@ -21,6 +27,8 @@ import { TransactionPresenter } from './transaction.presenter';
 
 @ApiTags('transaction')
 @Controller('transaction')
+@ApiResponse({ status: 500, description: 'Internal error' })
+@ApiExtraModels(CreateTransactionDTO, TransactionPresenter)
 class TransactionController {
   constructor(
     @Inject(UsecasesProxyModule.FETCH_TRANSACTION_USECASE_PROXY)
@@ -32,6 +40,7 @@ class TransactionController {
   ) {}
 
   @Get()
+  @ApiResponse({ status: 200, type: TransactionPresenter, isArray: true })
   async fetchTransaction(): Promise<TransactionPresenter[]> {
     const transactions = await this.fetchTransactionUsecase
       .getInstance()
@@ -42,6 +51,8 @@ class TransactionController {
   }
 
   @Post()
+  @ApiBody({ type: CreateTransactionDTO })
+  @ApiResponse({ status: 201, type: TransactionPresenter })
   async createTransaction(
     @Body() createTransactionDTO: CreateTransactionDTO,
   ): Promise<TransactionPresenter> {
@@ -52,6 +63,8 @@ class TransactionController {
   }
 
   @Delete(':id')
+  @ApiParam({ name: 'id', type: String })
+  @ApiResponse({ status: 200, type: TransactionPresenter })
   async deleteTransaction(
     @Param('id') id: string,
   ): Promise<TransactionPresenter> {

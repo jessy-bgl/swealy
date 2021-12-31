@@ -5,9 +5,14 @@ enum HttpMethodsEnum {
   'POST' = 'POST',
 }
 
-interface IPairsResult {
+enum PairTypesEnum {
+  SPOT = 'spot',
+  FUTURE = 'future',
+}
+
+interface IPairResult {
   name: string;
-  type: string;
+  type: PairTypesEnum;
   price: number;
   priceIncrement: number;
   sizeIncrement: number;
@@ -21,5 +26,5 @@ interface IOrderResult {
   type: OrderTypesEnum;
 }
 
-export type { IPairsResult, IOrderResult };
-export { HttpMethodsEnum };
+export type { IPairResult, IOrderResult };
+export { HttpMethodsEnum, PairTypesEnum };

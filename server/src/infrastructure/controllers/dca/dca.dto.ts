@@ -21,33 +21,37 @@ class CreateDcaDTO {
   @IsString()
   pair: string;
 
-  @ApiProperty({})
+  @ApiProperty({ required: true })
   @IsNumber()
   @IsPositive()
   frequencyInDays: number;
 
-  @ApiProperty({})
+  @ApiProperty({ required: true })
   @IsNumber()
   @IsPositive()
   hour: number;
 
-  @ApiProperty({})
+  @ApiProperty({ required: true })
   @IsNumber()
   @IsPositive()
   amount: number;
 }
 
 class UpdateDcaDTO {
+  @ApiProperty({ required: false })
   @IsOptional()
   @IsBoolean()
   isActive: boolean;
 
+  @ApiProperty({ required: true })
   @IsNumber()
   frequencyInDays: number;
 
+  @ApiProperty({ required: true })
   @IsNumber()
   hour: number;
 
+  @ApiProperty({ required: true })
   @IsNumber()
   amount: number;
 }
