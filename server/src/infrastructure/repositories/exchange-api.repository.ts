@@ -3,7 +3,7 @@ import { HttpService } from 'nestjs-http-promise';
 
 import { Exchange } from '../../domain/models/exchange';
 import { Dca } from '../../domain/models/dca';
-import { IOrderResult, IPairsResult } from '../../domain/repositories/types';
+import { IOrderResult, IPairResult } from '../../domain/repositories/types';
 
 import { ExchangeEnum } from '../entities/exchange.entity';
 import { IExchangeApiRepository } from '../../domain/repositories/exchange-api.repository';
@@ -40,7 +40,7 @@ class ExchangeApiRepository implements IExchangeApiRepository {
     }
   }
 
-  getAvailableSpotPairs(exchange: Exchange): Promise<IPairsResult[]> {
+  getAvailableSpotPairs(exchange: Exchange): Promise<IPairResult[]> {
     switch (exchange.name) {
       case ExchangeEnum.FTX: {
         return FtxApiRepository.getAvailableSpotPairs(this.httpService);

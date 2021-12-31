@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 
 import { ITransactionRepository } from '../../domain/repositories/transaction.repository';
 import { Transaction } from '../../domain/models/transaction';
-import { CreateTransactionDTO } from '../controllers/transaction/transaction.create.dto';
+import { CreateTransactionDTO } from '../controllers/transaction/transaction.dto';
 import {
   Transaction as TransactionEntity,
   TransactionDocument,
@@ -22,7 +22,7 @@ class TransactionRepository implements ITransactionRepository {
     try {
       const transactions = await this.transactionEntity
         .find()
-        .populate('dca')
+        .populate({ path: 'dca', populate: 'exchange' })
         .sort({ datetime: -1 })
         .lean();
       return transactions.map((t) => TransactionMapper.toTransaction(t));
@@ -36,7 +36,7 @@ class TransactionRepository implements ITransactionRepository {
   ): Promise<Transaction> {
     try {
       const transaction = new this.transactionEntity(createTransactionDTO);
-      await (await transaction.save()).populate('dca');
+      await (await transaction.save()).populate('dca dca.exchange');
       return TransactionMapper.toTransaction(transaction);
     } catch (e) {
       throw e;
@@ -47,7 +47,7 @@ class TransactionRepository implements ITransactionRepository {
     try {
       const transaction = await this.transactionEntity
         .findOneAndDelete({ _id: id })
-        .populate('dca');
+        .populate({ path: 'dca', populate: 'exchange' });
       if (!transaction) throw new NotFoundException();
       return TransactionMapper.toTransaction(transaction);
     } catch (e) {
@@ -61,7 +61,7 @@ class TransactionRepository implements ITransactionRepository {
         .find({ dca: dcaId, success: true })
         .sort({ datetime: -1 })
         .limit(1)
-        .populate('dca');
+        .populate({ path: 'dca', populate: 'exchange' });
       if (!transactions.length) return undefined;
       return TransactionMapper.toTransaction(transactions[0]);
     } catch (e) {

@@ -6,7 +6,7 @@ import { DcaRepository } from '../repositories/dca.repository';
 import { TransactionRepository } from '../repositories/transaction.repository';
 import { ExchangeApiRepository } from '../repositories/exchange-api.repository';
 
-import { CreateTransactionDTO } from '../controllers/transaction/transaction.create.dto';
+import { CreateTransactionDTO } from '../controllers/transaction/transaction.dto';
 
 @Injectable()
 export class DcaService {

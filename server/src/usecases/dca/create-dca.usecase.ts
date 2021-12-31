@@ -1,4 +1,4 @@
-import { CreateDcaDTO } from '../../infrastructure/controllers/dca/dca.create.dto';
+import { CreateDcaDTO } from '../../infrastructure/controllers/dca/dca.dto';
 import { IDcaRepository } from '../../domain/repositories/dca.repository.interface';
 
 class CreateDcaUseCase {

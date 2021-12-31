@@ -1,4 +1,4 @@
-import { UpdateExchangeDTO } from '../../infrastructure/controllers/exchange/exchange.update.dto';
+import { UpdateExchangeDTO } from '../../infrastructure/controllers/exchange/exchange.dto';
 import { IExchangeDbRepository } from '../../domain/repositories/exchange-db.repository';
 
 class UpdateExchangeUseCase {

@@ -1,4 +1,4 @@
-import { CreateTransactionDTO } from '../../infrastructure/controllers/transaction/transaction.create.dto';
+import { CreateTransactionDTO } from '../../infrastructure/controllers/transaction/transaction.dto';
 import { Transaction } from '../models/transaction';
 
 interface ITransactionRepository {

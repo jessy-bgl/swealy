@@ -4,8 +4,7 @@ import { Model } from 'mongoose';
 
 import { IDcaRepository } from '../../domain/repositories/dca.repository.interface';
 import { Dca } from '../../domain/models/dca';
-import { CreateDcaDTO } from '../controllers/dca/dca.create.dto';
-import { UpdateDcaDTO } from '../controllers/dca/dca.update.dto';
+import { CreateDcaDTO, UpdateDcaDTO } from '../controllers/dca/dca.dto';
 import { Dca as DcaEntity, DcaDocument } from '../entities/dca.entity';
 import { DcaMapper } from '../mappers/dca.mapper';
 

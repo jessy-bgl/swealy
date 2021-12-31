@@ -1,5 +1,7 @@
-import { CreateExchangeDTO } from '../../infrastructure/controllers/exchange/exchange.create.dto';
-import { UpdateExchangeDTO } from '../../infrastructure/controllers/exchange/exchange.update.dto';
+import {
+  CreateExchangeDTO,
+  UpdateExchangeDTO,
+} from '../../infrastructure/controllers/exchange/exchange.dto';
 import { Exchange } from '../models/exchange';
 
 // TODO : replace the DTOs as it breaks the clean archi

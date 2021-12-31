@@ -1,4 +1,4 @@
-import { CreateExchangeDTO } from '../../infrastructure/controllers/exchange/exchange.create.dto';
+import { CreateExchangeDTO } from '../../infrastructure/controllers/exchange/exchange.dto';
 import { IExchangeDbRepository } from '../../domain/repositories/exchange-db.repository';
 
 class AddExchangeUseCase {

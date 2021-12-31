@@ -2,8 +2,10 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { CreateExchangeDTO } from '../../infrastructure/controllers/exchange/exchange.create.dto';
-import { UpdateExchangeDTO } from '../../infrastructure/controllers/exchange/exchange.update.dto';
+import {
+  CreateExchangeDTO,
+  UpdateExchangeDTO,
+} from '../controllers/exchange/exchange.dto';
 import { IExchangeDbRepository } from '../../domain/repositories/exchange-db.repository';
 import {
   Exchange as ExchangeEntity,
