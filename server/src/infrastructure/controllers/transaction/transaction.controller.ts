@@ -17,6 +17,7 @@ import { DeleteTransactionUseCase } from '../../../usecases/transaction/delete-t
 import { FetchTransactionUseCase } from '../../../usecases/transaction/fetch-transaction.usecase';
 
 import { CreateTransactionDTO } from './transaction.dto';
+import { TransactionPresenter } from './transaction.presenter';
 
 @ApiTags('transaction')
 @Controller('transaction')
@@ -31,20 +32,33 @@ class TransactionController {
   ) {}
 
   @Get()
-  fetchTransaction() {
-    return this.fetchTransactionUsecase.getInstance().execute();
+  async fetchTransaction(): Promise<TransactionPresenter[]> {
+    const transactions = await this.fetchTransactionUsecase
+      .getInstance()
+      .execute();
+    return transactions.map(
+      (transaction) => new TransactionPresenter(transaction),
+    );
   }
 
   @Post()
-  createTransaction(@Body() createTransactionDTO: CreateTransactionDTO) {
-    return this.createTransactionUsecase
+  async createTransaction(
+    @Body() createTransactionDTO: CreateTransactionDTO,
+  ): Promise<TransactionPresenter> {
+    const transaction = await this.createTransactionUsecase
       .getInstance()
       .execute(createTransactionDTO);
+    return new TransactionPresenter(transaction);
   }
 
   @Delete(':id')
-  deleteTransaction(@Param('id') id: string) {
-    return this.deleteTransactionUsecase.getInstance().execute(id);
+  async deleteTransaction(
+    @Param('id') id: string,
+  ): Promise<TransactionPresenter> {
+    const transaction = await this.deleteTransactionUsecase
+      .getInstance()
+      .execute(id);
+    return new TransactionPresenter(transaction);
   }
 }
 
