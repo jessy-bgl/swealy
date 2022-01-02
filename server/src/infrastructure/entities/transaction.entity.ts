@@ -13,6 +13,9 @@ class Transaction {
   @Prop({ type: Boolean, required: true })
   success: boolean;
 
+  @Prop({ type: Boolean, default: false })
+  manual: boolean;
+
   @Prop({ type: Number, required: true, min: 0 })
   amount: number;
 
