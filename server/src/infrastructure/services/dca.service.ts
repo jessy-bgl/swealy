@@ -25,18 +25,18 @@ export class DcaService {
       // if the dca is not active => skip it and go to the next
       if (!dca.isActive) return;
 
-      // get last transaction of the DCA
-      const lastTransaction =
+      // get last successful transaction of the DCA
+      const lastSuccessfulTransaction =
         await this.transactionRepository.fetchLastDcaSuccessfulTransaction(
           dca.id,
         );
 
-      // get the difference of days between now and the last transaction
+      // get the difference of days between now and the last successful transaction
       const dateNow = new Date();
-      const diffInTime = lastTransaction
-        ? dateNow.getTime() - lastTransaction.datetime.getTime()
+      const diffInTime = lastSuccessfulTransaction
+        ? dateNow.getTime() - lastSuccessfulTransaction.datetime.getTime()
         : null;
-      const diffInDays = lastTransaction
+      const diffInDays = lastSuccessfulTransaction
         ? diffInTime / (1000 * 3600 * 24)
         : null;
 
@@ -57,6 +57,7 @@ export class DcaService {
           createTransactionDto.size = order.size;
           createTransactionDto.type = order.type;
           await this.transactionRepository.create(createTransactionDto);
+          await this.dcaRepository.incSuccessfulTransactionsCounter(dca.id);
         } catch (e) {
           this.logger.error(e.message);
           createTransactionDto.success = false;

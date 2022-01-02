@@ -56,6 +56,28 @@ class DcaRepository implements IDcaRepository {
       throw e;
     }
   }
+
+  async incSuccessfulTransactionsCounter(id: string): Promise<void> {
+    try {
+      await this.dcaEntity.updateOne(
+        { _id: id },
+        { $inc: { successfulTransactionsCounter: 1 } },
+      );
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  // async setNextTransactionDatetime(id: string, datetime: Date): Promise<void> {
+  //   try {
+  //     await this.dcaEntity.updateOne(
+  //       { _id: id },
+  //       { $set: { nextTransactionDatetime: datetime } },
+  //     );
+  //   } catch (e) {
+  //     throw e;
+  //   }
+  // }
 }
 
 export { DcaRepository };

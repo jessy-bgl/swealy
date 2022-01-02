@@ -10,6 +10,8 @@ interface IDcaRepository {
   create(createDcaDTO: CreateDcaDTO): Promise<Dca>;
   update(id: string, updateDcaDTO: UpdateDcaDTO): Promise<Dca>;
   delete(id: string): Promise<Dca>;
+  incSuccessfulTransactionsCounter(id: string): Promise<void>;
+  // setNextTransactionDatetime(id: string, datetime: Date): Promise<void>;
 }
 
 export { IDcaRepository };

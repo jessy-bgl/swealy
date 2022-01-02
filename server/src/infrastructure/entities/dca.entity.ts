@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types, Schema as MongooseSchema } from 'mongoose';
+
 import { Exchange } from './exchange.entity';
 
 @Schema()
@@ -30,6 +31,12 @@ class Dca {
 
   @Prop({ type: Number, required: true })
   amount: number;
+
+  // @Prop({ type: Date })
+  // nextTransactionDatetime: Date;
+
+  @Prop({ type: Number, default: 0 })
+  successfulTransactionsCounter: number;
 }
 
 type DcaDocument = Dca & Document;

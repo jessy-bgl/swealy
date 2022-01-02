@@ -17,15 +17,21 @@ class DcaPresenter {
   hour: number;
   @ApiProperty()
   amount: number;
+  // @ApiProperty()
+  // nextTransactionDatetime: Date;
+  @ApiProperty()
+  successfulTransactionsCounter: number;
 
   constructor(dca: Dca) {
     this.id = dca.id;
     this.isActive = dca.isActive;
-    this.exchange = new ExchangePresenter(dca.exchange);
     this.pair = dca.pair;
     this.frequencyInDays = dca.frequencyInDays;
     this.hour = dca.hour;
     this.amount = dca.amount;
+    this.exchange = new ExchangePresenter(dca.exchange);
+    // this.nextTransactionDatetime = dca.nextTransactionDatetime;
+    this.successfulTransactionsCounter = dca.successfulTransactionsCounter || 0;
 
     // remove exchange data that should not be available here
     delete this.exchange.apiKey;
