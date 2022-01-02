@@ -41,7 +41,7 @@ class UpdateDcaDTO {
   @ApiProperty({ required: false })
   @IsOptional()
   @IsBoolean()
-  isActive: boolean;
+  isActive?: boolean;
 
   @ApiProperty({ required: true })
   @IsNumber()

@@ -8,6 +8,8 @@ class Dca {
   frequencyInDays: number;
   hour: number;
   amount: number;
+  successfulTransactionsCounter: number;
+  // nextTransactionDatetime: Date;
 }
 
 export { Dca };
