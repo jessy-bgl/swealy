@@ -15,7 +15,7 @@ import { Types } from 'mongoose';
 import { OrderTypesEnum } from '../../../domain/models/transaction';
 
 class CreateTransactionDTO {
-  @ApiProperty({})
+  @ApiProperty({ required: false, default: 'current datetime' })
   @IsOptional()
   @IsDate()
   datetime: Date = new Date();
@@ -23,6 +23,11 @@ class CreateTransactionDTO {
   @ApiProperty({ required: true })
   @IsBoolean()
   success: boolean;
+
+  @ApiProperty({ required: false, default: false })
+  @IsOptional()
+  @IsBoolean()
+  manual: boolean;
 
   @ApiProperty({ required: true })
   @IsNumber()

@@ -14,6 +14,7 @@ class Transaction {
   id: string;
   datetime: Date;
   success: boolean;
+  manual: boolean;
   amount: number;
   dca: Dca;
   pair: string;

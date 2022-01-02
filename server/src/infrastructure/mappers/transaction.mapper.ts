@@ -17,6 +17,7 @@ class TransactionMapper {
     transaction.price = transactionEntity.price;
     transaction.size = transactionEntity.size;
     transaction.success = transactionEntity.success;
+    transaction.manual = transactionEntity.manual;
     transaction.type = transactionEntity.type;
     transaction.description = transactionEntity.description;
     return transaction;
@@ -32,6 +33,7 @@ class TransactionMapper {
     transactionEntity.price = transaction.price;
     transactionEntity.size = transaction.size;
     transactionEntity.success = transaction.success;
+    transactionEntity.manual = transaction.manual;
     transactionEntity.type = transaction.type;
     transactionEntity.description = transaction.description;
     return transactionEntity;

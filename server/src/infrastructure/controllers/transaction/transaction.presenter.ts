@@ -13,6 +13,8 @@ class TransactionPresenter {
   @ApiProperty()
   success: boolean;
   @ApiProperty()
+  manual: boolean;
+  @ApiProperty()
   amount: number;
   @ApiProperty()
   dca: DcaPresenter;
@@ -31,6 +33,7 @@ class TransactionPresenter {
     this.id = transaction.id;
     this.datetime = transaction.datetime;
     this.success = transaction.success;
+    this.manual = transaction.manual;
     this.amount = transaction.amount;
     this.dca = new DcaPresenter(transaction.dca);
     this.pair = transaction.pair;
