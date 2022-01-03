@@ -2,9 +2,11 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { ITransactionRepository } from '../../domain/repositories/transaction.repository';
+import {
+  ICreateTransactionDTO,
+  ITransactionRepository,
+} from '../../domain/repositories/transaction.repository';
 import { Transaction } from '../../domain/models/transaction';
-import { CreateTransactionDTO } from '../controllers/transaction/transaction.dto';
 import {
   Transaction as TransactionEntity,
   TransactionDocument,
@@ -32,7 +34,7 @@ class TransactionRepository implements ITransactionRepository {
   }
 
   async create(
-    createTransactionDTO: CreateTransactionDTO,
+    createTransactionDTO: ICreateTransactionDTO,
   ): Promise<Transaction> {
     try {
       const transaction = new this.transactionEntity(createTransactionDTO);

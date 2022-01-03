@@ -1,16 +1,26 @@
-import {
-  CreateExchangeDTO,
-  UpdateExchangeDTO,
-} from '../../infrastructure/controllers/exchange/exchange.dto';
 import { Exchange } from '../models/exchange';
 
-// TODO : replace the DTOs as it breaks the clean archi
+interface ICreateExchangeDTO {
+  name: string;
+  apiKey: string;
+  apiSecret: string;
+  label: string;
+  subaccountName?: string;
+}
+
+interface IUpdateExchangeDTO {
+  label?: string;
+  apiKey?: string;
+  apiSecret?: string;
+  subaccountName?: string;
+}
+
 interface IExchangeDbRepository {
   fetch(): Promise<Exchange[]>;
   fetchOne(id: string): Promise<Exchange>;
-  create(createExchangeDTO: CreateExchangeDTO): Promise<Exchange>;
-  update(id: string, updateExchangeDTO: UpdateExchangeDTO): Promise<Exchange>;
+  create(createExchangeDTO: ICreateExchangeDTO): Promise<Exchange>;
+  update(id: string, updateExchangeDTO: IUpdateExchangeDTO): Promise<Exchange>;
   delete(id: string): Promise<Exchange>;
 }
 
-export { IExchangeDbRepository };
+export { IExchangeDbRepository, ICreateExchangeDTO, IUpdateExchangeDTO };

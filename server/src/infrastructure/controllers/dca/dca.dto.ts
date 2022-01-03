@@ -8,13 +8,17 @@ import {
   IsPositive,
   IsString,
 } from 'class-validator';
-import { Types } from 'mongoose';
 
-class CreateDcaDTO {
+import {
+  ICreateDcaDTO,
+  IUpdateDcaDTO,
+} from '../../../domain/repositories/dca.repository.interface';
+
+class CreateDcaDTO implements ICreateDcaDTO {
   @ApiProperty({ required: true, type: 'string (ObjectId)' })
   @IsNotEmpty()
   @IsMongoId()
-  exchange: Types.ObjectId;
+  exchange: string; // Types.ObjectId;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
@@ -37,7 +41,7 @@ class CreateDcaDTO {
   amount: number;
 }
 
-class UpdateDcaDTO {
+class UpdateDcaDTO implements IUpdateDcaDTO {
   @ApiProperty({ required: false })
   @IsOptional()
   @IsBoolean()

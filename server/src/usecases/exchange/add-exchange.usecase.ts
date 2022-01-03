@@ -1,11 +1,12 @@
-import { CreateExchangeDTO } from '../../infrastructure/controllers/exchange/exchange.dto';
-import { IExchangeDbRepository } from '../../domain/repositories/exchange-db.repository';
+import {
+  ICreateExchangeDTO,
+  IExchangeDbRepository,
+} from '../../domain/repositories/exchange-db.repository';
 
 class AddExchangeUseCase {
   constructor(private readonly exchangeDbRepository: IExchangeDbRepository) {}
 
-  // TODO : replace the dto or move it because it breaks the clean archi
-  execute(createExchangeDTO: CreateExchangeDTO) {
+  execute(createExchangeDTO: ICreateExchangeDTO) {
     return this.exchangeDbRepository.create(createExchangeDTO);
   }
 }

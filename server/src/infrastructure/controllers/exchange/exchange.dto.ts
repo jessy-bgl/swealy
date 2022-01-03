@@ -1,8 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { ExchangeEnum } from '../../entities/exchange.entity';
 
-class CreateExchangeDTO {
+import { ExchangeEnum } from '../../entities/exchange.entity';
+import {
+  ICreateExchangeDTO,
+  IUpdateExchangeDTO,
+} from '../../../domain/repositories/exchange-db.repository';
+
+class CreateExchangeDTO implements ICreateExchangeDTO {
   @ApiProperty({ required: true })
   @IsNotEmpty()
   @IsEnum(ExchangeEnum)
@@ -29,7 +34,7 @@ class CreateExchangeDTO {
   subaccountName?: string;
 }
 
-class UpdateExchangeDTO {
+class UpdateExchangeDTO implements IUpdateExchangeDTO {
   @ApiProperty({ required: false })
   @IsOptional()
   @IsString()
