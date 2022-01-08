@@ -1,11 +1,12 @@
-import { UpdateExchangeDTO } from '../../infrastructure/controllers/exchange/exchange.dto';
-import { IExchangeDbRepository } from '../../domain/repositories/exchange-db.repository';
+import {
+  IExchangeDbRepository,
+  IUpdateExchangeDTO,
+} from '../../domain/repositories/exchange-db.repository';
 
 class UpdateExchangeUseCase {
   constructor(private readonly exchangeDbRepository: IExchangeDbRepository) {}
 
-  // TODO : replace DTO as it breaks the clean archi
-  execute(id: string, updateExchangeDTO: UpdateExchangeDTO) {
+  execute(id: string, updateExchangeDTO: IUpdateExchangeDTO) {
     return this.exchangeDbRepository.update(id, updateExchangeDTO);
   }
 }

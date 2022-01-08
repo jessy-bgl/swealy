@@ -2,9 +2,12 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { IDcaRepository } from '../../domain/repositories/dca.repository.interface';
+import {
+  ICreateDcaDTO,
+  IDcaRepository,
+  IUpdateDcaDTO,
+} from '../../domain/repositories/dca.repository.interface';
 import { Dca } from '../../domain/models/dca';
-import { CreateDcaDTO, UpdateDcaDTO } from '../controllers/dca/dca.dto';
 import { Dca as DcaEntity, DcaDocument } from '../entities/dca.entity';
 import { DcaMapper } from '../mappers/dca.mapper';
 
@@ -24,7 +27,7 @@ class DcaRepository implements IDcaRepository {
     }
   }
 
-  async create(createDcaDTO: CreateDcaDTO): Promise<Dca> {
+  async create(createDcaDTO: ICreateDcaDTO): Promise<Dca> {
     try {
       const dca = new this.dcaEntity(createDcaDTO);
       await (await dca.save()).populate('exchange');
@@ -34,7 +37,7 @@ class DcaRepository implements IDcaRepository {
     }
   }
 
-  async update(id: string, updateDcaDTO: UpdateDcaDTO): Promise<Dca> {
+  async update(id: string, updateDcaDTO: IUpdateDcaDTO): Promise<Dca> {
     try {
       const dca = await this.dcaEntity
         .findOneAndUpdate({ _id: id }, updateDcaDTO, { new: true })

@@ -8,6 +8,7 @@ import { IOrderResult, IPairResult } from '../../domain/repositories/types';
 import { ExchangeEnum } from '../entities/exchange.entity';
 import { IExchangeApiRepository } from '../../domain/repositories/exchange-api.repository';
 import { FtxApiRepository } from './ftx/ftx-api.repository';
+
 interface IExchangeAuthParams {
   apiKey: string;
   apiSecret: string;

@@ -3,15 +3,15 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import {
-  CreateExchangeDTO,
-  UpdateExchangeDTO,
-} from '../controllers/exchange/exchange.dto';
-import { IExchangeDbRepository } from '../../domain/repositories/exchange-db.repository';
+  ICreateExchangeDTO,
+  IExchangeDbRepository,
+  IUpdateExchangeDTO,
+} from '../../domain/repositories/exchange-db.repository';
+import { Exchange } from '../../domain/models/exchange';
 import {
   Exchange as ExchangeEntity,
   ExchangeDocument,
 } from '../entities/exchange.entity';
-import { Exchange } from '../../domain/models/exchange';
 import { ExchangeMapper } from '../mappers/exchange.mapper';
 
 @Injectable()
@@ -39,7 +39,7 @@ class ExchangeDbRepository implements IExchangeDbRepository {
     }
   }
 
-  async create(createExchangeDTO: CreateExchangeDTO): Promise<Exchange> {
+  async create(createExchangeDTO: ICreateExchangeDTO): Promise<Exchange> {
     try {
       const exchange = new this.exchangeEntity(createExchangeDTO);
       await exchange.save();
@@ -51,7 +51,7 @@ class ExchangeDbRepository implements IExchangeDbRepository {
 
   async update(
     id: string,
-    updateExchangeDTO: UpdateExchangeDTO,
+    updateExchangeDTO: IUpdateExchangeDTO,
   ): Promise<Exchange> {
     try {
       const exchange = await this.exchangeEntity.findOneAndUpdate(

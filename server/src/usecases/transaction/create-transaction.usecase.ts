@@ -1,11 +1,12 @@
-import { ITransactionRepository } from '../../domain/repositories/transaction.repository';
-import { CreateTransactionDTO } from '../../infrastructure/controllers/transaction/transaction.dto';
+import {
+  ICreateTransactionDTO,
+  ITransactionRepository,
+} from '../../domain/repositories/transaction.repository';
 
 class CreateTransactionUseCase {
   constructor(private readonly transactionRepository: ITransactionRepository) {}
 
-  // TODO : replace the dto or move it because it breaks the clean archi
-  execute(createTransactionDto: CreateTransactionDTO) {
+  execute(createTransactionDto: ICreateTransactionDTO) {
     return this.transactionRepository.create(createTransactionDto);
   }
 }

@@ -1,11 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
-import { Types } from 'mongoose';
 
 import { DcaRepository } from '../repositories/dca.repository';
 import { TransactionRepository } from '../repositories/transaction.repository';
 import { ExchangeApiRepository } from '../repositories/exchange-api.repository';
-
 import { CreateTransactionDTO } from '../controllers/transaction/transaction.dto';
 
 @Injectable()
@@ -48,7 +46,7 @@ export class DcaService {
         const createTransactionDto = new CreateTransactionDTO();
         createTransactionDto.datetime = dateNow;
         createTransactionDto.amount = dca.amount;
-        createTransactionDto.dca = new Types.ObjectId(dca.id);
+        createTransactionDto.dca = dca.id;
         createTransactionDto.pair = dca.pair;
         try {
           const order = await this.exchangeApiRepository.createSpotOrder(dca);

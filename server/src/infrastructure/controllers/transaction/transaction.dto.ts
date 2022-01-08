@@ -10,11 +10,11 @@ import {
   IsPositive,
   IsString,
 } from 'class-validator';
-import { Types } from 'mongoose';
 
 import { OrderTypesEnum } from '../../../domain/models/transaction';
+import { ICreateTransactionDTO } from '../../../domain/repositories/transaction.repository';
 
-class CreateTransactionDTO {
+class CreateTransactionDTO implements ICreateTransactionDTO {
   @ApiProperty({ required: false, default: 'current datetime' })
   @IsOptional()
   @IsDate()
@@ -37,7 +37,7 @@ class CreateTransactionDTO {
   @ApiProperty({ required: true, type: 'string (ObjectId)' })
   @IsNotEmpty()
   @IsMongoId()
-  dca: Types.ObjectId;
+  dca: string; //Types.ObjectId;
 
   @ApiProperty({ required: true })
   @IsString()
