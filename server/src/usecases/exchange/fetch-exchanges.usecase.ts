@@ -1,10 +1,12 @@
 import { IExchangeDbRepository } from '../../domain/repositories/exchange-db.repository';
+import { ExchangePresenter } from './exchange.presenter';
 
 class FetchExchangesUseCase {
   constructor(private readonly exchangeDbRepository: IExchangeDbRepository) {}
 
-  execute() {
-    return this.exchangeDbRepository.fetch();
+  async execute() {
+    const exchanges = await this.exchangeDbRepository.fetch();
+    return exchanges.map((exchange) => new ExchangePresenter(exchange));
   }
 }
 

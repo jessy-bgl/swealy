@@ -23,10 +23,8 @@ import { FetchDcaUseCase } from '../../../usecases/dca/fetch-dca.usecase';
 import { CreateDcaUseCase } from '../../../usecases/dca/create-dca.usecase';
 import { UpdateDcaUseCase } from '../../../usecases/dca/update-dca.usecase';
 import { DeleteDcaUseCase } from '../../../usecases/dca/delete-dca.usecase';
-
-import { Dca } from '../../../domain/models/dca';
+import { DcaPresenter } from '../../../usecases/dca/dca.presenter';
 import { CreateDcaDTO, UpdateDcaDTO } from './dca.dto';
-import { DcaPresenter } from './dca.presenter';
 
 @Controller('dca')
 @ApiTags('dca')
@@ -46,39 +44,33 @@ class DcaController {
 
   @Get()
   @ApiResponse({ status: 200, type: DcaPresenter, isArray: true })
-  async fetchDca(): Promise<Dca[]> {
-    const dcas = await this.fetchDcaUseCase.getInstance().execute();
-    return dcas.map((dca) => new DcaPresenter(dca));
+  fetchDca(): Promise<DcaPresenter[]> {
+    return this.fetchDcaUseCase.getInstance().execute();
   }
 
   @Post()
   @ApiBody({ type: CreateDcaDTO })
   @ApiResponse({ status: 201, type: DcaPresenter })
-  async createDca(@Body() createDcaDTO: CreateDcaDTO): Promise<Dca> {
-    const dca = await this.createDcaUsecase.getInstance().execute(createDcaDTO);
-    return new DcaPresenter(dca);
+  createDca(@Body() createDcaDTO: CreateDcaDTO): Promise<DcaPresenter> {
+    return this.createDcaUsecase.getInstance().execute(createDcaDTO);
   }
 
   @Put(':id')
   @ApiParam({ name: 'id', type: String })
   @ApiBody({ type: UpdateDcaDTO })
   @ApiResponse({ status: 200, type: DcaPresenter })
-  async updateDca(
+  updateDca(
     @Param('id') id: string,
     @Body() updateDcaDTO: UpdateDcaDTO,
-  ): Promise<Dca> {
-    const dca = await this.updateDcaUsecase
-      .getInstance()
-      .execute(id, updateDcaDTO);
-    return new DcaPresenter(dca);
+  ): Promise<DcaPresenter> {
+    return this.updateDcaUsecase.getInstance().execute(id, updateDcaDTO);
   }
 
   @Delete(':id')
   @ApiParam({ name: 'id', type: String })
   @ApiResponse({ status: 200, type: DcaPresenter })
-  async deleteDca(@Param('id') id: string): Promise<Dca> {
-    const dca = await this.deleteDcaUsecase.getInstance().execute(id);
-    return new DcaPresenter(dca);
+  deleteDca(@Param('id') id: string): Promise<DcaPresenter> {
+    return this.deleteDcaUsecase.getInstance().execute(id);
   }
 }
 
