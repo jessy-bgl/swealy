@@ -10,6 +10,12 @@ enum PairTypesEnum {
   FUTURE = 'future',
 }
 
+enum OrderStatusEnum {
+  NEW = 'new',
+  OPEN = 'open',
+  CLOSED = 'closed',
+}
+
 interface IPairResult {
   name: string;
   type: PairTypesEnum;
@@ -22,9 +28,9 @@ interface IOrderResult {
   datetime: Date;
   price: number;
   size: number;
-  status: string; // TODO : create an enum
+  status: OrderStatusEnum;
   type: OrderTypesEnum;
 }
 
 export type { IPairResult, IOrderResult };
-export { HttpMethodsEnum, PairTypesEnum };
+export { HttpMethodsEnum, PairTypesEnum, OrderStatusEnum };

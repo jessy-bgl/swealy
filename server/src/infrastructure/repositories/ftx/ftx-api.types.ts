@@ -1,3 +1,4 @@
+import { OrderStatusEnum } from '../../../domain/repositories/types';
 import {
   OrderSidesEnum,
   OrderTypesEnum,
@@ -27,7 +28,7 @@ interface IFtxPlaceOrderResult {
   createdAt: Date;
   price: number;
   size: number;
-  status: string; // TODO : create an enum
+  status: OrderStatusEnum;
   type: OrderTypesEnum;
 }
 
