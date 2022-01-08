@@ -15,7 +15,7 @@ interface ICreateTransactionDTO {
 
 interface ITransactionRepository {
   fetch(): Promise<Transaction[]>;
-  fetchLastDcaSuccessfulTransaction(dcaId: string): Promise<Transaction>;
+  fetchLastDcaAutoTransaction(dcaId: string): Promise<Transaction>;
   create(createTransactionDTO: ICreateTransactionDTO): Promise<Transaction>;
   delete(id: string): Promise<Transaction>;
 }

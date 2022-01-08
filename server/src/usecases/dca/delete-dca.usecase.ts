@@ -1,10 +1,12 @@
 import { IDcaRepository } from '../../domain/repositories/dca.repository.interface';
+import { DcaPresenter } from './dca.presenter';
 
 class DeleteDcaUseCase {
   constructor(private readonly dcaRepository: IDcaRepository) {}
 
-  execute(id: string) {
-    return this.dcaRepository.delete(id);
+  async execute(id: string) {
+    const dca = await this.dcaRepository.delete(id);
+    return new DcaPresenter(dca);
   }
 }
 

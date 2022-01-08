@@ -26,7 +26,10 @@ import { DeleteExchangeUseCase } from '../../../usecases/exchange/delete-exchang
 import { PairsExchangeApiKeyUseCase } from '../../../usecases/exchange/fetch-exchange-pairs.usecase';
 
 import { CreateExchangeDTO, UpdateExchangeDTO } from './exchange.dto';
-import { ExchangePresenter, PairsResult } from './exchange.presenter';
+import {
+  ExchangePresenter,
+  PairsResult,
+} from '../../../usecases/exchange/exchange.presenter';
 import { IPairResult } from '../../../domain/repositories/types';
 
 @ApiTags('exchange')
@@ -51,56 +54,50 @@ class ExchangeController {
 
   @Get()
   @ApiResponse({ status: 200, type: ExchangePresenter, isArray: true })
-  async fetchExchanges(): Promise<ExchangePresenter[]> {
-    const exchanges = await this.fetchExchangesUsecase.getInstance().execute();
-    return exchanges.map((exchange) => new ExchangePresenter(exchange));
+  fetchExchanges(): Promise<ExchangePresenter[]> {
+    return this.fetchExchangesUsecase.getInstance().execute();
   }
 
   @Post()
   @ApiBody({ type: CreateExchangeDTO })
   @ApiResponse({ status: 201, type: ExchangePresenter })
-  async addExchange(
+  addExchange(
     @Body() createExchangeDTO: CreateExchangeDTO,
   ): Promise<ExchangePresenter> {
-    const exchange = await this.addExchangeUsecase
-      .getInstance()
-      .execute(createExchangeDTO);
-    return new ExchangePresenter(exchange);
+    return this.addExchangeUsecase.getInstance().execute(createExchangeDTO);
   }
 
   @Put(':id')
   @ApiParam({ name: 'id', type: String })
   @ApiBody({ type: UpdateExchangeDTO })
   @ApiResponse({ status: 200, type: ExchangePresenter })
-  async updateExchange(
+  updateExchange(
     @Param('id') id: string,
     @Body() updateExchangeDTO: UpdateExchangeDTO,
   ): Promise<ExchangePresenter> {
-    const exchange = await this.updateExchangeUsecase
+    return this.updateExchangeUsecase
       .getInstance()
       .execute(id, updateExchangeDTO);
-    return new ExchangePresenter(exchange);
   }
 
   @Delete(':id')
   @ApiParam({ name: 'id', type: String })
   @ApiResponse({ status: 200, type: ExchangePresenter })
-  async deleteExchange(@Param('id') id: string): Promise<ExchangePresenter> {
-    const exchange = await this.deleteExchangeUsecase.getInstance().execute(id);
-    return new ExchangePresenter(exchange);
+  deleteExchange(@Param('id') id: string): Promise<ExchangePresenter> {
+    return this.deleteExchangeUsecase.getInstance().execute(id);
   }
 
   @Get(':id/check')
   @ApiParam({ name: 'id', type: String })
   @ApiResponse({ status: 200, type: Boolean })
-  async checkApiKeyValidity(@Param('id') id: string): Promise<boolean> {
+  checkApiKeyValidity(@Param('id') id: string): Promise<boolean> {
     return this.verifyExchangeApiKeyUsecase.getInstance().execute(id);
   }
 
   @Get(':id/pairs')
   @ApiParam({ name: 'id', type: String })
   @ApiResponse({ status: 200, type: PairsResult, isArray: true })
-  async getPairs(@Param('id') id: string): Promise<IPairResult[]> {
+  getPairs(@Param('id') id: string): Promise<IPairResult[]> {
     return this.getPairsExchangeApiKeyUsecase.getInstance().execute(id);
   }
 }

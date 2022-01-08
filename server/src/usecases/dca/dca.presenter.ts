@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Dca } from '../../../domain/models/dca';
+import { Dca } from '../../domain/models/dca';
 import { ExchangePresenter } from '../exchange/exchange.presenter';
 
 class DcaPresenter {
@@ -17,12 +17,13 @@ class DcaPresenter {
   hour: number;
   @ApiProperty()
   amount: number;
-  // @ApiProperty()
-  // nextTransactionDatetime: Date;
+  @ApiProperty()
+  nextTransactionDatetime?: Date;
   @ApiProperty()
   successfulTransactionsCounter: number;
 
-  constructor(dca: Dca) {
+  // the nextTransactionDatetime is not required because of the delete usecase
+  constructor(dca: Dca, nextTransactionDatetime?: Date) {
     this.id = dca.id;
     this.isActive = dca.isActive;
     this.pair = dca.pair;
@@ -30,7 +31,7 @@ class DcaPresenter {
     this.hour = dca.hour;
     this.amount = dca.amount;
     this.exchange = new ExchangePresenter(dca.exchange);
-    // this.nextTransactionDatetime = dca.nextTransactionDatetime;
+    this.nextTransactionDatetime = nextTransactionDatetime;
     this.successfulTransactionsCounter = dca.successfulTransactionsCounter || 0;
 
     // remove exchange data that should not be available here

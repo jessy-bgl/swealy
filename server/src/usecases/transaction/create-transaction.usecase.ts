@@ -2,12 +2,16 @@ import {
   ICreateTransactionDTO,
   ITransactionRepository,
 } from '../../domain/repositories/transaction.repository';
+import { TransactionPresenter } from './transaction.presenter';
 
 class CreateTransactionUseCase {
   constructor(private readonly transactionRepository: ITransactionRepository) {}
 
-  execute(createTransactionDto: ICreateTransactionDTO) {
-    return this.transactionRepository.create(createTransactionDto);
+  async execute(createTransactionDto: ICreateTransactionDTO) {
+    const transaction = await this.transactionRepository.create(
+      createTransactionDto,
+    );
+    return new TransactionPresenter(transaction);
   }
 }
 

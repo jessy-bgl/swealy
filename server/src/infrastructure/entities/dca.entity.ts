@@ -32,9 +32,6 @@ class Dca {
   @Prop({ type: Number, required: true })
   amount: number;
 
-  // @Prop({ type: Date })
-  // nextTransactionDatetime: Date;
-
   @Prop({ type: Number, default: 0 })
   successfulTransactionsCounter: number;
 }

@@ -1,10 +1,12 @@
 import { ITransactionRepository } from '../../domain/repositories/transaction.repository';
+import { TransactionPresenter } from './transaction.presenter';
 
 class DeleteTransactionUseCase {
   constructor(private readonly transactionRepository: ITransactionRepository) {}
 
-  execute(id: string) {
-    return this.transactionRepository.delete(id);
+  async execute(id: string) {
+    const transaction = await this.transactionRepository.delete(id);
+    return new TransactionPresenter(transaction);
   }
 }
 

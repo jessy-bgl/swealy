@@ -70,17 +70,6 @@ class DcaRepository implements IDcaRepository {
       throw e;
     }
   }
-
-  // async setNextTransactionDatetime(id: string, datetime: Date): Promise<void> {
-  //   try {
-  //     await this.dcaEntity.updateOne(
-  //       { _id: id },
-  //       { $set: { nextTransactionDatetime: datetime } },
-  //     );
-  //   } catch (e) {
-  //     throw e;
-  //   }
-  // }
 }
 
 export { DcaRepository };

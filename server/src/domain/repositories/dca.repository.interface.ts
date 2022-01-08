@@ -21,7 +21,6 @@ interface IDcaRepository {
   update(id: string, updateDcaDTO: IUpdateDcaDTO): Promise<Dca>;
   delete(id: string): Promise<Dca>;
   incSuccessfulTransactionsCounter(id: string): Promise<void>;
-  // setNextTransactionDatetime(id: string, datetime: Date): Promise<void>;
 }
 
 export { IDcaRepository, ICreateDcaDTO, IUpdateDcaDTO };

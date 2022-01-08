@@ -2,12 +2,14 @@ import {
   ICreateExchangeDTO,
   IExchangeDbRepository,
 } from '../../domain/repositories/exchange-db.repository';
+import { ExchangePresenter } from './exchange.presenter';
 
 class AddExchangeUseCase {
   constructor(private readonly exchangeDbRepository: IExchangeDbRepository) {}
 
-  execute(createExchangeDTO: ICreateExchangeDTO) {
-    return this.exchangeDbRepository.create(createExchangeDTO);
+  async execute(createExchangeDTO: ICreateExchangeDTO) {
+    const exchange = await this.exchangeDbRepository.create(createExchangeDTO);
+    return new ExchangePresenter(exchange);
   }
 }
 

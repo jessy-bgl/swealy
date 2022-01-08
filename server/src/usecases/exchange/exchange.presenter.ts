@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IPairResult, PairTypesEnum } from '../../../domain/repositories/types';
-import { Exchange, ExchangeEnum } from '../../../domain/models/exchange';
+import { IPairResult, PairTypesEnum } from '../../domain/repositories/types';
+import { Exchange, ExchangeEnum } from '../../domain/models/exchange';
 
 class ExchangePresenter {
   @ApiProperty()

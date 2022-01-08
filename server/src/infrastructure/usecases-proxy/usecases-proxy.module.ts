@@ -93,10 +93,15 @@ export class UsecasesProxyModule {
             ),
         },
         {
-          inject: [DcaRepository],
+          inject: [DcaRepository, TransactionRepository],
           provide: UsecasesProxyModule.FETCH_DCA_USECASE_PROXY,
-          useFactory: (dcaRepository: DcaRepository) =>
-            new UseCaseProxy(new FetchDcaUseCase(dcaRepository)),
+          useFactory: (
+            dcaRepository: DcaRepository,
+            transactionRepository: TransactionRepository,
+          ) =>
+            new UseCaseProxy(
+              new FetchDcaUseCase(dcaRepository, transactionRepository),
+            ),
         },
         {
           inject: [DcaRepository],

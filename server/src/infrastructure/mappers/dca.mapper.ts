@@ -4,6 +4,7 @@ import { Dca as DcaEntity } from '../entities/dca.entity';
 import { Exchange as ExchangeEntity } from '../entities/exchange.entity';
 import { Dca } from '../../domain/models/dca';
 import { ExchangeMapper } from './exchange.mapper';
+
 class DcaMapper {
   static toDca(dcaEntity: DcaEntity): Dca {
     if (!dcaEntity) return undefined;
@@ -16,8 +17,7 @@ class DcaMapper {
     dca.hour = dcaEntity.hour;
     dca.amount = dcaEntity.amount;
     dca.exchange = ExchangeMapper.toExchange(exchangeEntity);
-    // dca.nextTransactionDatetime = dca.nextTransactionDatetime;
-    dca.successfulTransactionsCounter = dca.successfulTransactionsCounter;
+    dca.successfulTransactionsCounter = dcaEntity.successfulTransactionsCounter;
     return dca;
   }
 
@@ -30,7 +30,6 @@ class DcaMapper {
     dcaEntity.hour = dca.hour;
     dcaEntity.amount = dca.amount;
     dcaEntity.exchange = ExchangeMapper.toExchangeEntity(dca.exchange);
-    // dcaEntity.nextTransactionDatetime = dca.nextTransactionDatetime;
     dcaEntity.successfulTransactionsCounter = dca.successfulTransactionsCounter;
     return dcaEntity;
   }

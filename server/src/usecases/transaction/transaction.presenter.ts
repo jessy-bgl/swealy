@@ -1,8 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  OrderTypesEnum,
-  Transaction,
-} from '../../../domain/models/transaction';
+import { OrderTypesEnum, Transaction } from '../../domain/models/transaction';
 import { DcaPresenter } from '../dca/dca.presenter';
 
 class TransactionPresenter {
