@@ -57,10 +57,10 @@ class TransactionRepository implements ITransactionRepository {
     }
   }
 
-  async fetchLastDcaSuccessfulTransaction(dcaId: string): Promise<Transaction> {
+  async fetchLastDcaAutoTransaction(dcaId: string): Promise<Transaction> {
     try {
       const transactions = await this.transactionEntity
-        .find({ dca: dcaId, success: true })
+        .find({ dca: dcaId, manual: false })
         .sort({ datetime: -1 })
         .limit(1)
         .populate({ path: 'dca', populate: 'exchange' });

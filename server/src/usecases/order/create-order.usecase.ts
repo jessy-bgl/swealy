@@ -34,19 +34,6 @@ class CreateOrderUseCase {
       createTransactionDto.success = false;
       createTransactionDto.description = e.message;
       await this.transactionRepository.create(createTransactionDto);
-    } finally {
-      //   const transactionDatetime = createTransactionDto.datetime;
-      //   const nextTransactionDatetime = new Date(
-      //     new Date(
-      //       transactionDatetime.setDate(
-      //         transactionDatetime.getDate() + dca.frequencyInDays,
-      //       ),
-      //     ).setHours(dca.hour, 0, 0),
-      //   );
-      //   await this.dcaRepository.setNextTransactionDatetime(
-      //     dca.id,
-      //     nextTransactionDatetime,
-      //   );
     }
   };
 }
