@@ -1,0 +1,15 @@
+{
+  "name": "Nom",
+  "label": "Label",
+  "description": "Description",
+  "cancel": "Annuler",
+  "save": "Sauvegarder",
+  "reset": "Réinitialiser",
+  "submit": "Valider",
+  "remove": "Supprimer",
+  "modify": "Modifier",
+  "close": "Fermer",
+  "yes": "Oui",
+  "no": "Non",
+  "none": "Aucun"
+}
