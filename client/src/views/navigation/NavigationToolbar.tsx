@@ -13,10 +13,8 @@ import {
 
 import MenuIcon from "@mui/icons-material/Menu";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import Brightness6Icon from "@mui/icons-material/Brightness6";
-import InfoIcon from "@mui/icons-material/Info";
+import ThemeIcon from "@mui/icons-material/Brightness6";
 
-import TooltipNavButtonWithIcon from "./components/TooltipNavIconButton";
 import MenuItemWithIcon from "./components/MenuItemIconButton";
 import { useThemeContext } from "../../services/stores/theme/useThemeContext";
 
@@ -61,10 +59,9 @@ const NavigationToolbar = (props: Props) => {
     >
       <MenuItemWithIcon
         name={t("theme")}
-        muiIcon={<Brightness6Icon />}
+        muiIcon={<ThemeIcon />}
         action={() => appTheme.toggleMode()}
       />
-      <MenuItemWithIcon name={t("about")} muiIcon={<InfoIcon />} />
     </Menu>
   );
 
@@ -87,21 +84,21 @@ const NavigationToolbar = (props: Props) => {
           >
             <MenuIcon />
           </IconButton>
+
           <Typography variant="h6" noWrap component="div">
             {props.title}
           </Typography>
+
           <Box sx={{ flexGrow: 1 }} />
+
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <Tooltip title={t("theme").toString()} arrow>
               <IconButton onClick={() => appTheme.toggleMode()}>
-                <Brightness6Icon />
+                <ThemeIcon />
               </IconButton>
             </Tooltip>
-            <TooltipNavButtonWithIcon
-              title={t("about")}
-              muiIcon={<InfoIcon />}
-            />
           </Box>
+
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
