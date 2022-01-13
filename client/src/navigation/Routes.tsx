@@ -1,7 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { Route, Routes } from "react-router-dom";
 
-import Navigation from "../views/navigation/Navigation";
+import { Navigation } from "../views/navigation/Navigation";
+import { Settings } from "../views/settings/Settings";
 
 function Router() {
   const { t } = useTranslation("navigation");
@@ -11,7 +12,11 @@ function Router() {
       <Route
         path="/"
         element={<Navigation child={<div />} title={t("dashboard")} />}
-      ></Route>
+      />
+      <Route
+        path="/settings"
+        element={<Navigation child={<Settings />} title={t("settings")} />}
+      />
     </Routes>
   );
 }

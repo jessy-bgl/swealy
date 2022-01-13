@@ -1,8 +1,14 @@
 import { CssBaseline, ThemeOptions } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { frFR } from "@mui/x-data-grid";
+import { frFR, enUS } from "@mui/x-data-grid";
+import { useContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 import Routes from "./navigation/Routes";
+import {
+  LanguageContext,
+  Languages,
+} from "./services/stores/language/LanguageContext";
 import { useThemeContext } from "./services/stores/theme/useThemeContext";
 
 const darkTheme = {
@@ -21,10 +27,17 @@ const lightTheme = {
 
 function App() {
   const appTheme = useThemeContext();
+  const { i18n } = useTranslation();
+  const { language } = useContext(LanguageContext);
+
+  useEffect(() => {
+    i18n.changeLanguage(`${language}-${language.toUpperCase()}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [language]);
 
   const muiTheme = createTheme(
     appTheme.isDarkMode ? darkTheme : lightTheme,
-    frFR // TODO : à adapter au changement de langue
+    language === Languages.FR ? frFR : enUS
   );
 
   return (

@@ -8,6 +8,7 @@ import "./index.css";
 import "./i18n/i18n.js";
 import App from "./App";
 import { ThemeProvider as AppThemeProvider } from "./services/stores/theme/ThemeProvider";
+import { LanguageProvider } from "./services/stores/language/LanguageProvider";
 
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
@@ -21,11 +22,13 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <AppThemeProvider>
-          <SnackbarProvider maxSnack={1}>
-            <App />
-          </SnackbarProvider>
-        </AppThemeProvider>
+        <LanguageProvider>
+          <AppThemeProvider>
+            <SnackbarProvider maxSnack={1}>
+              <App />
+            </SnackbarProvider>
+          </AppThemeProvider>
+        </LanguageProvider>
       </QueryClientProvider>
     </BrowserRouter>
   </React.StrictMode>,

@@ -11,7 +11,7 @@ interface Props {
   title: string;
 }
 
-export default function Navigation(props: Props) {
+const Navigation = (props: Props) => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -43,4 +43,6 @@ export default function Navigation(props: Props) {
       </Box>
     </Box>
   );
-}
+};
+
+export { Navigation };

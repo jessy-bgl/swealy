@@ -47,7 +47,6 @@ export default function NavigationDrawer(props: Props) {
         />
         <Divider />
         <ListItemWithIcon
-          disabled
           name={t("settings")}
           muiIcon={<SettingsIcon />}
           linkToNavigate="/settings"
