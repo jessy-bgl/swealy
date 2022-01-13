@@ -1,9 +1,11 @@
 import { useTranslation } from "react-i18next";
+
 import { Box, Divider, List, Drawer } from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ExchangeIcon from "@mui/icons-material/AccountBalance";
 import TransactionsIcon from "@mui/icons-material/History";
+import AboutIcon from "@mui/icons-material/Info";
 
 import ListItemWithIcon from "./components/ListItemTextIcon";
 
@@ -43,11 +45,19 @@ export default function NavigationDrawer(props: Props) {
           linkToNavigate="/exchanges"
           closeDrawer={props.handleDrawerToggle}
         />
+        <Divider />
         <ListItemWithIcon
           disabled
           name={t("settings")}
           muiIcon={<SettingsIcon />}
           linkToNavigate="/settings"
+          closeDrawer={props.handleDrawerToggle}
+        />
+        <ListItemWithIcon
+          disabled
+          name={t("about")}
+          muiIcon={<AboutIcon />}
+          linkToNavigate="/about"
           closeDrawer={props.handleDrawerToggle}
         />
       </List>
