@@ -19,7 +19,7 @@ class ExchangePresenter {
   constructor(exchange: Exchange) {
     const apiSecret = exchange.apiSecret;
     const apiSecretLength = exchange.apiSecret.length;
-    let apiSecretToShow = exchange.apiSecret;
+    let apiSecretToShow = apiSecret;
 
     if (apiSecretLength > 8) {
       const apiSecretPartToHide = '*'.repeat(apiSecretLength - 4);
