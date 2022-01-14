@@ -19,6 +19,9 @@ async function bootstrap() {
     new FastifyAdapter(),
   );
 
+  // enable cors (development mode only)
+  app.enableCors({ origin: true, credentials: true });
+
   // use pipes
   app.useGlobalPipes(validationPipe);
 
