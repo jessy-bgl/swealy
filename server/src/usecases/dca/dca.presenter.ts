@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Dca } from '../../domain/models/dca';
+import { Dca, DcaStatusEnum } from '../../domain/models/dca';
 import { ExchangePresenter } from '../exchange/exchange.presenter';
 
 class DcaPresenter {
   @ApiProperty()
   id: string;
   @ApiProperty()
-  isActive: boolean;
+  status: DcaStatusEnum;
   @ApiProperty()
   exchange: ExchangePresenter;
   @ApiProperty()
@@ -25,7 +25,7 @@ class DcaPresenter {
   // the nextTransactionDatetime is not required because of the delete usecase
   constructor(dca: Dca, nextTransactionDatetime?: Date) {
     this.id = dca.id;
-    this.isActive = dca.isActive;
+    this.status = dca.status;
     this.pair = dca.pair;
     this.frequencyInDays = dca.frequencyInDays;
     this.hour = dca.hour;

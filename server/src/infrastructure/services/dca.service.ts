@@ -5,6 +5,7 @@ import { DcaRepository } from '../repositories/dca.repository';
 import { TransactionRepository } from '../repositories/transaction.repository';
 import { ExchangeApiRepository } from '../repositories/exchange-api.repository';
 import { CreateOrderUseCase } from '../../usecases/order/create-order.usecase';
+import { DcaStatusEnum } from '../../domain/models/dca';
 
 @Injectable()
 export class DcaService {
@@ -25,7 +26,7 @@ export class DcaService {
     const dcas = await this.dcaRepository.fetch();
     dcas.forEach(async (dca) => {
       // if the dca is not active => skip it and go to the next
-      if (!dca.isActive) return;
+      if (dca.status !== DcaStatusEnum.ACTIVE) return;
 
       const lastAutoTransaction =
         await this.transactionRepository.fetchLastDcaAutoTransaction(dca.id);

@@ -1,8 +1,14 @@
 import { Exchange } from './exchange';
 
+enum DcaStatusEnum {
+  ACTIVE = 'active',
+  PAUSED = 'paused',
+  ARCHIVED = 'archived',
+}
+
 class Dca {
   id: string;
-  isActive: boolean;
+  status: DcaStatusEnum;
   exchange: Exchange;
   pair: string;
   frequencyInDays: number;
@@ -11,4 +17,4 @@ class Dca {
   successfulTransactionsCounter: number;
 }
 
-export { Dca };
+export { Dca, DcaStatusEnum };
