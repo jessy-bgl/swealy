@@ -17,11 +17,23 @@ class ExchangePresenter {
   subaccountName?: string;
 
   constructor(exchange: Exchange) {
+    const apiSecret = exchange.apiSecret;
+    const apiSecretLength = exchange.apiSecret.length;
+    let apiSecretToShow = exchange.apiSecret;
+
+    if (apiSecretLength > 8) {
+      const apiSecretPartToHide = '*'.repeat(apiSecretLength - 4);
+      apiSecretToShow =
+        `${apiSecret[0]}${apiSecret[1]}` +
+        apiSecretPartToHide +
+        `${apiSecret[apiSecretLength - 2]}${apiSecret[apiSecretLength - 1]}`;
+    }
+
     this.id = exchange.id;
     this.name = exchange.name;
     this.label = exchange.label;
     this.apiKey = exchange.apiKey;
-    this.apiSecret = exchange.apiSecret;
+    this.apiSecret = apiSecretToShow;
     this.subaccountName = exchange.subaccountName;
   }
 }

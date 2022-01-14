@@ -1,4 +1,4 @@
-import { Dca } from '../models/dca';
+import { Dca, DcaStatusEnum } from '../models/dca';
 
 interface ICreateDcaDTO {
   exchange: string;
@@ -12,7 +12,7 @@ interface IUpdateDcaDTO {
   amount: number;
   frequencyInDays: number;
   hour: number;
-  isActive?: boolean;
+  status?: DcaStatusEnum;
 }
 
 interface IDcaRepository {

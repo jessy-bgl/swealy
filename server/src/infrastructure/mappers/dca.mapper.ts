@@ -11,7 +11,7 @@ class DcaMapper {
     const dca = new Dca();
     const exchangeEntity = dcaEntity.exchange as ExchangeEntity;
     dca.id = dcaEntity._id.toString();
-    dca.isActive = dcaEntity.isActive;
+    dca.status = dcaEntity.status;
     dca.pair = dcaEntity.pair;
     dca.frequencyInDays = dcaEntity.frequencyInDays;
     dca.hour = dcaEntity.hour;
@@ -24,7 +24,7 @@ class DcaMapper {
   static toDcaEntity(dca: Dca): DcaEntity {
     const dcaEntity = new DcaEntity();
     dcaEntity._id = new Types.ObjectId(dca.id);
-    dcaEntity.isActive = dca.isActive;
+    dcaEntity.status = dca.status;
     dcaEntity.pair = dca.pair;
     dcaEntity.frequencyInDays = dca.frequencyInDays;
     dcaEntity.hour = dca.hour;

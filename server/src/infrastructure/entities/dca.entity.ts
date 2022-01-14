@@ -2,16 +2,18 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types, Schema as MongooseSchema } from 'mongoose';
 
 import { Exchange } from './exchange.entity';
+import { DcaStatusEnum } from '../../domain/models/dca';
 
 @Schema()
 class Dca {
   _id: Types.ObjectId;
 
   @Prop({
-    type: Boolean,
-    default: true,
+    type: String,
+    enum: DcaStatusEnum,
+    default: DcaStatusEnum.ACTIVE,
   })
-  isActive: boolean;
+  status: DcaStatusEnum;
 
   @Prop({
     type: MongooseSchema.Types.ObjectId,

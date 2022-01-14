@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
-  IsBoolean,
+  IsEnum,
   IsMongoId,
   IsNotEmpty,
   IsNumber,
@@ -13,6 +13,7 @@ import {
   ICreateDcaDTO,
   IUpdateDcaDTO,
 } from '../../../domain/repositories/dca.repository.interface';
+import { DcaStatusEnum } from '../../../domain/models/dca';
 
 class CreateDcaDTO implements ICreateDcaDTO {
   @ApiProperty({ required: true, type: 'string (ObjectId)' })
@@ -44,8 +45,9 @@ class CreateDcaDTO implements ICreateDcaDTO {
 class UpdateDcaDTO implements IUpdateDcaDTO {
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsBoolean()
-  isActive?: boolean;
+  @IsString()
+  @IsEnum(DcaStatusEnum)
+  status?: DcaStatusEnum;
 
   @ApiProperty({ required: true })
   @IsNumber()
