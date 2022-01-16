@@ -69,7 +69,7 @@ const Exchanges = () => {
                 }
               />
               <ListItemSecondaryAction>
-                <Tooltip title={t("keysCheck") as string}>
+                <Tooltip title={t("exchange:keysCheck") as string}>
                   <IconButton
                     color="primary"
                     onClick={() => handleClickApiKeysCheck(exchange.id)}
@@ -77,7 +77,7 @@ const Exchanges = () => {
                     <VerifyIcon />
                   </IconButton>
                 </Tooltip>
-                <Tooltip title={t("editExchange") as string}>
+                <Tooltip title={t("exchange:editExchange") as string}>
                   <IconButton
                     color="warning"
                     onClick={() => handleOpenUpdateDialog(exchange)}
@@ -85,7 +85,7 @@ const Exchanges = () => {
                     <EditIcon />
                   </IconButton>
                 </Tooltip>
-                <Tooltip title={t("removeExchange") as string}>
+                <Tooltip title={t("exchange:removeExchange") as string}>
                   <IconButton
                     color="error"
                     onClick={() => handleOpenDeleteDialog(exchange)}
