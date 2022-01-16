@@ -18,6 +18,7 @@ interface ITransactionRepository {
   fetchLastDcaAutoTransaction(dcaId: string): Promise<Transaction>;
   create(createTransactionDTO: ICreateTransactionDTO): Promise<Transaction>;
   delete(id: string): Promise<Transaction>;
+  deleteByDcaId(dcaId: string): Promise<void>;
   deleteByDcaIds(dcaIds: string[]): Promise<void>;
 }
 

@@ -126,10 +126,15 @@ export class UsecasesProxyModule {
             new UseCaseProxy(new UpdateDcaUseCase(dcaRepository)),
         },
         {
-          inject: [DcaRepository],
+          inject: [DcaRepository, TransactionRepository],
           provide: UsecasesProxyModule.DELETE_DCA_USECASE_PROXY,
-          useFactory: (dcaRepository: DcaRepository) =>
-            new UseCaseProxy(new DeleteDcaUseCase(dcaRepository)),
+          useFactory: (
+            dcaRepository: DcaRepository,
+            transactionRepository: TransactionRepository,
+          ) =>
+            new UseCaseProxy(
+              new DeleteDcaUseCase(dcaRepository, transactionRepository),
+            ),
         },
         {
           inject: [TransactionRepository],

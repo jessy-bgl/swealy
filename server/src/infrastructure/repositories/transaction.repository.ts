@@ -57,6 +57,14 @@ class TransactionRepository implements ITransactionRepository {
     }
   }
 
+  async deleteByDcaId(dcaId: string): Promise<void> {
+    try {
+      await this.transactionEntity.deleteMany({ dca: dcaId });
+    } catch (e) {
+      throw e;
+    }
+  }
+
   async deleteByDcaIds(dcaIds: string[]): Promise<void> {
     try {
       await this.transactionEntity.deleteMany({ dca: { $in: dcaIds } });
