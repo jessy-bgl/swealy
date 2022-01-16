@@ -20,6 +20,7 @@ interface IDcaRepository {
   create(createDcaDTO: ICreateDcaDTO): Promise<Dca>;
   update(id: string, updateDcaDTO: IUpdateDcaDTO): Promise<Dca>;
   delete(id: string): Promise<Dca>;
+  deleteByExchangeId(exchangeId: string): Promise<void>;
   incSuccessfulTransactionsCounter(id: string): Promise<void>;
 }
 

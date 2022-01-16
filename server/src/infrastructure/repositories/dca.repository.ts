@@ -60,6 +60,14 @@ class DcaRepository implements IDcaRepository {
     }
   }
 
+  async deleteByExchangeId(exchangeId: string): Promise<void> {
+    try {
+      await this.dcaEntity.deleteMany({ exchange: exchangeId });
+    } catch (e) {
+      throw e;
+    }
+  }
+
   async incSuccessfulTransactionsCounter(id: string): Promise<void> {
     try {
       await this.dcaEntity.updateOne(

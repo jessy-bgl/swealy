@@ -65,10 +65,15 @@ export class UsecasesProxyModule {
             new UseCaseProxy(new UpdateExchangeUseCase(repository)),
         },
         {
-          inject: [ExchangeDbRepository],
+          inject: [ExchangeDbRepository, DcaRepository],
           provide: UsecasesProxyModule.DELETE_EXCHANGE_USECASE_PROXY,
-          useFactory: (repository: ExchangeDbRepository) =>
-            new UseCaseProxy(new DeleteExchangeUseCase(repository)),
+          useFactory: (
+            repository: ExchangeDbRepository,
+            dcaRepository: DcaRepository,
+          ) =>
+            new UseCaseProxy(
+              new DeleteExchangeUseCase(repository, dcaRepository),
+            ),
         },
         {
           inject: [ExchangeDbRepository, ExchangeApiRepository],
