@@ -39,7 +39,6 @@ export default function NavigationDrawer(props: Props) {
           closeDrawer={props.handleDrawerToggle}
         />
         <ListItemWithIcon
-          disabled
           name={t("exchanges")}
           muiIcon={<ExchangeIcon />}
           linkToNavigate="/exchanges"

@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClientProvider } from "react-query";
 
 import "./index.css";
 import "./i18n/i18n.js";
@@ -12,11 +12,7 @@ import { LanguageProvider } from "./services/stores/language/LanguageProvider";
 
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
-
-const queryClient = new QueryClient();
-queryClient.setDefaultOptions({
-  queries: { refetchOnWindowFocus: false },
-});
+import { queryClient } from "./config/react-query";
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,0 +1,21 @@
+{
+  "name": "Nom",
+  "subaccountName": "Sous-compte",
+  "label": "Label",
+  "apiKey": "Clé API",
+  "apiSecret": "Clé secrète",
+  "addExchange": "Ajouter un exchange",
+  "newExchange": "Nouvel exchange",
+  "editExchange": "Editer",
+  "removeExchange": "Supprimer",
+  "keysCheck": "Vérifier la validité",
+  "removeExchangeTitle": "Confirmez-vous la suppression de {{label}} ({{name}}) ?",
+  "removeExchangeWarning": "Les DCA et les transactions associés à cet exchange seront également supprimés. Cette action est irréversible.",
+  "createExchangeSuccess": "Exchange ajouté avec succès",
+  "updateExchangeSuccess": "Exchange mis à jour avec succès",
+  "deleteExchangeSuccess": "Exchange supprimé avec succès",
+  "checkApiKeysSuccess": "Clés API valides",
+  "form": {
+    "requiredField": "Champ requis"
+  }
+}
