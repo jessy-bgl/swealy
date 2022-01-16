@@ -8,9 +8,10 @@ import { SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { swaggerConfig, swaggerPath, swaggerOptions } from './swagger.config';
 
-import { MongoExceptionsFilter } from './infrastructure/common/exceptions/MongoExceptionsFilter';
 import { validationPipe } from './infrastructure/common/pipes/validation.pipe';
 import { HTTP_PORT } from './infrastructure/config/constants';
+import { AllExceptionsFilter } from './infrastructure/common/exceptions/AllExceptionsFilter';
+import { MongoExceptionsFilter } from './infrastructure/common/exceptions/MongoExceptionsFilter';
 
 async function bootstrap() {
   // create NestJS app server based on Fastify
@@ -26,7 +27,7 @@ async function bootstrap() {
   app.useGlobalPipes(validationPipe);
 
   // use global-scope mongo exceptions filter
-  app.useGlobalFilters(new MongoExceptionsFilter());
+  app.useGlobalFilters(new AllExceptionsFilter(), new MongoExceptionsFilter());
 
   // use global prefix 'api'
   app.setGlobalPrefix('/api');
