@@ -1,15 +1,15 @@
-enum ExchangeEnum {
-  'BINANCE' = 'binance',
-  'FTX' = 'ftx',
+enum ExchangesEnum {
+  BINANCE = 'binance',
+  FTX = 'ftx',
 }
 
 class Exchange {
   id: string;
-  name: ExchangeEnum;
+  name: ExchangesEnum;
   label: string;
   apiKey: string;
   apiSecret: string;
   subaccountName?: string;
 }
 
-export { Exchange, ExchangeEnum };
+export { Exchange, ExchangesEnum };

@@ -3,6 +3,7 @@ import { initReactI18next } from "react-i18next";
 import commonFR from "./fr/common.json";
 import navigationFR from "./fr/navigation.json";
 import settingsFR from "./fr/settings.json";
+import exchangeFR from "./fr/exchange.json";
 import settingsEN from "./en/settings.json";
 
 export const defaultNS = "common";
@@ -12,6 +13,7 @@ export const resources = {
     common: commonFR,
     navigation: navigationFR,
     settings: settingsFR,
+    exchange: exchangeFR,
   },
   en: {
     settings: settingsEN,
@@ -20,7 +22,7 @@ export const resources = {
 
 i18n.use(initReactI18next).init({
   lng: "fr",
-  ns: ["common", "navigation", "settings"],
+  ns: ["common", "navigation", "settings", "exchange"],
   defaultNS,
   resources,
 });

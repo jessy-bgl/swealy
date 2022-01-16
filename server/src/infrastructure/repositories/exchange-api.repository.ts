@@ -5,7 +5,7 @@ import { Exchange } from '../../domain/models/exchange';
 import { Dca } from '../../domain/models/dca';
 import { IOrderResult, IPairResult } from '../../domain/repositories/types';
 
-import { ExchangeEnum } from '../entities/exchange.entity';
+import { ExchangesEnum } from '../entities/exchange.entity';
 import { IExchangeApiRepository } from '../../domain/repositories/exchange-api.repository';
 import { FtxApiRepository } from './ftx/ftx-api.repository';
 
@@ -19,9 +19,9 @@ interface IExchangeAuthParams {
 class ExchangeApiRepository implements IExchangeApiRepository {
   constructor(private readonly httpService: HttpService) {}
 
-  checkApiKeyValidity(exchange: Exchange): Promise<boolean> {
+  checkApiKeyValidity(exchange: Exchange): Promise<void> {
     switch (exchange.name) {
-      case ExchangeEnum.FTX: {
+      case ExchangesEnum.FTX: {
         return FtxApiRepository.checkApiKeyValidity(this.httpService, exchange);
       }
       default: {
@@ -32,7 +32,7 @@ class ExchangeApiRepository implements IExchangeApiRepository {
 
   createSpotOrder(dca: Dca): Promise<IOrderResult> {
     switch (dca.exchange.name) {
-      case ExchangeEnum.FTX: {
+      case ExchangesEnum.FTX: {
         return FtxApiRepository.createSpotOrder(this.httpService, dca);
       }
       default: {
@@ -43,7 +43,7 @@ class ExchangeApiRepository implements IExchangeApiRepository {
 
   getAvailableSpotPairs(exchange: Exchange): Promise<IPairResult[]> {
     switch (exchange.name) {
-      case ExchangeEnum.FTX: {
+      case ExchangesEnum.FTX: {
         return FtxApiRepository.getAvailableSpotPairs(this.httpService);
       }
       default: {

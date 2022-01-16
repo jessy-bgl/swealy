@@ -1,15 +1,22 @@
 import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
 import { MongoError } from 'mongodb';
+import { FastifyReply } from 'fastify';
 
 @Catch(MongoError)
 class MongoExceptionsFilter implements ExceptionFilter {
   catch(exception: MongoError, host: ArgumentsHost) {
-    const response = host.switchToHttp().getResponse();
+    const response = host.switchToHttp().getResponse<FastifyReply>();
 
     if (exception.code === 11000) {
-      response.status(409).send({ message: 'resource already exists' });
+      const statusCode = 409;
+      response
+        .status(statusCode)
+        .send({ statusCode, message: 'This resource already exists' });
     } else {
-      response.status(500).send({ message: 'db internal error' });
+      const statusCode = 500;
+      response
+        .status(statusCode)
+        .send({ statusCode, message: 'MongoDB internal error' });
     }
   }
 }

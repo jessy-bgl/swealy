@@ -1,13 +1,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
-import { ExchangeEnum } from '../../domain/models/exchange';
+import { ExchangesEnum } from '../../domain/models/exchange';
 
 @Schema()
 class Exchange {
   _id: Types.ObjectId;
 
   @Prop({ type: String, required: true })
-  name: ExchangeEnum;
+  name: ExchangesEnum;
 
   @Prop({ type: String, required: true, unique: true })
   label: string;
@@ -26,4 +26,4 @@ type ExchangeDocument = Exchange & Document;
 
 const ExchangeSchema = SchemaFactory.createForClass(Exchange);
 
-export { Exchange, ExchangeEnum, ExchangeDocument, ExchangeSchema };
+export { Exchange, ExchangesEnum, ExchangeDocument, ExchangeSchema };

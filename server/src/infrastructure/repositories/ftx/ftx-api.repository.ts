@@ -1,10 +1,6 @@
 import * as crypto from 'crypto';
 import { AxiosRequestHeaders } from 'axios';
-import {
-  HttpException,
-  Injectable,
-  InternalServerErrorException,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { HttpService } from 'nestjs-http-promise';
 
 import {
@@ -29,6 +25,15 @@ import {
 } from './ftx-api.types';
 
 const FTX_API_BASE_URL = 'https://ftx.com/api';
+const FTX_API_DEFAULT_ERROR = 'FTX api returned an error';
+
+const handleFtxApiError = (e: any) => {
+  if (e.response)
+    throw new Error(
+      `FTX API error (${e.response.status}) ${e.response.data.error}`,
+    );
+  else throw e;
+};
 
 @Injectable()
 class FtxApiRepository implements Partial<IExchangeApiRepository> {
@@ -61,7 +66,7 @@ class FtxApiRepository implements Partial<IExchangeApiRepository> {
   static async checkApiKeyValidity(
     httpService: HttpService,
     exchange: Exchange,
-  ): Promise<boolean> {
+  ): Promise<void> {
     try {
       const res = await httpService.get(`${FTX_API_BASE_URL}/account`, {
         headers: this.getAuthRequestHeaders(
@@ -70,16 +75,10 @@ class FtxApiRepository implements Partial<IExchangeApiRepository> {
           exchange,
         ),
       });
-      if (res.data.success === true) return true;
-      else throw new InternalServerErrorException('FTX API error');
+      if (res.data.success === true) return;
+      else throw new Error(FTX_API_DEFAULT_ERROR);
     } catch (e) {
-      throw new HttpException(
-        {
-          status: e.response.status,
-          error: e.response.data.error,
-        },
-        e.response.status,
-      );
+      handleFtxApiError(e);
     }
   }
 
@@ -111,7 +110,7 @@ class FtxApiRepository implements Partial<IExchangeApiRepository> {
           ),
         },
       );
-      if (!res.data.success) throw new Error('FTX API error');
+      if (!res.data.success) throw new Error(FTX_API_DEFAULT_ERROR);
       const { createdAt, size, status, type } = res.data
         .result as IFtxPlaceOrderResult;
       // NB : we don't use the price from the result because it is null as we place a market order
@@ -123,11 +122,7 @@ class FtxApiRepository implements Partial<IExchangeApiRepository> {
         type,
       };
     } catch (e) {
-      if (e.response)
-        throw new Error(
-          `FTX API error (${e.response.status}) ${e.response.data.error}`,
-        );
-      else throw e;
+      handleFtxApiError(e);
     }
   }
 
@@ -139,7 +134,7 @@ class FtxApiRepository implements Partial<IExchangeApiRepository> {
         `${FTX_API_BASE_URL}/markets`,
       );
       if (!res.data || !res.data.success)
-        throw new InternalServerErrorException('FTX api returned an error');
+        throw new Error(FTX_API_DEFAULT_ERROR);
       return res.data.result
         .filter((d) => d.type === 'spot')
         .map((d) => ({
@@ -150,13 +145,7 @@ class FtxApiRepository implements Partial<IExchangeApiRepository> {
           sizeIncrement: d.sizeIncrement,
         }));
     } catch (e) {
-      throw new HttpException(
-        {
-          status: e.response.status,
-          error: e.response.data.error,
-        },
-        e.response.status,
-      );
+      handleFtxApiError(e);
     }
   }
 
@@ -169,10 +158,10 @@ class FtxApiRepository implements Partial<IExchangeApiRepository> {
         `${FTX_API_BASE_URL}/markets/${pair}`,
       );
       if (!res.data || !res.data.success)
-        throw new InternalServerErrorException('FTX api returned an error');
+        throw new Error(FTX_API_DEFAULT_ERROR);
       return res.data.result.price;
     } catch (e) {
-      throw e;
+      handleFtxApiError(e);
     }
   }
 }
