@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
-import { ExchangeEnum } from '../../entities/exchange.entity';
+import { ExchangesEnum } from '../../entities/exchange.entity';
 import {
   ICreateExchangeDTO,
   IUpdateExchangeDTO,
@@ -10,7 +10,7 @@ import {
 class CreateExchangeDTO implements ICreateExchangeDTO {
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  @IsEnum(ExchangeEnum)
+  @IsEnum(ExchangesEnum)
   name: string;
 
   @ApiProperty({ required: true })

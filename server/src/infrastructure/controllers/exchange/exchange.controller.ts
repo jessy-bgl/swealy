@@ -7,6 +7,7 @@ import {
   Param,
   Put,
   Delete,
+  HttpCode,
 } from '@nestjs/common';
 import {
   ApiBody,
@@ -88,9 +89,10 @@ class ExchangeController {
   }
 
   @Get(':id/check')
+  @HttpCode(204)
   @ApiParam({ name: 'id', type: String })
-  @ApiResponse({ status: 200, type: Boolean })
-  checkApiKeyValidity(@Param('id') id: string): Promise<boolean> {
+  @ApiResponse({ status: 204, description: 'Success' })
+  checkApiKeyValidity(@Param('id') id: string): Promise<void> {
     return this.verifyExchangeApiKeyUsecase.getInstance().execute(id);
   }
 

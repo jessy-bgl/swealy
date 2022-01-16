@@ -3,7 +3,7 @@ import { Exchange } from '../models/exchange';
 import { IOrderResult, IPairResult } from './types';
 
 interface IExchangeApiRepository {
-  checkApiKeyValidity(exchange: Exchange): Promise<boolean>;
+  checkApiKeyValidity(exchange: Exchange): Promise<void>;
 
   createSpotOrder(dca: Dca): Promise<IOrderResult>;
 

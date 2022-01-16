@@ -33,6 +33,7 @@ class ExchangeDbRepository implements IExchangeDbRepository {
   async fetchOne(id: string): Promise<Exchange> {
     try {
       const exchange = await this.exchangeEntity.findById(id).lean();
+      if (!exchange) throw new NotFoundException();
       return ExchangeMapper.toExchange(exchange);
     } catch (e) {
       throw e;
