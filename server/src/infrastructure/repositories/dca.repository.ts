@@ -52,7 +52,9 @@ class DcaRepository implements IDcaRepository {
 
   async delete(id: string): Promise<Dca> {
     try {
-      const dca = await this.dcaEntity.findOneAndDelete({ _id: id });
+      const dca = await this.dcaEntity
+        .findOneAndDelete({ _id: id })
+        .populate('exchange');
       if (!dca) throw new NotFoundException();
       return DcaMapper.toDca(dca);
     } catch (e) {
@@ -62,7 +64,10 @@ class DcaRepository implements IDcaRepository {
 
   async deleteByExchangeId(exchangeId: string): Promise<Dca[]> {
     try {
-      const dcas = await this.dcaEntity.find({ exchange: exchangeId }).lean();
+      const dcas = await this.dcaEntity
+        .find({ exchange: exchangeId })
+        .populate('exchange')
+        .lean();
       await this.dcaEntity.deleteMany({ exchange: exchangeId });
       return dcas.map((dca) => DcaMapper.toDca(dca));
     } catch (e) {
