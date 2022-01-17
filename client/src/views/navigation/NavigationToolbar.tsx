@@ -70,8 +70,8 @@ const NavigationToolbar = (props: Props) => {
       <AppBar
         position="fixed"
         sx={{
-          width: { md: `calc(100% - ${props.drawerWidth}px)` },
-          ml: { md: `${props.drawerWidth}px` },
+          width: { lg: `calc(100% - ${props.drawerWidth}px)` },
+          ml: { lg: `${props.drawerWidth}px` },
         }}
       >
         <Toolbar>
@@ -80,7 +80,7 @@ const NavigationToolbar = (props: Props) => {
             aria-label="open drawer"
             edge="start"
             onClick={props.handleDrawerToggle}
-            sx={{ mr: 2, display: { md: "none" } }}
+            sx={{ mr: 2, display: { lg: "none" } }}
           >
             <MenuIcon />
           </IconButton>
@@ -91,7 +91,7 @@ const NavigationToolbar = (props: Props) => {
 
           <Box sx={{ flexGrow: 1 }} />
 
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ display: { xs: "none", lg: "flex" } }}>
             <Tooltip title={t("theme").toString()} arrow>
               <IconButton onClick={() => appTheme.toggleMode()}>
                 <ThemeIcon />
@@ -99,7 +99,7 @@ const NavigationToolbar = (props: Props) => {
             </Tooltip>
           </Box>
 
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ display: { xs: "flex", lg: "none" } }}>
             <IconButton
               size="large"
               aria-haspopup="true"

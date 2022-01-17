@@ -1,11 +1,14 @@
 import { useTranslation } from "react-i18next";
 
 import { Box, Divider, List, Drawer } from "@mui/material";
-import DashboardIcon from "@mui/icons-material/Dashboard";
+// import DashboardIcon from "@mui/icons-material/Dashboard";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ExchangeIcon from "@mui/icons-material/AccountBalance";
 import TransactionsIcon from "@mui/icons-material/History";
 import AboutIcon from "@mui/icons-material/Info";
+import ActiveDcaIcon from "@mui/icons-material/Paid";
+import InactiveDcaIcon from "@mui/icons-material/PaidOutlined";
+import ArchivedDcaIcon from "@mui/icons-material/AccountBalanceWallet";
 
 import ListItemWithIcon from "./components/ListItemTextIcon";
 
@@ -25,12 +28,31 @@ export default function NavigationDrawer(props: Props) {
       </div>
       <Divider />
       <List>
-        <ListItemWithIcon
+        {/* <ListItemWithIcon
           name={t("dashboard")}
           muiIcon={<DashboardIcon />}
           linkToNavigate="/"
           closeDrawer={props.handleDrawerToggle}
+        /> */}
+        <ListItemWithIcon
+          name={t("activeDcas")}
+          muiIcon={<ActiveDcaIcon />}
+          linkToNavigate="/dca/active"
+          closeDrawer={props.handleDrawerToggle}
         />
+        <ListItemWithIcon
+          name={t("pausedDcas")}
+          muiIcon={<InactiveDcaIcon />}
+          linkToNavigate="/dca/paused"
+          closeDrawer={props.handleDrawerToggle}
+        />
+        <ListItemWithIcon
+          name={t("archivedDcas")}
+          muiIcon={<ArchivedDcaIcon />}
+          linkToNavigate="/dca/archived"
+          closeDrawer={props.handleDrawerToggle}
+        />
+        <Divider />
         <ListItemWithIcon
           disabled
           name={t("transactions")}
@@ -65,7 +87,7 @@ export default function NavigationDrawer(props: Props) {
   return (
     <Box
       component="nav"
-      sx={{ width: { md: props.drawerWidth }, flexShrink: { md: 0 } }}
+      sx={{ width: { lg: props.drawerWidth }, flexShrink: { lg: 0 } }}
     >
       <Drawer
         variant="temporary"
@@ -75,7 +97,7 @@ export default function NavigationDrawer(props: Props) {
           keepMounted: true, // Better open performance on mobile.
         }}
         sx={{
-          display: { xs: "block", md: "none" },
+          display: { xs: "block", lg: "none" },
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
             width: props.drawerWidth,
@@ -87,7 +109,7 @@ export default function NavigationDrawer(props: Props) {
       <Drawer
         variant="permanent"
         sx={{
-          display: { xs: "none", md: "block" },
+          display: { xs: "none", lg: "block" },
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
             width: props.drawerWidth,

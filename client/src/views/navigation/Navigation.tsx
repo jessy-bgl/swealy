@@ -35,7 +35,7 @@ const Navigation = (props: Props) => {
         sx={{
           flexGrow: 1,
           p: 3,
-          width: { md: `calc(100% - ${drawerWidth}px)` },
+          width: { lg: `calc(100% - ${drawerWidth}px)` },
         }}
       >
         <Toolbar />
