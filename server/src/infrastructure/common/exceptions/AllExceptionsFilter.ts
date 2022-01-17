@@ -25,6 +25,11 @@ export class AllExceptionsFilter implements ExceptionFilter {
             message: exception.message,
           };
 
-    return response.status(httpStatus).send(newResponse);
+    // TODO : use the logger
+    if (httpStatus === 500) console.log(newResponse);
+
+    return response
+      .status(httpStatus)
+      .send(httpStatus === 500 ? 'Internal server error' : newResponse);
   }
 }
