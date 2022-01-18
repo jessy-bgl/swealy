@@ -11,6 +11,7 @@ import {
   ListItemSecondaryAction,
   IconButton,
   Tooltip,
+  ListItemIcon,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import VerifyIcon from "@mui/icons-material/Key";
@@ -49,15 +50,13 @@ const Exchanges = () => {
         <List>
           {data?.map((exchange) => (
             <ListItem divider key={exchange.label}>
-              <ListItemAvatar>
-                <Avatar>
-                  <img
-                    src={getExchangeLogo(exchange.name)}
-                    alt={`${exchange.name}_logo`}
-                    width={25}
-                  />
-                </Avatar>
-              </ListItemAvatar>
+              <ListItemIcon>
+                <img
+                  src={getExchangeLogo(exchange.name)}
+                  alt={`${exchange.name}_logo`}
+                  width={25}
+                />
+              </ListItemIcon>
               <ListItemText
                 primary={exchange.label}
                 secondary={

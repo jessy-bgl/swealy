@@ -3,10 +3,8 @@ import {
   Button,
   List,
   ListItem,
-  ListItemAvatar,
-  Avatar,
   ListItemText,
-  Divider,
+  ListItemIcon,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
@@ -60,15 +58,10 @@ const DcaConfirmation = ({
       <Grid item>
         <List dense>
           {items.map((item, index) => (
-            <div key={index}>
-              <ListItem>
-                <ListItemAvatar>
-                  <Avatar>{item.icon}</Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={item.value} secondary={item.label} />
-              </ListItem>
-              <Divider variant="inset" component="li" />
-            </div>
+            <ListItem divider key={index}>
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.value} secondary={item.label} />
+            </ListItem>
           ))}
         </List>
       </Grid>
