@@ -1,10 +1,10 @@
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Grid, Paper, Tabs, Tab } from "@mui/material";
 
 import AddIcon from "@mui/icons-material/AddCircle";
 
-import { DcaStatusEnum } from "../../models/Dca";
+import { Dca, DcaStatusEnum } from "../../models/Dca";
 import { CreateDcaDialog } from "./CreateDcaDialog";
 import { useFetchDcas } from "./hooks/useDcaQueries";
 import { useFetchExchanges } from "../exchanges/hooks/useExchangeQueries";
@@ -27,12 +27,18 @@ const Dcas = ({ dcaStatus }: Props) => {
   const [selectedDcaId, setSelectedDcaId] = useState("");
   const [selectedTab, setSelectedTab] = useState(DcaTabs.STATISTICS);
   const [openAddDcaDialog, setOpenAddDcaDialog] = useState(false);
+  const [dcas, setDcas] = useState([] as Dca[]);
 
   const fetchExchangesQuery = useFetchExchanges();
 
   const { t } = useTranslation("dca");
 
   const { data, isLoading } = useFetchDcas();
+
+  useEffect(() => {
+    if (data) setDcas(data.filter((dca) => dca.status === dcaStatus));
+    setSelectedDcaId("");
+  }, [dcaStatus, data]);
 
   const handleSelectDca = (dcaId: string) => {
     if (selectedDcaId === dcaId)
@@ -48,12 +54,11 @@ const Dcas = ({ dcaStatus }: Props) => {
   const handleCoseAddDcaDialog = () => setOpenAddDcaDialog(false);
 
   const renderInfoStats = () => {
-    if (!selectedDcaId)
-      return <Statistics dcaCounter={data ? data.length : 0} />;
+    if (!selectedDcaId) return <Statistics dcaCounter={dcas.length} />;
     else if (selectedDcaId && selectedTab === DcaTabs.STATISTICS)
       return <DcaStatistics />;
     else if (selectedDcaId && selectedTab === DcaTabs.INFO)
-      return <DcaInfo data={data?.find((dca) => dca.id === selectedDcaId)} />;
+      return <DcaInfo data={dcas.find((dca) => dca.id === selectedDcaId)} />;
   };
 
   if (isLoading) return <div />;
@@ -63,17 +68,15 @@ const Dcas = ({ dcaStatus }: Props) => {
       <Grid container spacing={2}>
         <Grid item xs={12} md={4} xl={3}>
           <Grid container direction="column" alignItems="center" spacing={2}>
-            {data
-              ?.filter((dca) => dca.status === dcaStatus)
-              .map((dca) => (
-                <Grid item key={dca.id} sx={{ width: "100%" }}>
-                  <DcaCard
-                    data={dca}
-                    isSelected={dca.id === selectedDcaId}
-                    onClickDca={handleSelectDca}
-                  />
-                </Grid>
-              ))}
+            {dcas.map((dca) => (
+              <Grid item key={dca.id} sx={{ width: "100%" }}>
+                <DcaCard
+                  data={dca}
+                  isSelected={dca.id === selectedDcaId}
+                  onClickDca={handleSelectDca}
+                />
+              </Grid>
+            ))}
             {dcaStatus === DcaStatusEnum.ACTIVE && (
               <Grid item>
                 <Button

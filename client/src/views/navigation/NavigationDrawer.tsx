@@ -25,11 +25,13 @@ export default function NavigationDrawer(props: Props) {
 
   const navigate = useNavigate();
 
-  const [selectedItem, setSelectedItem] = useState("activeDcas");
+  const [selectedItem, setSelectedItem] = useState(
+    window.location.pathname || "/dca/active"
+  );
 
-  const handleClickItem = (name, linkToNavigate?) => {
+  const handleClickItem = (linkToNavigate?) => {
     if (linkToNavigate) {
-      setSelectedItem(name);
+      setSelectedItem(linkToNavigate);
       props.handleDrawerToggle();
       navigate(linkToNavigate);
     }
@@ -51,48 +53,48 @@ export default function NavigationDrawer(props: Props) {
         <ListItemWithIcon
           name={t("activeDcas")}
           muiIcon={<ActiveDcaIcon />}
-          onClick={() => handleClickItem("activeDcas", "/dca/active")}
-          selected={selectedItem === "activeDcas"}
+          onClick={() => handleClickItem("/dca/active")}
+          selected={selectedItem === "/dca/active"}
         />
         <ListItemWithIcon
           name={t("pausedDcas")}
           muiIcon={<InactiveDcaIcon />}
-          onClick={() => handleClickItem("pausedDcas", "/dca/paused")}
-          selected={selectedItem === "pausedDcas"}
+          onClick={() => handleClickItem("/dca/paused")}
+          selected={selectedItem === "/dca/paused"}
         />
         <ListItemWithIcon
           name={t("archivedDcas")}
           muiIcon={<ArchivedDcaIcon />}
-          onClick={() => handleClickItem("archivedDcas", "/dca/archived")}
-          selected={selectedItem === "archivedDcas"}
+          onClick={() => handleClickItem("/dca/archived")}
+          selected={selectedItem === "/dca/archived"}
         />
         <Divider />
         <ListItemWithIcon
           disabled
           name={t("transactions")}
           muiIcon={<TransactionsIcon />}
-          onClick={() => handleClickItem("transactions", "/transactions")}
-          selected={selectedItem === "transactions"}
+          onClick={() => handleClickItem("/transactions")}
+          selected={selectedItem === "/transactions"}
         />
         <ListItemWithIcon
           name={t("exchanges")}
           muiIcon={<ExchangeIcon />}
-          onClick={() => handleClickItem("exchanges", "/exchanges")}
-          selected={selectedItem === "exchanges"}
+          onClick={() => handleClickItem("/exchanges")}
+          selected={selectedItem === "/exchanges"}
         />
         <Divider />
         <ListItemWithIcon
           name={t("settings")}
           muiIcon={<SettingsIcon />}
-          onClick={() => handleClickItem("settings", "/settings")}
-          selected={selectedItem === "settings"}
+          onClick={() => handleClickItem("/settings")}
+          selected={selectedItem === "/settings"}
         />
         <ListItemWithIcon
           disabled
           name={t("about")}
           muiIcon={<AboutIcon />}
-          onClick={() => handleClickItem("about", "/about")}
-          selected={selectedItem === "about"}
+          onClick={() => handleClickItem("/about")}
+          selected={selectedItem === "/about"}
         />
       </List>
     </div>

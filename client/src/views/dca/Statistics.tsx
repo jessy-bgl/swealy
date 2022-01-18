@@ -12,7 +12,7 @@ const Statistics = ({ dcaCounter }: Props) => {
     <Grid container justifyContent={"center"} sx={{ padding: 1 }}>
       <Grid item xs={9} sm={7}>
         <Grid container justifyContent="space-between" spacing={1}>
-          <Grid item>{t("stats.activeDcaCounter")}</Grid>
+          <Grid item>{t("stats.dcaCounter")}</Grid>
           <Grid item>{dcaCounter}</Grid>
         </Grid>
       </Grid>

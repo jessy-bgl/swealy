@@ -29,6 +29,7 @@
     "archived": "Archivé"
   },
   "stats": {
+    "dcaCounter": "Nombre de bots",
     "activeDcaCounter": "Bots actifs"
   }
 }
