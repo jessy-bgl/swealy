@@ -24,21 +24,19 @@ enum DcaTabs {
 }
 
 const Dcas = ({ dcaStatus }: Props) => {
+  const [dcas, setDcas] = useState([] as Dca[]);
   const [selectedDcaId, setSelectedDcaId] = useState("");
   const [selectedTab, setSelectedTab] = useState(DcaTabs.STATISTICS);
   const [openAddDcaDialog, setOpenAddDcaDialog] = useState(false);
-  const [dcas, setDcas] = useState([] as Dca[]);
-
-  const fetchExchangesQuery = useFetchExchanges();
 
   const { t } = useTranslation("dca");
-
+  const fetchExchangesQuery = useFetchExchanges();
   const { data, isLoading } = useFetchDcas();
 
   useEffect(() => {
     if (data) setDcas(data.filter((dca) => dca.status === dcaStatus));
     setSelectedDcaId("");
-  }, [dcaStatus, data]);
+  }, [data, dcaStatus]);
 
   const handleSelectDca = (dcaId: string) => {
     if (selectedDcaId === dcaId)

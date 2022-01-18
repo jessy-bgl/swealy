@@ -55,10 +55,33 @@ const useUpdateDca = () => {
   });
 };
 
+const useUpdateDcaStatus = () => {
+  const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation("dca");
+  const queryClient = useQueryClient();
+
+  return useMutation(DcaService.updateDcaStatus, {
+    onSuccess: (updatedDca: Dca) => {
+      // this is a little hack, because using setQueryData do not trigger any update here
+      queryClient.refetchQueries(DCAS_QUERY_KEY);
+      enqueueSnackbar(t("updateDcaSuccess"), { variant: "success" });
+    },
+    onError: (error: Error) => {
+      enqueueSnackbar(error.message, { variant: "error" });
+    },
+  });
+};
+
 const useFetchExchangePairs = (exchangeId: string) => {
   return useQuery<Pair[], Error>(EXCHANGE_PAIRS_QUERY_KEY, () =>
     ExchangeService.fetchAvailableSpotPairs(exchangeId)
   );
 };
 
-export { useCreateDca, useFetchDcas, useUpdateDca, useFetchExchangePairs };
+export {
+  useCreateDca,
+  useFetchDcas,
+  useUpdateDca,
+  useUpdateDcaStatus,
+  useFetchExchangePairs,
+};

@@ -27,7 +27,7 @@ const DcaCard = ({ data, isSelected, onClickDca }: Props) => {
   const { language } = useContext(LanguageContext);
 
   const showNextTransactionDate = (): string => {
-    if (!data.nextTransactionDatetime) return "";
+    if (!data.nextTransactionDatetime) return t("noNextTransaction");
     const date = new Date(data.nextTransactionDatetime);
     const formattedDate = format(date, "P", {
       locale: language === "fr" ? locale.fr : locale.enGB,

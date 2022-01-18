@@ -34,5 +34,10 @@ interface UpdateDcaDTO {
   amount: number;
 }
 
-export type { Dca, CreateDcaDTO, UpdateDcaDTO };
+interface UpdateDcaStatusDTO {
+  id: string;
+  status: DcaStatusEnum;
+}
+
+export type { Dca, CreateDcaDTO, UpdateDcaDTO, UpdateDcaStatusDTO };
 export { DcaStatusEnum };
