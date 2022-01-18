@@ -8,8 +8,8 @@ import ExchangeIcon from "@mui/icons-material/AccountBalance";
 import TransactionsIcon from "@mui/icons-material/History";
 import AboutIcon from "@mui/icons-material/Info";
 import ActiveDcaIcon from "@mui/icons-material/Paid";
-import InactiveDcaIcon from "@mui/icons-material/PaidOutlined";
-import ArchivedDcaIcon from "@mui/icons-material/AccountBalanceWallet";
+import InactiveDcaIcon from "@mui/icons-material/Pause";
+import ArchivedDcaIcon from "@mui/icons-material/Archive";
 
 import ListItemWithIcon from "./components/ListItemTextIcon";
 import { useState } from "react";
