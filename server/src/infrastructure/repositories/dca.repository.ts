@@ -6,6 +6,7 @@ import {
   ICreateDcaDTO,
   IDcaRepository,
   IUpdateDcaDTO,
+  IUpdateDcaStatusDTO,
 } from '../../domain/repositories/dca.repository.interface';
 import { Dca } from '../../domain/models/dca';
 import { Dca as DcaEntity, DcaDocument } from '../entities/dca.entity';
@@ -48,7 +49,21 @@ class DcaRepository implements IDcaRepository {
       throw e;
     }
   }
-  $;
+
+  async updateStatus(
+    id: string,
+    { status }: IUpdateDcaStatusDTO,
+  ): Promise<Dca> {
+    try {
+      const dca = await this.dcaEntity
+        .findOneAndUpdate({ _id: id }, { status }, { new: true })
+        .populate('exchange');
+      if (!dca) throw new NotFoundException();
+      return DcaMapper.toDca(dca);
+    } catch (e) {
+      throw e;
+    }
+  }
 
   async delete(id: string): Promise<Dca> {
     try {

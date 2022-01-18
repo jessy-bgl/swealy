@@ -1,3 +1,4 @@
+import { DcaStatusEnum } from '../../domain/models/dca';
 import { ITransactionRepository } from '../../domain/repositories/transaction.repository';
 import { IDcaRepository } from '../../domain/repositories/dca.repository.interface';
 import { DcaPresenter } from './dca.presenter';
@@ -14,12 +15,19 @@ class FetchDcaUseCase {
 
     const dcaPresenters = await Promise.all(
       dcas.map(async (dca) => {
-        const lastAutoTransaction =
-          await this.transactionRepository.fetchLastDcaAutoTransaction(dca.id);
-        const nextTransactionDatetime = computeNextDcaTransactionDatetime(
-          dca,
-          lastAutoTransaction,
-        );
+        let nextTransactionDatetime: Date | undefined;
+
+        if (dca.status === DcaStatusEnum.ACTIVE) {
+          const lastAutoTransaction =
+            await this.transactionRepository.fetchLastDcaAutoTransaction(
+              dca.id,
+            );
+          nextTransactionDatetime = computeNextDcaTransactionDatetime(
+            dca,
+            lastAutoTransaction,
+          );
+        }
+
         return new DcaPresenter(dca, nextTransactionDatetime);
       }),
     );
