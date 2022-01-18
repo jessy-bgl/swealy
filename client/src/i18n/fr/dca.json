@@ -5,18 +5,30 @@
   "deleteDcaSuccess": "Bot supprimé avec succès",
   "nextTransaction": "Prochain achat le {{- date}} à {{heure}}",
   "summary": "Achat de {{quantity}} {{cryptoToUse}} de {{cryptoToBuy}} tous les {{days}} jours à {{hour}}h (UTC)",
+  "statistics": "Statistiques",
+  "info": "Infos",
   "form": {
     "requiredField": "Champ requis",
     "exchange": "Exchange",
     "pair": "Paire",
+    "status": "Statut",
     "frequency": "Fréquence",
-    "frequencyInDays": "Fréquence en jours",
+    "frequencyInDays": "Fréquence (en jours)",
     "frequencySummary": "Tous les {{days}} jours à {{hour}}h (UTC)",
     "hour": "Heure (UTC)",
     "amount": "Montant",
     "next": "Suivant",
     "previous": "Précédent",
     "confirm": "Confirmer",
+    "update": "Mettre à jour",
     "mustBeGreaterOrEqualTo": "Doit être supérieur ou égal à {{value}}"
+  },
+  "status": {
+    "active": "Actif",
+    "paused": "En pause",
+    "archived": "Archivé"
+  },
+  "stats": {
+    "activeDcaCounter": "Bots actifs"
   }
 }

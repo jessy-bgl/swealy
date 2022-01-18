@@ -1,22 +1,31 @@
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, Paper, Tabs, Tab } from "@mui/material";
 
 import AddIcon from "@mui/icons-material/AddCircle";
 
 import { DcaStatusEnum } from "../../models/Dca";
-import { DcaCard } from "./Dca";
 import { CreateDcaDialog } from "./CreateDcaDialog";
 import { useFetchDcas } from "./hooks/useDcaQueries";
 import { useFetchExchanges } from "../exchanges/hooks/useExchangeQueries";
+
+import { DcaCard } from "./Dca";
+import { Statistics } from "./Statistics";
+import { DcaStatistics } from "./DcaStatistics";
+import { DcaInfo } from "./DcaInfo";
 
 type Props = {
   dcaStatus: DcaStatusEnum;
 };
 
+enum DcaTabs {
+  STATISTICS = "statistics",
+  INFO = "info",
+}
+
 const Dcas = ({ dcaStatus }: Props) => {
   const [selectedDcaId, setSelectedDcaId] = useState("");
-
+  const [selectedTab, setSelectedTab] = useState(DcaTabs.STATISTICS);
   const [openAddDcaDialog, setOpenAddDcaDialog] = useState(false);
 
   const fetchExchangesQuery = useFetchExchanges();
@@ -31,8 +40,21 @@ const Dcas = ({ dcaStatus }: Props) => {
     else setSelectedDcaId(dcaId);
   };
 
+  const handleSelectTab = (event: SyntheticEvent, newTab: DcaTabs) => {
+    setSelectedTab(newTab);
+  };
+
   const handleClickAddDca = () => setOpenAddDcaDialog(true);
   const handleCoseAddDcaDialog = () => setOpenAddDcaDialog(false);
+
+  const renderInfoStats = () => {
+    if (!selectedDcaId)
+      return <Statistics dcaCounter={data ? data.length : 0} />;
+    else if (selectedDcaId && selectedTab === DcaTabs.STATISTICS)
+      return <DcaStatistics />;
+    else if (selectedDcaId && selectedTab === DcaTabs.INFO)
+      return <DcaInfo data={data?.find((dca) => dca.id === selectedDcaId)} />;
+  };
 
   if (isLoading) return <div />;
 
@@ -44,7 +66,7 @@ const Dcas = ({ dcaStatus }: Props) => {
             {data
               ?.filter((dca) => dca.status === dcaStatus)
               .map((dca) => (
-                <Grid item key={dca.id}>
+                <Grid item key={dca.id} sx={{ width: "100%" }}>
                   <DcaCard
                     data={dca}
                     isSelected={dca.id === selectedDcaId}
@@ -66,8 +88,21 @@ const Dcas = ({ dcaStatus }: Props) => {
             )}
           </Grid>
         </Grid>
+
         <Grid item xs={12} md={8} xl={9}>
-          {/* TODO : statistics */}
+          <Paper>
+            {selectedDcaId && (
+              <Tabs
+                value={selectedTab}
+                onChange={handleSelectTab}
+                variant="fullWidth"
+              >
+                <Tab label={t("statistics")} value={DcaTabs.STATISTICS} />
+                <Tab label={t("info")} value={DcaTabs.INFO} />
+              </Tabs>
+            )}
+            {renderInfoStats()}
+          </Paper>
         </Grid>
       </Grid>
 

@@ -57,11 +57,13 @@ const useCreateDcaThirdForm = () => {
   const {
     handleSubmit,
     control,
+    register,
+    reset,
     formState: { errors, isDirty },
   } = useForm({
     resolver: yupResolver(schema),
   });
-  return { handleSubmit, errors, isDirty, control, fields };
+  return { handleSubmit, errors, isDirty, control, fields, register, reset };
 };
 
 export { useCreateDcaFirstForm, useCreateDcaSecondForm, useCreateDcaThirdForm };
