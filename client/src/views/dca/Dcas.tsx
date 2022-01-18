@@ -52,16 +52,18 @@ const Dcas = ({ dcaStatus }: Props) => {
                   />
                 </Grid>
               ))}
-            <Grid item>
-              <Button
-                fullWidth
-                variant="outlined"
-                startIcon={<AddIcon />}
-                onClick={handleClickAddDca}
-              >
-                {t("createDca")}
-              </Button>
-            </Grid>
+            {dcaStatus === DcaStatusEnum.ACTIVE && (
+              <Grid item>
+                <Button
+                  fullWidth
+                  variant="outlined"
+                  startIcon={<AddIcon />}
+                  onClick={handleClickAddDca}
+                >
+                  {t("createDca")}
+                </Button>
+              </Grid>
+            )}
           </Grid>
         </Grid>
         <Grid item xs={12} md={8} xl={9}>
