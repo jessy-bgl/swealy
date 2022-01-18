@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { Box, Divider, List, Drawer } from "@mui/material";
 // import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -11,6 +12,7 @@ import InactiveDcaIcon from "@mui/icons-material/PaidOutlined";
 import ArchivedDcaIcon from "@mui/icons-material/AccountBalanceWallet";
 
 import ListItemWithIcon from "./components/ListItemTextIcon";
+import { useState } from "react";
 
 interface Props {
   drawerWidth: number;
@@ -20,6 +22,18 @@ interface Props {
 
 export default function NavigationDrawer(props: Props) {
   const { t } = useTranslation("navigation");
+
+  const navigate = useNavigate();
+
+  const [selectedItem, setSelectedItem] = useState("activeDcas");
+
+  const handleClickItem = (name, linkToNavigate?) => {
+    if (linkToNavigate) {
+      setSelectedItem(name);
+      props.handleDrawerToggle();
+      navigate(linkToNavigate);
+    }
+  };
 
   const drawer = (
     <div>
@@ -37,48 +51,48 @@ export default function NavigationDrawer(props: Props) {
         <ListItemWithIcon
           name={t("activeDcas")}
           muiIcon={<ActiveDcaIcon />}
-          linkToNavigate="/dca/active"
-          closeDrawer={props.handleDrawerToggle}
+          onClick={() => handleClickItem("activeDcas", "/dca/active")}
+          selected={selectedItem === "activeDcas"}
         />
         <ListItemWithIcon
           name={t("pausedDcas")}
           muiIcon={<InactiveDcaIcon />}
-          linkToNavigate="/dca/paused"
-          closeDrawer={props.handleDrawerToggle}
+          onClick={() => handleClickItem("pausedDcas", "/dca/paused")}
+          selected={selectedItem === "pausedDcas"}
         />
         <ListItemWithIcon
           name={t("archivedDcas")}
           muiIcon={<ArchivedDcaIcon />}
-          linkToNavigate="/dca/archived"
-          closeDrawer={props.handleDrawerToggle}
+          onClick={() => handleClickItem("archivedDcas", "/dca/archived")}
+          selected={selectedItem === "archivedDcas"}
         />
         <Divider />
         <ListItemWithIcon
           disabled
           name={t("transactions")}
           muiIcon={<TransactionsIcon />}
-          linkToNavigate="/transactions"
-          closeDrawer={props.handleDrawerToggle}
+          onClick={() => handleClickItem("transactions", "/transactions")}
+          selected={selectedItem === "transactions"}
         />
         <ListItemWithIcon
           name={t("exchanges")}
           muiIcon={<ExchangeIcon />}
-          linkToNavigate="/exchanges"
-          closeDrawer={props.handleDrawerToggle}
+          onClick={() => handleClickItem("exchanges", "/exchanges")}
+          selected={selectedItem === "exchanges"}
         />
         <Divider />
         <ListItemWithIcon
           name={t("settings")}
           muiIcon={<SettingsIcon />}
-          linkToNavigate="/settings"
-          closeDrawer={props.handleDrawerToggle}
+          onClick={() => handleClickItem("settings", "/settings")}
+          selected={selectedItem === "settings"}
         />
         <ListItemWithIcon
           disabled
           name={t("about")}
           muiIcon={<AboutIcon />}
-          linkToNavigate="/about"
-          closeDrawer={props.handleDrawerToggle}
+          onClick={() => handleClickItem("about", "/about")}
+          selected={selectedItem === "about"}
         />
       </List>
     </div>
