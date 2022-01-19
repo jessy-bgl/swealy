@@ -24,7 +24,7 @@ class TransactionRepository implements ITransactionRepository {
     try {
       const transactions = await this.transactionEntity
         .find()
-        .populate({ path: 'dca', populate: 'exchange' })
+        .populate({ path: 'dca', populate: { path: 'exchange' } })
         .sort({ datetime: -1 })
         .lean();
       return transactions.map((t) => TransactionMapper.toTransaction(t));
@@ -38,7 +38,9 @@ class TransactionRepository implements ITransactionRepository {
   ): Promise<Transaction> {
     try {
       const transaction = new this.transactionEntity(createTransactionDTO);
-      await (await transaction.save()).populate('dca dca.exchange');
+      await (
+        await transaction.save()
+      ).populate({ path: 'dca', populate: { path: 'exchange' } });
       return TransactionMapper.toTransaction(transaction);
     } catch (e) {
       throw e;
@@ -49,7 +51,8 @@ class TransactionRepository implements ITransactionRepository {
     try {
       const transaction = await this.transactionEntity
         .findOneAndDelete({ _id: id })
-        .populate({ path: 'dca', populate: 'exchange' });
+        .populate({ path: 'dca', populate: { path: 'exchange' } })
+        .lean();
       if (!transaction) throw new NotFoundException();
       return TransactionMapper.toTransaction(transaction);
     } catch (e) {
