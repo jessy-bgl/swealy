@@ -34,13 +34,11 @@ const CreateExchangeDialog = ({ onClose }: Props) => {
   const { submit, register, errors, isDirty, isLoading } =
     useCreateExchangeForm({ closeDialog: onClose });
 
-  const dialogTitle = t("exchange:newExchange");
-
   return (
     <Dialog fullScreen={fullScreenDialog} open={true} onClose={onClose}>
       <form onSubmit={submit}>
         <DialogTitle>
-          {dialogTitle}
+          {t("exchange:newExchange")}
           <IconButton
             aria-label="close"
             onClick={onClose}
