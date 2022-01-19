@@ -9,16 +9,20 @@ import { DcaRepository } from '../repositories/dca.repository';
 import { TransactionRepository } from '../repositories/transaction.repository';
 
 import { UseCaseProxy } from './usecases-proxy';
+
 import { FetchExchangesUseCase } from '../../usecases/exchange/fetch-exchanges.usecase';
 import { AddExchangeUseCase } from '../../usecases/exchange/add-exchange.usecase';
 import { VerifyExchangeApiKeyUseCase } from '../../usecases/exchange/verify-exchange.usecase';
 import { UpdateExchangeUseCase } from '../../usecases/exchange/update-exchange.usecase';
 import { DeleteExchangeUseCase } from '../../usecases/exchange/delete-exchange.usecase';
 import { PairsExchangeApiKeyUseCase } from '../../usecases/exchange/fetch-exchange-pairs.usecase';
+
 import { CreateDcaUseCase } from '../../usecases/dca/create-dca.usecase';
 import { FetchDcaUseCase } from '../../usecases/dca/fetch-dca.usecase';
 import { UpdateDcaUseCase } from '../../usecases/dca/update-dca.usecase';
+import { UpdateDcaStatusUseCase } from '../../usecases/dca/update-dca-status.usecase';
 import { DeleteDcaUseCase } from '../../usecases/dca/delete-dca.usecase';
+
 import { FetchTransactionUseCase } from '../../usecases/transaction/fetch-transaction.usecase';
 import { CreateTransactionUseCase } from '../../usecases/transaction/create-transaction.usecase';
 import { DeleteTransactionUseCase } from '../../usecases/transaction/delete-transaction.usecase';
@@ -33,10 +37,13 @@ export class UsecasesProxyModule {
   static UPDATE_EXCHANGE_USECASE_PROXY = 'updateExchangeUsecaseProxy';
   static VERIFY_EXCHANGE_USECASE_PROXY = 'verifyExchangeUsecaseProxy';
   static GET_MARKETS_EXCHANGE_USECASE_PROXY = 'getPairsExchangeUsecaseProxy';
+
   static FETCH_DCA_USECASE_PROXY = 'fetchDcaUsecaseProxy';
   static CREATE_DCA_USECASE_PROXY = 'createDcaUsecaseProxy';
   static UPDATE_DCA_USECASE_PROXY = 'updateDcaUsecaseProxy';
+  static UPDATE_DCA_STATUS_USECASE_PROXY = 'updateDcaStatusUsecaseProxy';
   static DELETE_DCA_USECASE_PROXY = 'deleteDcaUsecaseProxy';
+
   static FETCH_TRANSACTION_USECASE_PROXY = 'fetchTransactionUsecaseProxy';
   static CREATE_TRANSACTION_USECASE_PROXY = 'createTransactionUsecaseProxy';
   static DELETE_TRANSACTION_USECASE_PROXY = 'deleteTransactionUsecaseProxy';
@@ -126,6 +133,12 @@ export class UsecasesProxyModule {
             new UseCaseProxy(new UpdateDcaUseCase(dcaRepository)),
         },
         {
+          inject: [DcaRepository],
+          provide: UsecasesProxyModule.UPDATE_DCA_STATUS_USECASE_PROXY,
+          useFactory: (dcaRepository: DcaRepository) =>
+            new UseCaseProxy(new UpdateDcaStatusUseCase(dcaRepository)),
+        },
+        {
           inject: [DcaRepository, TransactionRepository],
           provide: UsecasesProxyModule.DELETE_DCA_USECASE_PROXY,
           useFactory: (
@@ -171,6 +184,7 @@ export class UsecasesProxyModule {
         UsecasesProxyModule.FETCH_DCA_USECASE_PROXY,
         UsecasesProxyModule.CREATE_DCA_USECASE_PROXY,
         UsecasesProxyModule.UPDATE_DCA_USECASE_PROXY,
+        UsecasesProxyModule.UPDATE_DCA_STATUS_USECASE_PROXY,
         UsecasesProxyModule.DELETE_DCA_USECASE_PROXY,
         UsecasesProxyModule.FETCH_TRANSACTION_USECASE_PROXY,
         UsecasesProxyModule.CREATE_TRANSACTION_USECASE_PROXY,

@@ -19,12 +19,14 @@ import {
 import { UseCaseProxy } from '../../../infrastructure/usecases-proxy/usecases-proxy';
 import { UsecasesProxyModule } from '../../../infrastructure/usecases-proxy/usecases-proxy.module';
 
+import { CreateDcaDTO, UpdateDcaDTO, UpdateDcaStatusDTO } from './dca.dto';
+import { DcaPresenter } from '../../../usecases/dca/dca.presenter';
+
 import { FetchDcaUseCase } from '../../../usecases/dca/fetch-dca.usecase';
 import { CreateDcaUseCase } from '../../../usecases/dca/create-dca.usecase';
 import { UpdateDcaUseCase } from '../../../usecases/dca/update-dca.usecase';
+import { UpdateDcaStatusUseCase } from '../../../usecases/dca/update-dca-status.usecase';
 import { DeleteDcaUseCase } from '../../../usecases/dca/delete-dca.usecase';
-import { DcaPresenter } from '../../../usecases/dca/dca.presenter';
-import { CreateDcaDTO, UpdateDcaDTO } from './dca.dto';
 
 @Controller('dca')
 @ApiTags('dca')
@@ -38,6 +40,8 @@ class DcaController {
     private readonly createDcaUsecase: UseCaseProxy<CreateDcaUseCase>,
     @Inject(UsecasesProxyModule.UPDATE_DCA_USECASE_PROXY)
     private readonly updateDcaUsecase: UseCaseProxy<UpdateDcaUseCase>,
+    @Inject(UsecasesProxyModule.UPDATE_DCA_STATUS_USECASE_PROXY)
+    private readonly updateDcaStatusUsecase: UseCaseProxy<UpdateDcaStatusUseCase>,
     @Inject(UsecasesProxyModule.DELETE_DCA_USECASE_PROXY)
     private readonly deleteDcaUsecase: UseCaseProxy<DeleteDcaUseCase>,
   ) {}
@@ -64,6 +68,19 @@ class DcaController {
     @Body() updateDcaDTO: UpdateDcaDTO,
   ): Promise<DcaPresenter> {
     return this.updateDcaUsecase.getInstance().execute(id, updateDcaDTO);
+  }
+
+  @Put(':id/status')
+  @ApiParam({ name: 'id', type: String })
+  @ApiBody({ type: UpdateDcaStatusDTO })
+  @ApiResponse({ status: 200, type: DcaPresenter })
+  updateDcaStatus(
+    @Param('id') id: string,
+    @Body() updateDcaStatusDTO: UpdateDcaStatusDTO,
+  ): Promise<DcaPresenter> {
+    return this.updateDcaStatusUsecase
+      .getInstance()
+      .execute(id, updateDcaStatusDTO);
   }
 
   @Delete(':id')

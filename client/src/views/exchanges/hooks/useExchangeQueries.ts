@@ -56,20 +56,6 @@ const useUpdateExchange = () => {
   });
 };
 
-const useCheckApiKeysValidity = () => {
-  const { enqueueSnackbar } = useSnackbar();
-  const { t } = useTranslation("exchange");
-
-  return useMutation(ExchangeService.checkApiKeys, {
-    onSuccess: () => {
-      enqueueSnackbar(t("checkApiKeysSuccess"), { variant: "success" });
-    },
-    onError: (error: Error) => {
-      enqueueSnackbar(error.message, { variant: "error" });
-    },
-  });
-};
-
 const useDeleteExchange = () => {
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation("exchange");
@@ -84,6 +70,20 @@ const useDeleteExchange = () => {
         );
       });
       enqueueSnackbar(t("deleteExchangeSuccess"), { variant: "success" });
+    },
+    onError: (error: Error) => {
+      enqueueSnackbar(error.message, { variant: "error" });
+    },
+  });
+};
+
+const useCheckApiKeysValidity = () => {
+  const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation("exchange");
+
+  return useMutation(ExchangeService.checkApiKeys, {
+    onSuccess: () => {
+      enqueueSnackbar(t("checkApiKeysSuccess"), { variant: "success" });
     },
     onError: (error: Error) => {
       enqueueSnackbar(error.message, { variant: "error" });

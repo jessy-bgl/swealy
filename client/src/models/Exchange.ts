@@ -28,5 +28,18 @@ interface UpdateExchangeDTO {
   subaccountName?: string;
 }
 
+enum PairTypesEnum {
+  SPOT = "spot",
+  FUTURE = "future",
+}
+
+interface Pair {
+  name: string;
+  type: PairTypesEnum;
+  price: number;
+  priceIncrement: number;
+  sizeIncrement: number;
+}
+
 export { ExchangesEnum };
-export type { Exchange, CreateExchangeDTO, UpdateExchangeDTO };
+export type { Exchange, CreateExchangeDTO, UpdateExchangeDTO, Pair };

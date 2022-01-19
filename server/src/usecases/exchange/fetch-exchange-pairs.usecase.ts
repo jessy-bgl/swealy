@@ -9,7 +9,10 @@ class PairsExchangeApiKeyUseCase {
 
   execute = async (id: string) => {
     const exchange = await this.exchangeDbRepository.fetchOne(id);
-    return this.exchangeApiRepository.getAvailableSpotPairs(exchange);
+    const pairs = await this.exchangeApiRepository.getAvailableSpotPairs(
+      exchange,
+    );
+    return pairs.filter((pair) => pair.name.includes('USD'));
   };
 }
 

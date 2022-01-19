@@ -1,26 +1,21 @@
 import { ListItem, ListItemIcon, ListItemText } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
 interface ListItemWithIconProps {
   name: string;
   muiIcon: any;
-  closeDrawer: Function;
-  linkToNavigate?: string;
+  onClick: any;
   disabled?: boolean;
+  selected?: boolean;
 }
 
 const ListItemTextIcon = (props: ListItemWithIconProps) => {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    if (props.linkToNavigate) {
-      props.closeDrawer();
-      navigate(props.linkToNavigate);
-    }
-  };
-
   return (
-    <ListItem button disabled={props.disabled} onClick={handleClick}>
+    <ListItem
+      button
+      disabled={props.disabled}
+      onClick={props.onClick}
+      selected={props.selected}
+    >
       <ListItemIcon>{props.muiIcon}</ListItemIcon>
       <ListItemText primary={props.name} />
     </ListItem>

@@ -1,5 +1,8 @@
 {
   "dashboard": "Tableau de bord",
+  "activeDcas": "Bots actifs",
+  "pausedDcas": "Bots en pause",
+  "archivedDcas": "Bots archivés",
   "theme": "Thème",
   "about": "A propos",
   "settings": "Réglages",

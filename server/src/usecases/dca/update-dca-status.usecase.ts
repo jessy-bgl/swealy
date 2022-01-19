@@ -1,16 +1,16 @@
 import { DcaStatusEnum } from '../../domain/models/dca';
 import {
   IDcaRepository,
-  IUpdateDcaDTO,
+  IUpdateDcaStatusDTO,
 } from '../../domain/repositories/dca.repository.interface';
 import { DcaPresenter } from './dca.presenter';
 import { computeNextDcaTransactionDatetime } from './utils';
 
-class UpdateDcaUseCase {
+class UpdateDcaStatusUseCase {
   constructor(private readonly dcaRepository: IDcaRepository) {}
 
-  async execute(id: string, updateDcaDTO: IUpdateDcaDTO) {
-    const dca = await this.dcaRepository.update(id, updateDcaDTO);
+  async execute(id: string, updateDcaStatusDTO: IUpdateDcaStatusDTO) {
+    const dca = await this.dcaRepository.updateStatus(id, updateDcaStatusDTO);
 
     const nextTransactionDatetime =
       dca.status === DcaStatusEnum.ACTIVE
@@ -21,4 +21,4 @@ class UpdateDcaUseCase {
   }
 }
 
-export { UpdateDcaUseCase };
+export { UpdateDcaStatusUseCase };

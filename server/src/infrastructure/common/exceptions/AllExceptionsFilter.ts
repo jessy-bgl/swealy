@@ -5,10 +5,13 @@ import {
   HttpException,
   ExceptionFilter,
   HttpStatus,
+  Logger,
 } from '@nestjs/common';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
+  private readonly logger = new Logger('ExceptionsCatcher');
+
   catch(exception: Error, host: ArgumentsHost): unknown {
     const response = host.switchToHttp().getResponse<FastifyReply>();
 
@@ -25,6 +28,10 @@ export class AllExceptionsFilter implements ExceptionFilter {
             message: exception.message,
           };
 
-    return response.status(httpStatus).send(newResponse);
+    if (httpStatus === 500) this.logger.error(newResponse);
+
+    return response
+      .status(httpStatus)
+      .send(httpStatus === 500 ? 'Internal server error' : newResponse);
   }
 }

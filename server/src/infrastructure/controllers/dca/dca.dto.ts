@@ -12,6 +12,7 @@ import {
 import {
   ICreateDcaDTO,
   IUpdateDcaDTO,
+  IUpdateDcaStatusDTO,
 } from '../../../domain/repositories/dca.repository.interface';
 import { DcaStatusEnum } from '../../../domain/models/dca';
 
@@ -62,4 +63,11 @@ class UpdateDcaDTO implements IUpdateDcaDTO {
   amount: number;
 }
 
-export { CreateDcaDTO, UpdateDcaDTO };
+class UpdateDcaStatusDTO implements IUpdateDcaStatusDTO {
+  @ApiProperty({ required: true })
+  @IsString()
+  @IsEnum(DcaStatusEnum)
+  status: DcaStatusEnum;
+}
+
+export { CreateDcaDTO, UpdateDcaDTO, UpdateDcaStatusDTO };

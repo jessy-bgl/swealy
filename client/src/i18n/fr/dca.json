@@ -1,0 +1,42 @@
+{
+  "createDca": "Nouveau bot de DCA",
+  "createDcaSuccess": "Bot créé avec succès",
+  "updateDcaSuccess": "Bot mis à jour avec succès",
+  "deleteDcaSuccess": "Bot supprimé avec succès",
+  "nextTransaction": "Prochain achat le {{- date}} à {{heure}}",
+  "noNextTransaction": "Aucun achat programmé",
+  "summary": "Achat de {{quantity}} {{cryptoToUse}} de {{cryptoToBuy}} tous les {{days}} jours à {{hour}}h (UTC)",
+  "statistics": "Statistiques",
+  "info": "Infos",
+  "form": {
+    "requiredField": "Champ requis",
+    "exchange": "Exchange",
+    "pair": "Paire",
+    "status": "Statut",
+    "frequency": "Fréquence",
+    "frequencyInDays": "Fréquence (en jours)",
+    "frequencySummary": "Tous les {{days}} jours à {{hour}}h (UTC)",
+    "hour": "Heure (UTC)",
+    "amount": "Montant",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "confirm": "Confirmer",
+    "update": "Mettre à jour",
+    "mustBeGreaterOrEqualTo": "Doit être supérieur ou égal à {{value}}"
+  },
+  "status": {
+    "active": "Actif",
+    "paused": "En pause",
+    "archived": "Archivé",
+    "delete": "Supprimer"
+  },
+  "action": {
+    "activate": "Activer",
+    "pause": "Mettre en pause",
+    "archive": "Archiver"
+  },
+  "stats": {
+    "dcaCounter": "Nombre de bots",
+    "activeDcaCounter": "Bots actifs"
+  }
+}

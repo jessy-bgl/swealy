@@ -11,6 +11,7 @@ import {
   ListItemSecondaryAction,
   IconButton,
   Tooltip,
+  ListItemIcon,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import VerifyIcon from "@mui/icons-material/Key";
@@ -49,15 +50,13 @@ const Exchanges = () => {
         <List>
           {data?.map((exchange) => (
             <ListItem divider key={exchange.label}>
-              <ListItemAvatar>
-                <Avatar>
-                  <img
-                    src={getExchangeLogo(exchange.name)}
-                    alt={`${exchange.name}_logo`}
-                    width={25}
-                  />
-                </Avatar>
-              </ListItemAvatar>
+              <ListItemIcon>
+                <img
+                  src={getExchangeLogo(exchange.name)}
+                  alt={`${exchange.name}_logo`}
+                  width={25}
+                />
+              </ListItemIcon>
               <ListItemText
                 primary={exchange.label}
                 secondary={
@@ -69,7 +68,7 @@ const Exchanges = () => {
                 }
               />
               <ListItemSecondaryAction>
-                <Tooltip title={t("keysCheck") as string}>
+                <Tooltip title={t("exchange:keysCheck") as string}>
                   <IconButton
                     color="primary"
                     onClick={() => handleClickApiKeysCheck(exchange.id)}
@@ -77,7 +76,7 @@ const Exchanges = () => {
                     <VerifyIcon />
                   </IconButton>
                 </Tooltip>
-                <Tooltip title={t("editExchange") as string}>
+                <Tooltip title={t("exchange:editExchange") as string}>
                   <IconButton
                     color="warning"
                     onClick={() => handleOpenUpdateDialog(exchange)}
@@ -85,7 +84,7 @@ const Exchanges = () => {
                     <EditIcon />
                   </IconButton>
                 </Tooltip>
-                <Tooltip title={t("removeExchange") as string}>
+                <Tooltip title={t("exchange:removeExchange") as string}>
                   <IconButton
                     color="error"
                     onClick={() => handleOpenDeleteDialog(exchange)}
