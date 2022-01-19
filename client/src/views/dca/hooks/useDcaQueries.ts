@@ -21,11 +21,13 @@ const useCreateDca = () => {
 
   return useMutation(DcaService.createDca, {
     onSuccess: (newDca: Dca) => {
-      queryClient.setQueryData<Dca[]>(DCAS_QUERY_KEY, (dcas) => {
-        if (!dcas) return [];
-        dcas.push(newDca);
-        return dcas;
-      });
+      // this is a little hack, because using setQueryData do not trigger any update
+      queryClient.refetchQueries(DCAS_QUERY_KEY);
+      // queryClient.setQueryData<Dca[]>(DCAS_QUERY_KEY, (dcas) => {
+      //   if (!dcas) return [];
+      //   dcas.push(newDca);
+      //   return dcas;
+      // });
       enqueueSnackbar(t("createDcaSuccess"), { variant: "success" });
     },
     onError: (error: Error) => {
@@ -62,7 +64,7 @@ const useUpdateDcaStatus = () => {
 
   return useMutation(DcaService.updateDcaStatus, {
     onSuccess: (updatedDca: Dca) => {
-      // this is a little hack, because using setQueryData do not trigger any update here
+      // this is a little hack, because using setQueryData do not trigger any update
       queryClient.refetchQueries(DCAS_QUERY_KEY);
       enqueueSnackbar(t("updateDcaSuccess"), { variant: "success" });
     },

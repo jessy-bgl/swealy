@@ -33,6 +33,7 @@ const Dcas = ({ dcaStatus }: Props) => {
   const fetchExchangesQuery = useFetchExchanges();
   const { data, isLoading } = useFetchDcas();
 
+  // TODO : bug here - this is not alaways called after data update
   useEffect(() => {
     if (data) setDcas(data.filter((dca) => dca.status === dcaStatus));
     setSelectedDcaId("");
