@@ -1,0 +1,14 @@
+{
+  "date": "Date",
+  "status": "Statut",
+  "success": "Succès",
+  "manual": "Manuelle",
+  "automatic": "Automatique",
+  "pair": "Paire",
+  "exchange": "Exchange",
+  "price": "Prix",
+  "size": "Quantité",
+  "type": "Type",
+  "orderType": "Type d'ordre",
+  "addTransaction": "Ajouter une transaction"
+}

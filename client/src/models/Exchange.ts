@@ -3,6 +3,19 @@ enum ExchangesEnum {
   FTX = "ftx",
 }
 
+enum PairTypesEnum {
+  SPOT = "spot",
+  FUTURE = "future",
+}
+
+interface Pair {
+  name: string;
+  type: PairTypesEnum;
+  price: number;
+  priceIncrement: number;
+  sizeIncrement: number;
+}
+
 interface Exchange {
   id: string;
   name: ExchangesEnum;
@@ -26,19 +39,6 @@ interface UpdateExchangeDTO {
   apiKey?: string;
   apiSecret?: string;
   subaccountName?: string;
-}
-
-enum PairTypesEnum {
-  SPOT = "spot",
-  FUTURE = "future",
-}
-
-interface Pair {
-  name: string;
-  type: PairTypesEnum;
-  price: number;
-  priceIncrement: number;
-  sizeIncrement: number;
 }
 
 export { ExchangesEnum };
