@@ -20,7 +20,6 @@ class CreateOrderUseCase {
     createTransactionDto.datetime = new Date();
     createTransactionDto.amount = dca.amount;
     createTransactionDto.dca = dca.id;
-    createTransactionDto.pair = dca.pair;
     try {
       const order = await this.exchangeApiRepository.createSpotOrder(dca);
       createTransactionDto.success = true;

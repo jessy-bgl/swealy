@@ -22,7 +22,10 @@ import { CreateTransactionUseCase } from '../../../usecases/transaction/create-t
 import { DeleteTransactionUseCase } from '../../../usecases/transaction/delete-transaction.usecase';
 import { FetchTransactionUseCase } from '../../../usecases/transaction/fetch-transaction.usecase';
 import { TransactionPresenter } from '../../../usecases/transaction/transaction.presenter';
-import { CreateTransactionDTO } from './transaction.dto';
+import {
+  CreateTransactionDTO,
+  CreateManualTransactionDTO,
+} from './transaction.dto';
 
 @ApiTags('transaction')
 @Controller('transaction')
@@ -45,10 +48,11 @@ class TransactionController {
   }
 
   @Post()
-  @ApiBody({ type: CreateTransactionDTO })
+  @ApiBody({ type: CreateManualTransactionDTO })
   @ApiResponse({ status: 201, type: TransactionPresenter })
   createTransaction(
-    @Body() createTransactionDTO: CreateTransactionDTO,
+    @Body()
+    createTransactionDTO: CreateTransactionDTO | CreateManualTransactionDTO,
   ): Promise<TransactionPresenter> {
     return this.createTransactionUsecase
       .getInstance()
