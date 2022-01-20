@@ -7,8 +7,10 @@ import AddIcon from "@mui/icons-material/Add";
 import { useFetchTransactions } from "./hooks/useTransactionQueries";
 import { useTransactionStyles } from "./hooks/useTransactionStyles";
 import { useTransactions } from "./hooks/useTransactions";
+
 import { CreateTransactionDialog } from "./CreateTransactionDialog";
 import { DeleteTransactionDialog } from "./DeleteTransactionDialog";
+import { TransactionInfoDialog } from "./TransactionInfoDialog";
 
 const Transactions = () => {
   const { t } = useTranslation("transaction");
@@ -17,8 +19,10 @@ const Transactions = () => {
   const {
     openAddTransactionDialog,
     deleteTransactionDialog,
+    transactionInfoDialog,
     toggleAddTransactionDialog,
     closeDeleteTransactionDialog,
+    closeTransactionInfoDialog,
     columns,
   } = useTransactions();
 
@@ -73,6 +77,13 @@ const Transactions = () => {
         <DeleteTransactionDialog
           data={deleteTransactionDialog.data}
           onClose={closeDeleteTransactionDialog}
+        />
+      )}
+
+      {transactionInfoDialog.open && (
+        <TransactionInfoDialog
+          data={transactionInfoDialog.data}
+          onClose={closeTransactionInfoDialog}
         />
       )}
     </>

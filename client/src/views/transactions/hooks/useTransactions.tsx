@@ -9,6 +9,7 @@ import { format } from "date-fns";
 import * as locale from "date-fns/locale";
 
 import DeleteIcon from "@mui/icons-material/Delete";
+import InfoIcon from "@mui/icons-material/Info";
 
 import { Transaction } from "../../../models/Transaction";
 import { LanguageContext } from "../../../services/stores/language/LanguageContext";
@@ -16,6 +17,11 @@ import { LanguageContext } from "../../../services/stores/language/LanguageConte
 const useTransactions = () => {
   const [openAddTransactionDialog, setOpenAddTransactionDialog] =
     useState(false);
+
+  const [transactionInfoDialog, setTransactionInfoDialog] = useState({
+    data: "",
+    open: false,
+  });
 
   const [deleteTransactionDialog, setDeleteTransactionDialog] = useState({
     data: {} as Transaction,
@@ -30,6 +36,12 @@ const useTransactions = () => {
 
   const closeDeleteTransactionDialog = () =>
     setDeleteTransactionDialog({ data: {} as Transaction, open: false });
+
+  const openTransactionInfoDialog = (data: string) =>
+    setTransactionInfoDialog({ data, open: true });
+
+  const closeTransactionInfoDialog = () =>
+    setTransactionInfoDialog({ data: "", open: false });
 
   const { t } = useTranslation("transaction");
   const { language } = useContext(LanguageContext);
@@ -98,6 +110,15 @@ const useTransactions = () => {
               onClick={() => openDeleteTransactionDialog(row)}
             />
           );
+        if (!row.success)
+          return (
+            <GridActionsCellItem
+              icon={<InfoIcon />}
+              label="Info"
+              color="info"
+              onClick={() => openTransactionInfoDialog(row.description)}
+            />
+          );
       },
     },
   ];
@@ -105,9 +126,11 @@ const useTransactions = () => {
   return {
     openAddTransactionDialog,
     deleteTransactionDialog,
+    transactionInfoDialog,
     toggleAddTransactionDialog,
     openDeleteTransactionDialog,
     closeDeleteTransactionDialog,
+    closeTransactionInfoDialog,
     columns,
   };
 };
