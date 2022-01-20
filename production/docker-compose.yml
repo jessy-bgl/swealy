@@ -2,7 +2,7 @@ version: "3.4"
 
 services:
   db:
-    container_name: "cryptodca-db"
+    container_name: "swealy-db"
     logging:
       driver: "json-file"
       options:
@@ -20,7 +20,7 @@ services:
     restart: unless-stopped
 
   api:
-    container_name: "cryptodca-api"
+    container_name: "swealy-api"
     logging:
       driver: "json-file"
       options:
@@ -31,13 +31,13 @@ services:
     environment:
       - COOKIE_SECRET=2x4tTxQ7jRHqLRl8bbFYoUADDLbyfcNh
       - JWT_SECRET=De3Y6aKGywtQzWl7c0e4hYslK1lRb85u
-      - MONGO_URI=mongodb://admin:cryptodcaAdminPasswd@db:27017/cryptodca
+      - MONGO_URI=mongodb://admin:swealyAdminPasswd@db:27017/swealy
     restart: unless-stopped
     depends_on:
       - db
 
   client:
-    container_name: "cryptodca-client"
+    container_name: "swealy-client"
     logging:
       driver: "json-file"
       options:
@@ -50,7 +50,7 @@ services:
       - api
 
   proxy:
-    container_name: "cryptodca-proxy"
+    container_name: "swealy-proxy"
     logging:
       driver: "json-file"
       options:
