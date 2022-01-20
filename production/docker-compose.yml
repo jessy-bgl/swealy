@@ -16,7 +16,7 @@ services:
       - MONGO_INITDB_DATABASE=admin
     command: ["--auth"]
     volumes:
-      - crypto_dca_db:/data/db
+      - swealy_db:/data/db
     restart: unless-stopped
 
   api:
@@ -66,5 +66,5 @@ services:
       - 443:443
 
 volumes:
-  crypto_dca_db:
+  swealy_db:
     driver: local

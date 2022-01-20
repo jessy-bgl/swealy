@@ -17,7 +17,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - crypto_dca_db:/data/db
+      - swealy_db:/data/db
 
   api:
     container_name: "api"
@@ -51,5 +51,5 @@ services:
       - "3000:3000"
 
 volumes:
-  crypto_dca_db:
+  swealy_db:
     driver: local
