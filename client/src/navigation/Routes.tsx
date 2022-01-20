@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import { Navigation } from "../views/navigation/Navigation";
 import { Exchanges } from "../views/exchanges/Exchanges";
@@ -15,7 +15,12 @@ function Router() {
     <Routes>
       <Route
         path="/"
-        element={<Navigation child={<div />} title={t("dashboard")} />}
+        element={
+          <Navigation
+            child={<Navigate to="/dca/active" />}
+            title={t("dashboard")}
+          />
+        }
       />
       <Route
         path="/dca/active"
