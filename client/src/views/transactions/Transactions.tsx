@@ -52,7 +52,7 @@ const Transactions = () => {
                     columns={columns}
                     disableSelectionOnClick
                     getRowClassName={(params) =>
-                      `transaction-${params.row ? "success" : "fail"}`
+                      `transaction-${params.row.success ? "success" : "fail"}`
                     }
                     components={{
                       Toolbar: GridToolbar,
