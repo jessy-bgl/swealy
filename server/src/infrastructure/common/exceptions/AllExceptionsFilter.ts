@@ -32,6 +32,10 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
     return response
       .status(httpStatus)
-      .send(httpStatus === 500 ? 'Internal server error' : newResponse);
+      .send(
+        httpStatus === 500
+          ? { statusCode: httpStatus, message: 'Internal server error' }
+          : newResponse,
+      );
   }
 }
