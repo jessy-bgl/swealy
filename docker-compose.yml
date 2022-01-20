@@ -8,10 +8,10 @@ services:
     build:
       context: ./database
       dockerfile: Dockerfile
-      args:
-        - MONGO_INITDB_ROOT_USERNAME=root
-        - MONGO_INITDB_ROOT_PASSWORD=root_db!
-        - MONGO_INITDB_DATABASE=admin
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root_db!
+      - MONGO_INITDB_DATABASE=admin
     command: ["--auth", "--quiet", "--bind_ip_all"]
     restart: unless-stopped
     ports:
@@ -31,7 +31,7 @@ services:
       - COOKIE_SECRET=2x4tTxQ7jRHqLRl8bbFYoUADDLbyfcNh
       - JWT_SECRET=De3Y6aKGywtQzWl7c0e4hYslK1lRb85u
       - HTTP_PORT=5000
-      - MONGO_URI=mongodb://admin:admin_passwd@db:27017/crypto-dca
+      - MONGO_URI=mongodb://admin:cryptodcaAdminPasswd@db:27017/cryptodca
     volumes:
       - ./server:/app
     ports:

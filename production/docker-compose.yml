@@ -1,0 +1,70 @@
+version: "3.4"
+
+services:
+  db:
+    container_name: "cryptodca-db"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "5"
+    build:
+      context: ../database
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root_db!
+      - MONGO_INITDB_DATABASE=admin
+    command: ["--auth"]
+    volumes:
+      - crypto_dca_db:/data/db
+    restart: unless-stopped
+
+  api:
+    container_name: "cryptodca-api"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "5"
+    build:
+      context: ../server
+    environment:
+      - COOKIE_SECRET=2x4tTxQ7jRHqLRl8bbFYoUADDLbyfcNh
+      - JWT_SECRET=De3Y6aKGywtQzWl7c0e4hYslK1lRb85u
+      - MONGO_URI=mongodb://admin:cryptodcaAdminPasswd@db:27017/cryptodca
+    restart: unless-stopped
+    depends_on:
+      - db
+
+  client:
+    container_name: "cryptodca-client"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "5"
+    build:
+      context: ../client
+    restart: unless-stopped
+    depends_on:
+      - api
+
+  proxy:
+    container_name: "cryptodca-proxy"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "5"
+    build:
+      context: ../proxy
+    restart: unless-stopped
+    depends_on:
+      - client
+    ports:
+      - 80:80
+      - 443:443
+
+volumes:
+  crypto_dca_db:
+    driver: local
