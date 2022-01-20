@@ -1,3 +1,4 @@
+import { IDcaRepository } from '../../domain/repositories/dca.repository.interface';
 import {
   ICreateManualTransactionDTO,
   ICreateTransactionDTO,
@@ -12,7 +13,10 @@ function isAutoTransaction(
 }
 
 class CreateTransactionUseCase {
-  constructor(private readonly transactionRepository: ITransactionRepository) {}
+  constructor(
+    private readonly transactionRepository: ITransactionRepository,
+    private readonly dcaRepository: IDcaRepository,
+  ) {}
 
   async execute(
     createTransactionDto: ICreateTransactionDTO | ICreateManualTransactionDTO,
@@ -27,6 +31,10 @@ class CreateTransactionUseCase {
       };
     const transaction = await this.transactionRepository.create(
       createTransactionDto,
+    );
+    await this.dcaRepository.incSuccessfulTransactionsCounter(
+      transaction.dca.id,
+      1,
     );
     return new TransactionPresenter(transaction);
   }

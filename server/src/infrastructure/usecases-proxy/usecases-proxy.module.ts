@@ -158,19 +158,31 @@ export class UsecasesProxyModule {
             ),
         },
         {
-          inject: [TransactionRepository],
+          inject: [TransactionRepository, DcaRepository],
           provide: UsecasesProxyModule.CREATE_TRANSACTION_USECASE_PROXY,
-          useFactory: (transactionRepository: TransactionRepository) =>
+          useFactory: (
+            transactionRepository: TransactionRepository,
+            dcaRepository: DcaRepository,
+          ) =>
             new UseCaseProxy(
-              new CreateTransactionUseCase(transactionRepository),
+              new CreateTransactionUseCase(
+                transactionRepository,
+                dcaRepository,
+              ),
             ),
         },
         {
-          inject: [TransactionRepository],
+          inject: [TransactionRepository, DcaRepository],
           provide: UsecasesProxyModule.DELETE_TRANSACTION_USECASE_PROXY,
-          useFactory: (transactionRepository: TransactionRepository) =>
+          useFactory: (
+            transactionRepository: TransactionRepository,
+            dcaRepository: DcaRepository,
+          ) =>
             new UseCaseProxy(
-              new DeleteTransactionUseCase(transactionRepository),
+              new DeleteTransactionUseCase(
+                transactionRepository,
+                dcaRepository,
+              ),
             ),
         },
       ],

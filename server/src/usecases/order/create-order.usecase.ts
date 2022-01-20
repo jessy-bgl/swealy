@@ -27,7 +27,7 @@ class CreateOrderUseCase {
       createTransactionDto.size = order.size;
       createTransactionDto.type = order.type;
       await this.transactionRepository.create(createTransactionDto);
-      await this.dcaRepository.incSuccessfulTransactionsCounter(dca.id);
+      await this.dcaRepository.incSuccessfulTransactionsCounter(dca.id, 1);
     } catch (e) {
       this.logger.error(e.message);
       createTransactionDto.success = false;

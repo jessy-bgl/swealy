@@ -90,11 +90,14 @@ class DcaRepository implements IDcaRepository {
     }
   }
 
-  async incSuccessfulTransactionsCounter(id: string): Promise<void> {
+  async incSuccessfulTransactionsCounter(
+    id: string,
+    value: number,
+  ): Promise<void> {
     try {
       await this.dcaEntity.updateOne(
         { _id: id },
-        { $inc: { successfulTransactionsCounter: 1 } },
+        { $inc: { successfulTransactionsCounter: value } },
       );
     } catch (e) {
       throw e;
