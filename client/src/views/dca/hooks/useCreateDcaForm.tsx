@@ -43,14 +43,17 @@ const useCreateDcaThirdForm = () => {
   const schema = yup.object({
     amount: yup
       .number()
+      .typeError(t("form.requiredField"))
       .min(1, t("form.mustBeGreaterOrEqualTo", { value: 1 }))
       .required(t("form.requiredField")),
     frequencyInDays: yup
       .number()
+      .typeError(t("form.requiredField"))
       .min(1, t("form.mustBeGreaterOrEqualTo", { value: 1 }))
       .required(t("form.requiredField")),
     hour: yup
       .number()
+      .typeError(t("form.requiredField"))
       .min(0, t("form.mustBeGreaterOrEqualTo", { value: 0 }))
       .required(t("form.requiredField")),
   });
