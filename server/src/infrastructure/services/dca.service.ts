@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 
 import { DcaRepository } from '../repositories/dca.repository';
@@ -9,6 +9,8 @@ import { DcaStatusEnum } from '../../domain/models/dca';
 
 @Injectable()
 export class DcaService {
+  private readonly logger = new Logger(DcaService.name);
+
   constructor(
     private readonly dcaRepository: DcaRepository,
     private readonly transactionRepository: TransactionRepository,
@@ -28,22 +30,26 @@ export class DcaService {
       // if the dca is not active => skip it and go to the next
       if (dca.status !== DcaStatusEnum.ACTIVE) return;
 
-      const lastAutoTransaction =
-        await this.transactionRepository.fetchLastDcaAutoTransaction(dca.id);
+      try {
+        const lastAutoTransaction =
+          await this.transactionRepository.fetchLastDcaAutoTransaction(dca.id);
 
-      // get the difference of days between now and the last successful transaction
-      const dateNow = new Date();
-      const diffInTime = lastAutoTransaction
-        ? dateNow.getTime() - lastAutoTransaction.datetime.getTime()
-        : null;
-      const diffInDays = lastAutoTransaction
-        ? diffInTime / (1000 * 3600 * 24)
-        : null;
-      const isDcaFrequencyReached =
-        (diffInDays === null || diffInDays >= dca.frequencyInDays) &&
-        dateNow.getHours() === dca.hour;
+        // get the difference of days between now and the last successful transaction
+        const dateNow = new Date();
+        const diffInTime = lastAutoTransaction
+          ? dateNow.getTime() - lastAutoTransaction.datetime.getTime()
+          : null;
+        const diffInDays = lastAutoTransaction
+          ? diffInTime / (1000 * 3600 * 24)
+          : null;
+        const isDcaFrequencyReached =
+          (diffInDays === null || diffInDays >= dca.frequencyInDays) &&
+          dateNow.getHours() === dca.hour;
 
-      if (isDcaFrequencyReached) createOrderUseCase.execute(dca);
+        if (isDcaFrequencyReached) createOrderUseCase.execute(dca);
+      } catch (e) {
+        this.logger.error(e.message);
+      }
     });
   }
 }

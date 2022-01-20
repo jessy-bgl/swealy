@@ -82,7 +82,7 @@ class TransactionRepository implements ITransactionRepository {
         .find({ dca: dcaId, manual: false })
         .sort({ datetime: -1 })
         .limit(1)
-        .populate({ path: 'dca', populate: 'exchange' });
+        .populate({ path: 'dca', populate: { path: 'exchange' } });
       if (!transactions.length) return undefined;
       return TransactionMapper.toTransaction(transactions[0]);
     } catch (e) {
