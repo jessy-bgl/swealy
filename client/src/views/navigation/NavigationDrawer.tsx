@@ -1,7 +1,16 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { Box, Divider, List, Drawer } from "@mui/material";
+import {
+  Box,
+  Divider,
+  List,
+  Drawer,
+  SvgIcon,
+  Grid,
+  Typography,
+} from "@mui/material";
 // import DashboardIcon from "@mui/icons-material/Dashboard";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ExchangeIcon from "@mui/icons-material/AccountBalance";
@@ -12,7 +21,7 @@ import InactiveDcaIcon from "@mui/icons-material/Pause";
 import ArchivedDcaIcon from "@mui/icons-material/Archive";
 
 import ListItemWithIcon from "./components/ListItemTextIcon";
-import { useState } from "react";
+import { ReactComponent as Logo } from "../../assets/logo.svg";
 
 interface Props {
   drawerWidth: number;
@@ -40,7 +49,20 @@ export default function NavigationDrawer(props: Props) {
   const drawer = (
     <div>
       <div style={{ height: "64px", textAlign: "center" }}>
-        {/* TODO : add a logo */}
+        <Grid
+          container
+          justifyContent="center"
+          alignItems="center"
+          spacing={1}
+          sx={{ height: "100%" }}
+        >
+          <Grid item sx={{ marginTop: 0.7 }}>
+            <SvgIcon component={Logo} inheritViewBox fontSize={"large"} />
+          </Grid>
+          <Grid item>
+            <Typography variant="h6">Swealy</Typography>
+          </Grid>
+        </Grid>
       </div>
       <Divider />
       <List>
