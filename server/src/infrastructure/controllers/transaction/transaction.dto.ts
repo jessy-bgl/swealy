@@ -12,7 +12,10 @@ import {
 } from 'class-validator';
 
 import { OrderTypesEnum } from '../../../domain/models/transaction';
-import { ICreateTransactionDTO } from '../../../domain/repositories/transaction.repository';
+import {
+  ICreateTransactionDTO,
+  ICreateManualTransactionDTO,
+} from '../../../domain/repositories/transaction.repository';
 
 class CreateTransactionDTO implements ICreateTransactionDTO {
   @ApiProperty({ required: false, default: 'current datetime' })
@@ -39,11 +42,6 @@ class CreateTransactionDTO implements ICreateTransactionDTO {
   @IsMongoId()
   dca: string; //Types.ObjectId;
 
-  @ApiProperty({ required: true })
-  @IsString()
-  @IsNotEmpty()
-  pair: string;
-
   @ApiProperty({ required: false })
   @IsOptional()
   @IsNumber()
@@ -68,4 +66,41 @@ class CreateTransactionDTO implements ICreateTransactionDTO {
   description?: string;
 }
 
-export { CreateTransactionDTO };
+class CreateManualTransactionDTO implements ICreateManualTransactionDTO {
+  @ApiProperty({ required: true })
+  @IsDate()
+  datetime: Date = new Date();
+
+  success = true;
+
+  manual = true;
+
+  amount: number;
+
+  @ApiProperty({ required: true, type: 'string (ObjectId)' })
+  @IsNotEmpty()
+  @IsMongoId()
+  dca: string; //Types.ObjectId;
+
+  @ApiProperty({ required: true })
+  @IsNumber()
+  @IsPositive()
+  price: number;
+
+  @ApiProperty({ required: true })
+  @IsNumber()
+  @IsPositive()
+  size: number;
+
+  @ApiProperty({ required: true, enum: OrderTypesEnum })
+  @IsString()
+  @IsEnum(OrderTypesEnum)
+  type: OrderTypesEnum;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  description?: string;
+}
+
+export { CreateTransactionDTO, CreateManualTransactionDTO };

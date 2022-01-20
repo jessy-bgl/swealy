@@ -16,8 +16,6 @@ class TransactionPresenter {
   @ApiProperty()
   dca: DcaPresenter;
   @ApiProperty()
-  pair: string;
-  @ApiProperty()
   price: number;
   @ApiProperty({ enum: OrderTypesEnum })
   type: OrderTypesEnum;
@@ -33,7 +31,7 @@ class TransactionPresenter {
     this.manual = transaction.manual;
     this.amount = transaction.amount;
     this.dca = new DcaPresenter(transaction.dca);
-    this.pair = transaction.pair;
+    this.price = transaction.price;
     this.type = transaction.type;
     this.size = transaction.size;
     this.description = transaction.description;

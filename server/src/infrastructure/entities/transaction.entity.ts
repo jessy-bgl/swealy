@@ -16,9 +16,6 @@ class Transaction {
   @Prop({ type: Boolean, default: false })
   manual: boolean;
 
-  @Prop({ type: Number, required: true, min: 0 })
-  amount: number;
-
   @Prop({
     type: MongooseSchema.Types.ObjectId,
     required: true,
@@ -26,8 +23,8 @@ class Transaction {
   })
   dca: Dca | Types.ObjectId;
 
-  @Prop({ type: String, required: true })
-  pair: string;
+  @Prop({ type: Number, required: true, min: 0 })
+  amount: number;
 
   @Prop({ type: Number, min: 0 })
   price?: number;

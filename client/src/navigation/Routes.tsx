@@ -6,6 +6,7 @@ import { Exchanges } from "../views/exchanges/Exchanges";
 import { Settings } from "../views/settings/Settings";
 import { Dcas } from "../views/dca/Dcas";
 import { DcaStatusEnum } from "../models/Dca";
+import { Transactions } from "../views/transactions/Transactions";
 
 function Router() {
   const { t } = useTranslation("navigation");
@@ -41,6 +42,12 @@ function Router() {
             child={<Dcas dcaStatus={DcaStatusEnum.ARCHIVED} />}
             title={t("archivedDcas")}
           />
+        }
+      />
+      <Route
+        path="/transactions"
+        element={
+          <Navigation child={<Transactions />} title={t("transactions")} />
         }
       />
       <Route

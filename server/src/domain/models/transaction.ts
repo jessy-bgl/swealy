@@ -17,7 +17,6 @@ class Transaction {
   manual: boolean;
   amount: number;
   dca: Dca;
-  pair: string;
   price: number;
   size: number;
   type: OrderTypesEnum;

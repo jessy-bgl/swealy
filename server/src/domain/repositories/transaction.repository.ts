@@ -6,10 +6,18 @@ interface ICreateTransactionDTO {
   manual: boolean;
   amount: number;
   dca: string; // Types.ObjectId;
-  pair: string;
   price?: number;
   size?: number;
   type?: OrderTypesEnum;
+  description?: string;
+}
+
+interface ICreateManualTransactionDTO {
+  datetime: Date;
+  dca: string; // Types.ObjectId;
+  price: number;
+  size: number;
+  type: OrderTypesEnum;
   description?: string;
 }
 
@@ -22,4 +30,8 @@ interface ITransactionRepository {
   deleteByDcaIds(dcaIds: string[]): Promise<void>;
 }
 
-export { ITransactionRepository, ICreateTransactionDTO };
+export {
+  ITransactionRepository,
+  ICreateTransactionDTO,
+  ICreateManualTransactionDTO,
+};

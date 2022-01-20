@@ -70,7 +70,6 @@ export default function NavigationDrawer(props: Props) {
         />
         <Divider />
         <ListItemWithIcon
-          disabled
           name={t("transactions")}
           muiIcon={<TransactionsIcon />}
           onClick={() => handleClickItem("/transactions")}
