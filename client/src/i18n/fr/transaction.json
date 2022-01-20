@@ -10,5 +10,22 @@
   "size": "Quantité",
   "type": "Type",
   "orderType": "Type d'ordre",
-  "addTransaction": "Ajouter une transaction"
+  "actions": "Actions",
+  "addTransaction": "Ajouter une transaction",
+  "newTransaction": "Nouvelle transaction",
+  "createTransactionSuccess": "Transaction créée avec succès",
+  "deleteTransactionSuccess": "Transaction supprimée avec succès",
+  "removeTransactionTitle": "Suppression de la transaction {{- pair}} du {{date}}",
+  "removeTransactionWarning": "Cette action est irréversible.",
+  "form": {
+    "requiredField": "Champ requis",
+    "dateRequired": "Date requise",
+    "mustBePositive": "Doit être positif",
+    "datetime": "Date",
+    "dca": "DCA",
+    "price": "Prix",
+    "size": "Quantité",
+    "type": "Type d'ordre",
+    "description": "Description"
+  }
 }

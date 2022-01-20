@@ -12,7 +12,6 @@ interface Transaction {
   manual: boolean;
   amount: number;
   dca: Dca;
-  pair: string;
   price: number;
   type: OrderTypesEnum;
   size: number;

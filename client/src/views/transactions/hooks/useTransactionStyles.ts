@@ -1,36 +1,45 @@
-import { createTheme, darken, lighten } from "@mui/material/styles";
+import { darken, lighten } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
+import { useTheme } from "@emotion/react";
 
-const defaultTheme = createTheme();
+const useTransactionStyles = () => {
+  const appTheme: any = useTheme();
 
-const useTransactionStyles = makeStyles(
-  (theme) => {
-    const getBackgroundColor = (color) =>
-      theme.palette.mode === "dark" ? darken(color, 0.6) : lighten(color, 0.6);
+  return makeStyles(
+    (theme) => {
+      const getBackgroundColor = (color) =>
+        appTheme.palette.mode === "dark"
+          ? darken(color, 0.6)
+          : lighten(color, 0.6);
 
-    const getHoverBackgroundColor = (color) =>
-      theme.palette.mode === "dark" ? darken(color, 0.5) : lighten(color, 0.5);
+      const getHoverBackgroundColor = (color) =>
+        appTheme.palette.mode === "dark"
+          ? darken(color, 0.5)
+          : lighten(color, 0.5);
 
-    return {
-      root: {
-        "& .transaction-success": {
-          backgroundColor: getBackgroundColor(theme.palette.success.main),
-          "&:hover": {
-            backgroundColor: getHoverBackgroundColor(
-              theme.palette.success.main
-            ),
+      return {
+        root: {
+          "& .transaction-success": {
+            backgroundColor: getBackgroundColor(theme.palette.success.main),
+            "&:hover": {
+              backgroundColor: getHoverBackgroundColor(
+                theme.palette.success.main
+              ),
+            },
+          },
+          "& .transaction-fail": {
+            backgroundColor: getBackgroundColor(theme.palette.error.main),
+            "&:hover": {
+              backgroundColor: getHoverBackgroundColor(
+                theme.palette.error.main
+              ),
+            },
           },
         },
-        "& .transaction-fail": {
-          backgroundColor: getBackgroundColor(theme.palette.error.main),
-          "&:hover": {
-            backgroundColor: getHoverBackgroundColor(theme.palette.error.main),
-          },
-        },
-      },
-    };
-  },
-  { defaultTheme }
-);
+      };
+    },
+    { defaultTheme: appTheme }
+  );
+};
 
 export { useTransactionStyles };

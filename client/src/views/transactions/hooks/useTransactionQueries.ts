@@ -24,8 +24,10 @@ const useCreateTransaction = () => {
         TRANSACTIONS_QUERY_KEY,
         (transactions) => {
           if (!transactions) return [];
-          transactions.push(newTransaction);
-          return transactions;
+          const newTransactions = Object.assign([], transactions);
+          // TODO : replace push by putting the data at the right place (chronological order)
+          newTransactions.push(newTransaction);
+          return newTransactions;
         }
       );
       enqueueSnackbar(t("createTransactionSuccess"), { variant: "success" });
