@@ -1,0 +1,31 @@
+{
+  "date": "Date",
+  "status": "Status",
+  "success": "Success",
+  "manual": "Manual",
+  "automatic": "Automatic",
+  "pair": "Pair",
+  "exchange": "Exchange",
+  "price": "Price",
+  "size": "Size",
+  "type": "Type",
+  "orderType": "Order type",
+  "actions": "Actions",
+  "addTransaction": "Add transaction",
+  "newTransaction": "New transaction",
+  "createTransactionSuccess": "Transaction successfully created",
+  "deleteTransactionSuccess": "Transaction successfully deleted",
+  "removeTransactionTitle": "Transaction {{- pair}} of {{date}} deletion",
+  "removeTransactionWarning": "This action is irreversible.",
+  "form": {
+    "requiredField": "Required field",
+    "dateRequired": "Required date",
+    "mustBePositive": "Must be positive",
+    "datetime": "Date",
+    "dca": "DCA",
+    "price": "Price",
+    "size": "Size",
+    "type": "Order type",
+    "description": "Description"
+  }
+}

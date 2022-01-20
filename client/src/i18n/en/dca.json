@@ -1,0 +1,42 @@
+{
+  "createDca": "New DCA bot",
+  "createDcaSuccess": "Bot successfully created",
+  "updateDcaSuccess": "Bot successfully updated",
+  "deleteDcaSuccess": "Bot successfully deleted",
+  "nextTransaction": "Next buy : {{- date}} at {{heure}}",
+  "noNextTransaction": "No planned buy",
+  "summary": "Buy {{quantity}} {{cryptoToUse}} of {{cryptoToBuy}} every {{days}} days at {{hour}}h (UTC)",
+  "statistics": "Statistics",
+  "info": "Info",
+  "form": {
+    "requiredField": "Required field",
+    "exchange": "Exchange",
+    "pair": "Pair",
+    "status": "Status",
+    "frequency": "Frequency",
+    "frequencyInDays": "Frequency (in days)",
+    "frequencySummary": "Every {{days}} days at {{hour}}h (UTC)",
+    "hour": "Hour (UTC)",
+    "amount": "Amount",
+    "next": "Next",
+    "previous": "Previous",
+    "confirm": "Confirm",
+    "update": "Update",
+    "mustBeGreaterOrEqualTo": "Must be greater or equal to {{value}}"
+  },
+  "status": {
+    "active": "Active",
+    "paused": "Paused",
+    "archived": "Archived",
+    "delete": "Delete"
+  },
+  "action": {
+    "activate": "Activate",
+    "pause": "Pause",
+    "archive": "Archive"
+  },
+  "stats": {
+    "dcaCounter": "Bots",
+    "activeDcaCounter": "Active bots"
+  }
+}

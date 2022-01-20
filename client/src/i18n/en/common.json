@@ -1,0 +1,17 @@
+{
+  "name": "Name",
+  "label": "Label",
+  "description": "Description",
+  "cancel": "Cancel",
+  "save": "Save",
+  "reset": "Reset",
+  "submit": "Submit",
+  "confirm": "Confirm",
+  "edit": "Edit",
+  "update": "Update",
+  "delete": "Delete",
+  "close": "Close",
+  "yes": "Yes",
+  "no": "No",
+  "none": "None"
+}

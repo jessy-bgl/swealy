@@ -1,0 +1,11 @@
+{
+  "dashboard": "Dashboard",
+  "activeDcas": "Active bots",
+  "pausedDcas": "Paused bots",
+  "archivedDcas": "Archived bots",
+  "theme": "Theme",
+  "about": "About",
+  "settings": "Settings",
+  "exchanges": "Exchanges",
+  "transactions": "Transactions"
+}

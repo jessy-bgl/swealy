@@ -1,0 +1,21 @@
+{
+  "name": "Name",
+  "subaccountName": "Subaccount",
+  "label": "Label",
+  "apiKey": "API key",
+  "apiSecret": "API secret",
+  "addExchange": "Add an exchange",
+  "newExchange": "New exchange",
+  "editExchange": "Edit",
+  "removeExchange": "Delete",
+  "keysCheck": "Check keys validity",
+  "removeExchangeTitle": "Deletion of {{label}} ({{name}})",
+  "removeExchangeWarning": "Bots and transactions linked to this exchange will also be deleted. This action is irreversible.",
+  "createExchangeSuccess": "Exchange successfully added",
+  "updateExchangeSuccess": "Exchange successfully updated",
+  "deleteExchangeSuccess": "Exchange successfully deleted",
+  "checkApiKeysSuccess": "API keys are valid",
+  "form": {
+    "requiredField": "Required field"
+  }
+}

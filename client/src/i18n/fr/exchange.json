@@ -10,7 +10,7 @@
   "removeExchange": "Supprimer",
   "keysCheck": "Vérifier la validité",
   "removeExchangeTitle": "Confirmez-vous la suppression de {{label}} ({{name}}) ?",
-  "removeExchangeWarning": "Les DCA et les transactions associés à cet exchange seront également supprimés. Cette action est irréversible.",
+  "removeExchangeWarning": "Les bots et les transactions associés à cet exchange seront également supprimés. Cette action est irréversible.",
   "createExchangeSuccess": "Exchange ajouté avec succès",
   "updateExchangeSuccess": "Exchange mis à jour avec succès",
   "deleteExchangeSuccess": "Exchange supprimé avec succès",
