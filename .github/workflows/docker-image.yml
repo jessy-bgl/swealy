@@ -13,4 +13,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the client Docker image
-      run: docker build . --file client/Dockerfile --tag swealy-client:v1.0.0-beta1
+      run: cd client && docker build . --file Dockerfile --tag swealy-client:1.0.0-beta1
