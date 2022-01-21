@@ -29,8 +29,7 @@ jobs:
           # platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            jessy-bgl/swealy:latest
-            ghcr.io/jessy-bgl/swealy:latest
+            ghcr.io/jessy-bgl/swealy-client:latest
 
         # - uses: actions/checkout@v2
         # - name: Build the client Docker image
