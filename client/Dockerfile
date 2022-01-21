@@ -1,9 +1,10 @@
 FROM node:16-alpine as builder
 WORKDIR '/app'
-COPY ./yarn* ./
-RUN yarn
+COPY ./package* ./
+#COPY ./yarn* ./
+RUN npm i
 COPY ./ ./
-RUN yarn build
+RUN npm run build
 
 FROM nginx:1.20
 COPY ./proxy/default.conf /etc/nginx/conf.d/default.conf
