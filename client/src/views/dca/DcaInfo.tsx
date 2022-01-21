@@ -132,7 +132,7 @@ const DcaInfo = ({ data }: Props) => {
         {editableFieldNames.map((fieldName) => (
           <Grid item key={fieldName}>
             <TextField
-              {...register(fieldName)}
+              {...register(fieldName as keyof UpdateDcaDTO)}
               defaultValue={data ? data[fieldName] : null}
               label={t(`form.${fieldName}`)}
               type="number"
