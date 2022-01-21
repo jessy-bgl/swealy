@@ -3,7 +3,7 @@ WORKDIR '/app'
 COPY ./yarn* ./
 RUN yarn
 COPY ./ ./
-RUN npm run build
+RUN yarn build
 
 FROM nginx:1.20
 COPY ./proxy/default.conf /etc/nginx/conf.d/default.conf
