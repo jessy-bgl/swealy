@@ -36,7 +36,7 @@ const useUpdateExchangeForm = ({
     register,
     handleSubmit,
     formState: { errors, isDirty },
-  } = useForm({
+  } = useForm<UpdateExchangeDTO>({
     resolver: yupResolver(schema),
     defaultValues,
   });

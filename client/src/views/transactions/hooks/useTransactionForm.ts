@@ -3,7 +3,10 @@ import { useTranslation } from "react-i18next";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { OrderTypesEnum } from "../../../models/Transaction";
+import {
+  CreateTransactionDTO,
+  OrderTypesEnum,
+} from "../../../models/Transaction";
 
 const useCreateTransactionForm = () => {
   const { t } = useTranslation("transaction");
@@ -36,7 +39,7 @@ const useCreateTransactionForm = () => {
     handleSubmit,
     control,
     formState: { errors, isDirty },
-  } = useForm({
+  } = useForm<CreateTransactionDTO>({
     resolver: yupResolver(schema),
   });
 

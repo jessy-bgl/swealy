@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import { UpdateDcaDTO } from "../../../models/Dca";
+
 const useCreateDcaFirstForm = () => {
   const { t } = useTranslation("dca");
   const schema = yup.object({
@@ -63,7 +65,7 @@ const useCreateDcaThirdForm = () => {
     register,
     reset,
     formState: { errors, isDirty },
-  } = useForm({
+  } = useForm<UpdateDcaDTO>({
     resolver: yupResolver(schema),
   });
   return { handleSubmit, errors, isDirty, control, fields, register, reset };

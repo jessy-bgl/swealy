@@ -2,6 +2,7 @@ import { Grid, TextField, Button } from "@mui/material";
 import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
+import { UpdateDcaDTO } from "../../../models/Dca";
 import { useCreateDcaThirdForm } from "../hooks/useCreateDcaForm";
 
 type Props = {
@@ -28,7 +29,7 @@ const ThirdForm = ({ onSubmit, onClickPrevious, defaultValues }: Props) => {
           <Grid item key={field.name}>
             <Controller
               control={control}
-              name={field.name}
+              name={field.name as keyof UpdateDcaDTO}
               defaultValue={defaultValues[field.name] || 1}
               render={({
                 field: { onChange, value },

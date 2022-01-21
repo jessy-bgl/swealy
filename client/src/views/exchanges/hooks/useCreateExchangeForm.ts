@@ -26,7 +26,7 @@ const useCreateExchangeForm = ({ closeDialog }: Props) => {
     register,
     handleSubmit,
     formState: { errors, isDirty },
-  } = useForm({
+  } = useForm<CreateExchangeDTO>({
     resolver: yupResolver(schema),
   });
 
