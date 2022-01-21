@@ -2,7 +2,7 @@ import { Grid, TextField, MenuItem, Button, Skeleton } from "@mui/material";
 import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { useCreateDcaSecondForm } from "../hooks/useCreateDcaForm";
+import { useCreateDcaSecondForm } from "./hooks/useCreateDcaForm";
 import { useFetchExchangePairs } from "../hooks/useDcaQueries";
 
 type Props = {

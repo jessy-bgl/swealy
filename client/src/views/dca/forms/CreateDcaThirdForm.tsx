@@ -3,7 +3,7 @@ import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { UpdateDcaDTO } from "../../../models/Dca";
-import { useCreateDcaThirdForm } from "../hooks/useCreateDcaForm";
+import { useCreateDcaThirdForm } from "./hooks/useCreateDcaForm";
 
 type Props = {
   onSubmit: any;

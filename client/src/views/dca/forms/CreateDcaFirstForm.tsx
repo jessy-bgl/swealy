@@ -3,7 +3,7 @@ import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { Exchange } from "../../../models/Exchange";
-import { useCreateDcaFirstForm } from "../hooks/useCreateDcaForm";
+import { useCreateDcaFirstForm } from "./hooks/useCreateDcaForm";
 
 type Props = {
   exchanges: Exchange[];

@@ -8,7 +8,7 @@ import ArchiveIcon from "@mui/icons-material/Archive";
 
 import { Dca, DcaStatusEnum, UpdateDcaDTO } from "../../models/Dca";
 import { useUpdateDca, useUpdateDcaStatus } from "./hooks/useDcaQueries";
-import { useUpdateDcaForm } from "./hooks/useUpdateDcaForm";
+import { useUpdateDcaForm } from "./forms/hooks/useUpdateDcaForm";
 
 type Props = {
   data?: Dca;

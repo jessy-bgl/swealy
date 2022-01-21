@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { UpdateDcaDTO } from "../../../models/Dca";
+import { UpdateDcaDTO } from "../../../../models/Dca";
 
 const useCreateDcaFirstForm = () => {
   const { t } = useTranslation("dca");

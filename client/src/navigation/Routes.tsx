@@ -4,9 +4,9 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Navigation } from "../views/navigation/Navigation";
 import { Exchanges } from "../views/exchanges/Exchanges";
 import { Settings } from "../views/settings/Settings";
-import { Dcas } from "../views/dca/Dcas";
 import { DcaStatusEnum } from "../models/Dca";
 import { Transactions } from "../views/transactions/Transactions";
+import { Dashboard } from "../views/dca/Dashboard";
 
 function Router() {
   const { t } = useTranslation("navigation");
@@ -26,7 +26,7 @@ function Router() {
         path="/dca/active"
         element={
           <Navigation
-            child={<Dcas dcaStatus={DcaStatusEnum.ACTIVE} />}
+            child={<Dashboard dcaStatus={DcaStatusEnum.ACTIVE} />}
             title={t("activeDcas")}
           />
         }
@@ -35,7 +35,7 @@ function Router() {
         path="/dca/paused"
         element={
           <Navigation
-            child={<Dcas dcaStatus={DcaStatusEnum.PAUSED} />}
+            child={<Dashboard dcaStatus={DcaStatusEnum.PAUSED} />}
             title={t("pausedDcas")}
           />
         }
@@ -44,7 +44,7 @@ function Router() {
         path="/dca/archived"
         element={
           <Navigation
-            child={<Dcas dcaStatus={DcaStatusEnum.ARCHIVED} />}
+            child={<Dashboard dcaStatus={DcaStatusEnum.ARCHIVED} />}
             title={t("archivedDcas")}
           />
         }

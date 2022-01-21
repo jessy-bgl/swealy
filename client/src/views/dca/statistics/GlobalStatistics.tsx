@@ -5,7 +5,7 @@ type Props = {
   dcaCounter: number;
 };
 
-const Statistics = ({ dcaCounter }: Props) => {
+const GlobalStatistics = ({ dcaCounter }: Props) => {
   const { t } = useTranslation("dca");
 
   return (
@@ -20,4 +20,4 @@ const Statistics = ({ dcaCounter }: Props) => {
   );
 };
 
-export { Statistics };
+export { GlobalStatistics };

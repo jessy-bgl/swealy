@@ -16,7 +16,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import ExchangeIcon from "@mui/icons-material/AccountBalance";
 import TransactionsIcon from "@mui/icons-material/History";
 import AboutIcon from "@mui/icons-material/Info";
-import ActiveDcaIcon from "@mui/icons-material/Paid";
+import ActiveDcaIcon from "@mui/icons-material/SmartToy";
 import InactiveDcaIcon from "@mui/icons-material/Pause";
 import ArchivedDcaIcon from "@mui/icons-material/Archive";
 
@@ -69,8 +69,8 @@ export default function NavigationDrawer(props: Props) {
         {/* <ListItemWithIcon
           name={t("dashboard")}
           muiIcon={<DashboardIcon />}
-          linkToNavigate="/"
-          closeDrawer={props.handleDrawerToggle}
+          onClick={() => handleClickItem("/")}
+          selected={selectedItem === "/"}
         /> */}
         <ListItemWithIcon
           name={t("activeDcas")}
