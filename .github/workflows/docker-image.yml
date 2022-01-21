@@ -42,8 +42,6 @@ jobs:
           push: true
           tags: |
             ghcr.io/jessy-bgl/swealy-client:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
 
       - name: Build and push api
         id: docker_build_api
@@ -54,8 +52,6 @@ jobs:
           push: true
           tags: |
             ghcr.io/jessy-bgl/swealy-api:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
 
       - name: Build and push database
         id: docker_build_database
@@ -66,8 +62,6 @@ jobs:
           push: true
           tags: |
             ghcr.io/jessy-bgl/swealy-db:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
 
       - name: Build and push proxy
         id: docker_build_proxy
@@ -78,5 +72,3 @@ jobs:
           push: true
           tags: |
             ghcr.io/jessy-bgl/swealy-proxy:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
