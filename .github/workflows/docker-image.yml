@@ -13,7 +13,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: ./client
+          context: client
           push: true
           tags: jessy-bgl/swealy-clgiient:latest
 
