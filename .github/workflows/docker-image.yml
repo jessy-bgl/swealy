@@ -1,0 +1,16 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ dev/ci ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the client Docker image
+      run: docker build . --file client/Dockerfile --tag swealy-client:v1.0.0-beta1
