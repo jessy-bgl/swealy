@@ -1,56 +1,38 @@
-import { SyntheticEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Grid, Paper, Tabs, Tab } from "@mui/material";
 
 import AddIcon from "@mui/icons-material/AddCircle";
 
-import { Dca, DcaStatusEnum } from "../../models/Dca";
+import { DcaStatusEnum } from "../../models/Dca";
 import { CreateDcaDialog } from "./CreateDcaDialog";
-import { useFetchDcas } from "./hooks/useDcaQueries";
 import { useFetchExchanges } from "../exchanges/hooks/useExchangeQueries";
-
 import { DcaCard } from "./Dca";
 import { Statistics } from "./Statistics";
 import { DcaStatistics } from "./DcaStatistics";
 import { DcaInfo } from "./DcaInfo";
+import { useDcas } from "./hooks/useDcas";
 
 type Props = {
   dcaStatus: DcaStatusEnum;
 };
 
-enum DcaTabs {
-  STATISTICS = "statistics",
-  INFO = "info",
-}
-
 const Dcas = ({ dcaStatus }: Props) => {
-  const [dcas, setDcas] = useState([] as Dca[]);
-  const [selectedDcaId, setSelectedDcaId] = useState("");
-  const [selectedTab, setSelectedTab] = useState(DcaTabs.STATISTICS);
-  const [openAddDcaDialog, setOpenAddDcaDialog] = useState(false);
-
   const { t } = useTranslation("dca");
+
   const fetchExchangesQuery = useFetchExchanges();
-  const { data, isLoading } = useFetchDcas();
 
-  // TODO : bug here - this is not alaways called after data update
-  useEffect(() => {
-    if (data) setDcas(data.filter((dca) => dca.status === dcaStatus));
-    setSelectedDcaId("");
-  }, [data, dcaStatus]);
-
-  const handleSelectDca = (dcaId: string) => {
-    if (selectedDcaId === dcaId)
-      setSelectedDcaId(selectedDcaId !== "" ? "" : selectedDcaId);
-    else setSelectedDcaId(dcaId);
-  };
-
-  const handleSelectTab = (event: SyntheticEvent, newTab: DcaTabs) => {
-    setSelectedTab(newTab);
-  };
-
-  const handleClickAddDca = () => setOpenAddDcaDialog(true);
-  const handleCoseAddDcaDialog = () => setOpenAddDcaDialog(false);
+  const {
+    dcas,
+    isLoading,
+    DcaTabs,
+    selectedDcaId,
+    selectedTab,
+    openAddDcaDialog,
+    handleClickAddDca,
+    handleSelectDca,
+    handleSelectTab,
+    handleCoseAddDcaDialog,
+  } = useDcas(dcaStatus);
 
   const renderInfoStats = () => {
     if (!selectedDcaId) return <Statistics dcaCounter={dcas.length} />;
