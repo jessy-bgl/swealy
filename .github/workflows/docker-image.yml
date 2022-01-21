@@ -11,13 +11,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push client
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           context: client
           push: true
-          tags: jessy-bgl/swealy-clgiient:latest
+          tags: jessy-bgl/swealy-client:latest
 
         # - uses: actions/checkout@v2
         # - name: Build the client Docker image
