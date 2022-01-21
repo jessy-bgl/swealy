@@ -9,18 +9,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Login to DockerHub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push client
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           context: ./client
           push: true
-          tags: jessy-bgl/swealy-client:latest
+          tags: jessy-bgl/swealy-clgiient:latest
 
         # - uses: actions/checkout@v2
         # - name: Build the client Docker image
