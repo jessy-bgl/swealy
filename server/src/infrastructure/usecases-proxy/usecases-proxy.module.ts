@@ -27,6 +27,8 @@ import { FetchTransactionUseCase } from '../../usecases/transaction/fetch-transa
 import { CreateTransactionUseCase } from '../../usecases/transaction/create-transaction.usecase';
 import { DeleteTransactionUseCase } from '../../usecases/transaction/delete-transaction.usecase';
 
+import { FetchGlobalStatsUseCase } from '../..//usecases/statistics/fetch-global-statistics.usecase';
+
 @Module({
   imports: [HttpCustomModule, RepositoriesModule],
 })
@@ -47,6 +49,8 @@ export class UsecasesProxyModule {
   static FETCH_TRANSACTION_USECASE_PROXY = 'fetchTransactionUsecaseProxy';
   static CREATE_TRANSACTION_USECASE_PROXY = 'createTransactionUsecaseProxy';
   static DELETE_TRANSACTION_USECASE_PROXY = 'deleteTransactionUsecaseProxy';
+
+  static FETCH_GLOBAL_STATS_USECASE_PROXY = 'fetchGlobalStatsUsecaseProxy';
 
   static register(): DynamicModule {
     return {
@@ -185,6 +189,17 @@ export class UsecasesProxyModule {
               ),
             ),
         },
+        {
+          inject: [DcaRepository, TransactionRepository],
+          provide: UsecasesProxyModule.FETCH_GLOBAL_STATS_USECASE_PROXY,
+          useFactory: (
+            dcaRepository: DcaRepository,
+            transactionRepository: TransactionRepository,
+          ) =>
+            new UseCaseProxy(
+              new FetchGlobalStatsUseCase(dcaRepository, transactionRepository),
+            ),
+        },
       ],
       exports: [
         UsecasesProxyModule.FETCH_EXCHANGES_USECASE_PROXY,
@@ -201,6 +216,7 @@ export class UsecasesProxyModule {
         UsecasesProxyModule.FETCH_TRANSACTION_USECASE_PROXY,
         UsecasesProxyModule.CREATE_TRANSACTION_USECASE_PROXY,
         UsecasesProxyModule.DELETE_TRANSACTION_USECASE_PROXY,
+        UsecasesProxyModule.FETCH_GLOBAL_STATS_USECASE_PROXY,
       ],
     };
   }
