@@ -36,7 +36,8 @@
     "archive": "Archiver"
   },
   "stats": {
-    "dcaCounter": "Nombre de bots",
-    "activeDcaCounter": "Bots actifs"
+    "dcaCounter": "bots DCA",
+    "activeDcaCounter": "Bots actifs",
+    "inactiveDcaCounter": "Bots inactifs"
   }
 }

@@ -27,5 +27,12 @@
     "size": "Size",
     "type": "Order type",
     "description": "Description"
+  },
+  "stats": {
+    "transactionCounter": "transactions",
+    "successTransactionCounter": "Successful transaction",
+    "failTransactionCounter": "Failed transactions",
+    "allocationTitle": "Assets allocation",
+    "allocationSubtitle": "(active bots only)"
   }
 }

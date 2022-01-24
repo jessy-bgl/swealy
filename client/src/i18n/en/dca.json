@@ -36,7 +36,8 @@
     "archive": "Archive"
   },
   "stats": {
-    "dcaCounter": "Bots",
-    "activeDcaCounter": "Active bots"
+    "dcaCounter": "DCA bots",
+    "activeDcaCounter": "Active bots",
+    "inactiveDcaCounter": "Inactive bots"
   }
 }
