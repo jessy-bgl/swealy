@@ -1,4 +1,4 @@
-import { Button, Grid, TextField } from "@mui/material";
+import { Button, Grid, TextField, Paper, Box } from "@mui/material";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -97,81 +97,85 @@ const DcaInfo = ({ data }: Props) => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <Grid
-        container
-        direction="column"
-        alignItems={"center"}
-        spacing={2}
-        sx={{ padding: 2 }}
-      >
-        <Grid item>
-          <TextField
-            disabled
-            value={data ? data.exchange.name.toUpperCase() : ""}
-            label={t("form.exchange")}
-            size="small"
-          />
-        </Grid>
-        <Grid item>
-          <TextField
-            disabled
-            value={data ? data.pair : ""}
-            label={t("form.pair")}
-            size="small"
-          />
-        </Grid>
-        <Grid item>
-          <TextField
-            disabled
-            value={t(`status.${data?.status}`)}
-            label={t("form.status")}
-            size="small"
-          />
-        </Grid>
-        {editableFieldNames.map((fieldName) => (
-          <Grid item key={fieldName}>
-            <TextField
-              {...register(fieldName as keyof UpdateDcaDTO)}
-              defaultValue={data ? data[fieldName] : null}
-              label={t(`form.${fieldName}`)}
-              type="number"
-              helperText={errors[fieldName]?.message}
-              error={errors[fieldName] ? true : false}
-              size="small"
-            />
-          </Grid>
-        ))}
-        <Grid item>
-          <Button
-            type="submit"
-            size="small"
-            variant="outlined"
-            disabled={!isDirty || updateDcaQuery.isLoading}
+    <Box style={{ display: "flex" }}>
+      <Paper sx={{ width: "100%" }}>
+        <form onSubmit={onSubmit}>
+          <Grid
+            container
+            direction="column"
+            alignItems={"center"}
+            spacing={2}
+            sx={{ padding: 2 }}
           >
-            {t("form.update")}
-          </Button>
-        </Grid>
-        <Grid item>
-          <Grid container spacing={1}>
-            {getDcaActions().map((dcaAction) => (
-              <Grid item key={dcaAction.label}>
-                <Button
+            <Grid item>
+              <TextField
+                disabled
+                value={data ? data.exchange.name.toUpperCase() : ""}
+                label={t("form.exchange")}
+                size="small"
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                disabled
+                value={data ? data.pair : ""}
+                label={t("form.pair")}
+                size="small"
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                disabled
+                value={t(`status.${data?.status}`)}
+                label={t("form.status")}
+                size="small"
+              />
+            </Grid>
+            {editableFieldNames.map((fieldName) => (
+              <Grid item key={fieldName}>
+                <TextField
+                  {...register(fieldName as keyof UpdateDcaDTO)}
+                  defaultValue={data ? data[fieldName] : null}
+                  label={t(`form.${fieldName}`)}
+                  type="number"
+                  helperText={errors[fieldName]?.message}
+                  error={errors[fieldName] ? true : false}
                   size="small"
-                  color={dcaAction.color}
-                  variant="outlined"
-                  endIcon={dcaAction.icon}
-                  onClick={dcaAction.onClick}
-                  disabled={updateDcaStatusQuery.isLoading}
-                >
-                  {dcaAction.label}
-                </Button>
+                />
               </Grid>
             ))}
+            <Grid item>
+              <Button
+                type="submit"
+                size="small"
+                variant="outlined"
+                disabled={!isDirty || updateDcaQuery.isLoading}
+              >
+                {t("form.update")}
+              </Button>
+            </Grid>
+            <Grid item>
+              <Grid container spacing={1}>
+                {getDcaActions().map((dcaAction) => (
+                  <Grid item key={dcaAction.label}>
+                    <Button
+                      size="small"
+                      color={dcaAction.color}
+                      variant="outlined"
+                      endIcon={dcaAction.icon}
+                      onClick={dcaAction.onClick}
+                      disabled={updateDcaStatusQuery.isLoading}
+                    >
+                      {dcaAction.label}
+                    </Button>
+                  </Grid>
+                ))}
+              </Grid>
+            </Grid>
           </Grid>
-        </Grid>
-      </Grid>
-    </form>
+        </form>
+      </Paper>
+    </Box>
   );
 };
 

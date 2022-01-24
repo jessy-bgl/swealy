@@ -1,9 +1,9 @@
-import { Grid, Paper, Tabs, Tab } from "@mui/material";
+import { Grid, Tabs, Tab } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 import { DcaStatusEnum } from "../../models/Dca";
-import { GlobalStatistics } from "./statistics/GlobalStatistics";
-import { DcaStatistics } from "./statistics/DcaStatistics";
+import { GlobalStatistics } from "./statistics/global/GlobalStatistics";
+import { DcaStatistics } from "./statistics/dca/DcaStatistics";
 import { DcaInfo } from "./DcaInfo";
 import { Dcas } from "./Dcas";
 import { DcaTabs, useDashboard } from "./hooks/useDashboard";
@@ -25,7 +25,7 @@ const Dashboard = ({ dcaStatus }: Props) => {
   const { t } = useTranslation("dca");
 
   const renderInfoStats = () => {
-    if (!selectedDcaId) return <GlobalStatistics dcaCounter={dcas.length} />;
+    if (!selectedDcaId) return <GlobalStatistics />;
     else if (selectedDcaId && selectedTab === DcaTabs.STATISTICS)
       return <DcaStatistics />;
     else if (selectedDcaId && selectedTab === DcaTabs.INFO)
@@ -46,19 +46,17 @@ const Dashboard = ({ dcaStatus }: Props) => {
       </Grid>
 
       <Grid item xs={12} md={8} xl={9}>
-        <Paper>
-          {selectedDcaId && (
-            <Tabs
-              value={selectedTab}
-              onChange={handleSelectTab}
-              variant="fullWidth"
-            >
-              <Tab label={t("statistics")} value={DcaTabs.STATISTICS} />
-              <Tab label={t("info")} value={DcaTabs.INFO} />
-            </Tabs>
-          )}
-          {renderInfoStats()}
-        </Paper>
+        {selectedDcaId && (
+          <Tabs
+            value={selectedTab}
+            onChange={handleSelectTab}
+            variant="fullWidth"
+          >
+            <Tab label={t("statistics")} value={DcaTabs.STATISTICS} />
+            <Tab label={t("info")} value={DcaTabs.INFO} />
+          </Tabs>
+        )}
+        {renderInfoStats()}
       </Grid>
     </Grid>
   );
