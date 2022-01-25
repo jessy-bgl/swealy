@@ -1,4 +1,4 @@
-# SWEALY
+# Swealy
 
 Open source web app to automate your crypto investments based on DCA.
 
