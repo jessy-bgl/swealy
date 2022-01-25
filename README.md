@@ -6,7 +6,7 @@ Open source web app to automate your crypto investments based on DCA.
 
 ## Installation
 
-The production scripts are available in production/ direction.
+The production scripts are available in [production](https://github.com/jessy-bgl/swealy/tree/main/production).
 
 The easiest way to install the app (including the web server, the database and a reverse-proxy) is to use the docker-compose.stable.yml file.
 
@@ -16,5 +16,4 @@ In all cases, the HTTP port 80 will be used by default to access the app server.
 
 ## License
 
-GPL-3.0
-[GPL](https://choosealicense.com/licenses/gpl-3.0/)
+[GPL-3.0](https://choosealicense.com/licenses/gpl-3.0/)
