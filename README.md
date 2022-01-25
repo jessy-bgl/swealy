@@ -13,3 +13,8 @@ The easiest way to install the app (including the web server, the database and a
 Alternatively, to get the latest version, clone the repo and use the docker-compose.latest.yml file to build the entire app.
 
 In all cases, the HTTP port 80 will be used by default to access the app server. You can change this by editing the proxy service ports values in the docker-compose file.
+
+## License
+
+GPL-3.0
+[GPL](https://choosealicense.com/licenses/gpl-3.0/)
