@@ -6,7 +6,11 @@ import {
 import { SwaggerModule } from '@nestjs/swagger';
 
 import { AppModule } from './app.module';
-import { swaggerConfig, swaggerPath, swaggerOptions } from './swagger.config';
+import {
+  swaggerConfig,
+  swaggerPath,
+  swaggerOptions,
+} from './infrastructure/config/swagger/swagger.config';
 
 import { validationPipe } from './infrastructure/common/pipes/validation.pipe';
 import { HTTP_PORT } from './infrastructure/config/constants';
