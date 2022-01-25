@@ -30,7 +30,7 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/jessy-bgl/swealy-client:latest
+            ghcr.io/jessy-bgl/swealy-client:stable
 
       - name: Build and push api
         id: docker_build_api
@@ -40,7 +40,7 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/jessy-bgl/swealy-api:latest
+            ghcr.io/jessy-bgl/swealy-api:stable
 
       - name: Build and push database
         id: docker_build_database
@@ -50,7 +50,7 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/jessy-bgl/swealy-db:latest
+            ghcr.io/jessy-bgl/swealy-db:stable
 
       - name: Build and push proxy
         id: docker_build_proxy
@@ -60,4 +60,4 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/jessy-bgl/swealy-proxy:latest
+            ghcr.io/jessy-bgl/swealy-proxy:stable

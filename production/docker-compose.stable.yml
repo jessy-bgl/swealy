@@ -3,7 +3,7 @@ version: "3.4"
 services:
   db:
     container_name: "swealy-db"
-    image: ghcr.io/jessy-bgl/swealy-db
+    image: ghcr.io/jessy-bgl/swealy-db:stable
     logging:
       driver: "json-file"
       options:
@@ -20,7 +20,7 @@ services:
 
   api:
     container_name: "swealy-api"
-    image: ghcr.io/jessy-bgl/swealy-api
+    image: ghcr.io/jessy-bgl/swealy-api:stable
     logging:
       driver: "json-file"
       options:
@@ -36,7 +36,7 @@ services:
 
   client:
     container_name: "swealy-client"
-    image: ghcr.io/jessy-bgl/swealy-client
+    image: ghcr.io/jessy-bgl/swealy-client:stable
     logging:
       driver: "json-file"
       options:
@@ -48,7 +48,7 @@ services:
 
   proxy:
     container_name: "swealy-proxy"
-    image: ghcr.io/jessy-bgl/swealy-proxy
+    image: ghcr.io/jessy-bgl/swealy-proxy:stable
     logging:
       driver: "json-file"
       options:
