@@ -46,7 +46,16 @@ export class DcaService {
           (diffInDays === null || diffInDays >= dca.frequencyInDays) &&
           dateNow.getHours() === dca.hour;
 
-        if (isDcaFrequencyReached) createOrderUseCase.execute(dca);
+        if (isDcaFrequencyReached) {
+          const exchangeLabel = dca.exchange.label;
+          const amount = dca.amount;
+          const pairSplitted = dca.pair.split('/');
+          const orderLog =
+            `New spot order on ${exchangeLabel} : ` +
+            `~${amount} ${pairSplitted[0]} of ${pairSplitted[1]}`;
+          this.logger.log(orderLog);
+          createOrderUseCase.execute(dca);
+        }
       } catch (e) {
         this.logger.error(e.message);
       }
