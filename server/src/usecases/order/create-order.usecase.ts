@@ -28,8 +28,8 @@ class CreateOrderUseCase {
       createTransactionDto.type = order.type;
       const pairSplitted = dca.pair.split('/');
       const successLog =
-        `Spot order success : ${order.size} ${pairSplitted[1]} ` +
-        `bought at the price of ${order.price} ${pairSplitted[0]}`;
+        `Spot order success : ${order.size} ${pairSplitted[0]} ` +
+        `bought at the price of ${order.price} ${pairSplitted[1]}`;
       this.logger.log(successLog);
       await this.transactionRepository.create(createTransactionDto);
       await this.dcaRepository.incSuccessfulTransactionsCounter(dca.id, 1);

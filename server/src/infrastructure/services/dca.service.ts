@@ -37,7 +37,7 @@ export class DcaService {
         // get the difference of days between now and the last successful transaction
         const dateNow = new Date();
         const diffInTime = lastAutoTransaction
-          ? dateNow.getTime() - lastAutoTransaction.datetime.getTime()
+          ? dateNow.getTime() - lastAutoTransaction.datetime.setSeconds(0, 0)
           : null;
         const diffInDays = lastAutoTransaction
           ? diffInTime / (1000 * 3600 * 24)
@@ -52,7 +52,7 @@ export class DcaService {
           const pairSplitted = dca.pair.split('/');
           const orderLog =
             `New spot order on ${exchangeLabel} : ` +
-            `~${amount} ${pairSplitted[0]} of ${pairSplitted[1]}`;
+            `~${amount} ${pairSplitted[1]} of ${pairSplitted[0]}`;
           this.logger.log(orderLog);
           createOrderUseCase.execute(dca);
         }
