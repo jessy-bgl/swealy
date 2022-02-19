@@ -1,6 +1,6 @@
 import * as crypto from 'crypto';
 import { AxiosRequestHeaders } from 'axios';
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { HttpService } from 'nestjs-http-promise';
 
 import {
@@ -29,8 +29,12 @@ const FTX_API_DEFAULT_ERROR = 'FTX api returned an error';
 
 const handleFtxApiError = (e: any) => {
   if (e.response)
-    throw new Error(
-      `FTX API error (${e.response.status}) ${e.response.data.error}`,
+    throw new HttpException(
+      {
+        status: e.response.status || 500,
+        error: `FTX API error - ${e.response.data.error}`,
+      },
+      e.response.status || 500,
     );
   else throw e;
 };
