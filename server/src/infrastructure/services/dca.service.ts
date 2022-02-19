@@ -42,12 +42,6 @@ export class DcaService {
         const diffInDays = lastAutoTransaction
           ? diffInTime / (1000 * 3600 * 24)
           : null;
-        // this.logger.log(
-        //   `diffInDays : ${diffInDays} | dca frequencyInDays : ${dca.frequencyInDays}`,
-        // );
-        // this.logger.log(
-        //   `date now getHours : ${dateNow.getHours()} | dca hour : ${dca.hour}`,
-        // );
         const isDcaFrequencyReached =
           (diffInDays === null || diffInDays >= dca.frequencyInDays) &&
           dateNow.getHours() === dca.hour;
