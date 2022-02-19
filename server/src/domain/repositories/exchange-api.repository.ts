@@ -2,12 +2,12 @@ import { Dca } from '../models/dca';
 import { Exchange } from '../models/exchange';
 import { IOrderResult, IPairResult } from './types';
 
-interface IExchangeApiRepository {
-  checkApiKeyValidity(exchange: Exchange): Promise<void>;
+abstract class IExchangeApiRepository {
+  abstract checkApiKeyValidity(exchange: Exchange): Promise<void>;
 
-  createSpotOrder(dca: Dca): Promise<IOrderResult>;
+  abstract createSpotOrder(dca: Dca): Promise<IOrderResult>;
 
-  getAvailableSpotPairs(exchange: Exchange): Promise<IPairResult[]>;
+  abstract getAvailableSpotPairs(exchange: Exchange): Promise<IPairResult[]>;
 
   // TODO : getAvailableSpotFunds
 }

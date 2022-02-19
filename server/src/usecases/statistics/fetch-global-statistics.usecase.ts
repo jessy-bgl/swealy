@@ -1,4 +1,4 @@
-import { Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import * as _ from 'lodash';
 
 import { IDcaRepository } from '../../domain/repositories/dca.repository.interface';
@@ -54,6 +54,7 @@ const getTransactionGlobalStats = (transactions: Transaction[]) => ({
   manual: transactions.filter((tr) => tr.manual === true).length,
 });
 
+@Injectable()
 class FetchGlobalStatsUseCase {
   private readonly logger = new Logger(FetchGlobalStatsUseCase.name);
 

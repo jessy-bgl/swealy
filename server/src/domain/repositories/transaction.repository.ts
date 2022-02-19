@@ -21,13 +21,15 @@ interface ICreateManualTransactionDTO {
   description?: string;
 }
 
-interface ITransactionRepository {
-  fetch(): Promise<Transaction[]>;
-  fetchLastDcaAutoTransaction(dcaId: string): Promise<Transaction>;
-  create(createTransactionDTO: ICreateTransactionDTO): Promise<Transaction>;
-  delete(id: string): Promise<Transaction>;
-  deleteByDcaId(dcaId: string): Promise<void>;
-  deleteByDcaIds(dcaIds: string[]): Promise<void>;
+abstract class ITransactionRepository {
+  abstract fetch(): Promise<Transaction[]>;
+  abstract fetchLastDcaAutoTransaction(dcaId: string): Promise<Transaction>;
+  abstract create(
+    createTransactionDTO: ICreateTransactionDTO,
+  ): Promise<Transaction>;
+  abstract delete(id: string): Promise<Transaction>;
+  abstract deleteByDcaId(dcaId: string): Promise<void>;
+  abstract deleteByDcaIds(dcaIds: string[]): Promise<void>;
 }
 
 export {

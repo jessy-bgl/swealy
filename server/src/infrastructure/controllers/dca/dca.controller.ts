@@ -2,7 +2,6 @@ import {
   Body,
   Controller,
   Post,
-  Inject,
   Get,
   Param,
   Put,
@@ -15,9 +14,6 @@ import {
   ApiBody,
   ApiParam,
 } from '@nestjs/swagger';
-
-import { UseCaseProxy } from '../../../infrastructure/usecases-proxy/usecases-proxy';
-import { UsecasesProxyModule } from '../../../infrastructure/usecases-proxy/usecases-proxy.module';
 
 import { CreateDcaDTO, UpdateDcaDTO, UpdateDcaStatusDTO } from './dca.dto';
 import { DcaPresenter } from '../../../usecases/dca/dca.presenter';
@@ -34,29 +30,24 @@ import { DeleteDcaUseCase } from '../../../usecases/dca/delete-dca.usecase';
 @ApiExtraModels(CreateDcaDTO, UpdateDcaDTO, DcaPresenter)
 class DcaController {
   constructor(
-    @Inject(UsecasesProxyModule.FETCH_DCA_USECASE_PROXY)
-    private readonly fetchDcaUseCase: UseCaseProxy<FetchDcaUseCase>,
-    @Inject(UsecasesProxyModule.CREATE_DCA_USECASE_PROXY)
-    private readonly createDcaUsecase: UseCaseProxy<CreateDcaUseCase>,
-    @Inject(UsecasesProxyModule.UPDATE_DCA_USECASE_PROXY)
-    private readonly updateDcaUsecase: UseCaseProxy<UpdateDcaUseCase>,
-    @Inject(UsecasesProxyModule.UPDATE_DCA_STATUS_USECASE_PROXY)
-    private readonly updateDcaStatusUsecase: UseCaseProxy<UpdateDcaStatusUseCase>,
-    @Inject(UsecasesProxyModule.DELETE_DCA_USECASE_PROXY)
-    private readonly deleteDcaUsecase: UseCaseProxy<DeleteDcaUseCase>,
+    private readonly fetchDcaUseCase: FetchDcaUseCase,
+    private readonly createDcaUsecase: CreateDcaUseCase,
+    private readonly updateDcaUsecase: UpdateDcaUseCase,
+    private readonly updateDcaStatusUsecase: UpdateDcaStatusUseCase,
+    private readonly deleteDcaUsecase: DeleteDcaUseCase,
   ) {}
 
   @Get()
   @ApiResponse({ status: 200, type: DcaPresenter, isArray: true })
   fetchDca(): Promise<DcaPresenter[]> {
-    return this.fetchDcaUseCase.getInstance().execute();
+    return this.fetchDcaUseCase.execute();
   }
 
   @Post()
   @ApiBody({ type: CreateDcaDTO })
   @ApiResponse({ status: 201, type: DcaPresenter })
   createDca(@Body() createDcaDTO: CreateDcaDTO): Promise<DcaPresenter> {
-    return this.createDcaUsecase.getInstance().execute(createDcaDTO);
+    return this.createDcaUsecase.execute(createDcaDTO);
   }
 
   @Put(':id')
@@ -67,7 +58,7 @@ class DcaController {
     @Param('id') id: string,
     @Body() updateDcaDTO: UpdateDcaDTO,
   ): Promise<DcaPresenter> {
-    return this.updateDcaUsecase.getInstance().execute(id, updateDcaDTO);
+    return this.updateDcaUsecase.execute(id, updateDcaDTO);
   }
 
   @Put(':id/status')
@@ -78,16 +69,14 @@ class DcaController {
     @Param('id') id: string,
     @Body() updateDcaStatusDTO: UpdateDcaStatusDTO,
   ): Promise<DcaPresenter> {
-    return this.updateDcaStatusUsecase
-      .getInstance()
-      .execute(id, updateDcaStatusDTO);
+    return this.updateDcaStatusUsecase.execute(id, updateDcaStatusDTO);
   }
 
   @Delete(':id')
   @ApiParam({ name: 'id', type: String })
   @ApiResponse({ status: 200, type: DcaPresenter })
   deleteDca(@Param('id') id: string): Promise<DcaPresenter> {
-    return this.deleteDcaUsecase.getInstance().execute(id);
+    return this.deleteDcaUsecase.execute(id);
   }
 }
 

@@ -1,8 +1,11 @@
+import { Injectable } from '@nestjs/common';
+
 import { ITransactionRepository } from '../../domain/repositories/transaction.repository';
 import { IDcaRepository } from '../../domain/repositories/dca.repository.interface';
 import { IExchangeDbRepository } from '../../domain/repositories/exchange-db.repository';
 import { ExchangePresenter } from './exchange.presenter';
 
+@Injectable()
 class DeleteExchangeUseCase {
   constructor(
     private readonly exchangeDbRepository: IExchangeDbRepository,

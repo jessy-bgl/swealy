@@ -3,18 +3,20 @@ import { ScheduleModule } from '@nestjs/schedule';
 
 import { HttpCustomModule } from './infrastructure/config/axios/http.module';
 import { DatabaseModule } from './infrastructure/config/mongoose/database.module';
-import { ControllersModule } from './infrastructure/controllers/controllers.module';
-import { UsecasesProxyModule } from './infrastructure/usecases-proxy/usecases-proxy.module';
 import { ServicesModule } from './infrastructure/services/services.module';
+import { ExchangeModule } from './infrastructure/ioc/exchange.module';
+import { DcaModule } from './infrastructure/ioc/dca.module';
+import { TransactionModule } from './infrastructure/ioc/transaction.module';
 
 @Module({
   imports: [
     ScheduleModule.forRoot(),
     DatabaseModule,
     HttpCustomModule,
-    UsecasesProxyModule,
-    ControllersModule,
     ServicesModule,
+    ExchangeModule,
+    DcaModule,
+    TransactionModule,
   ],
   controllers: [],
   providers: [],

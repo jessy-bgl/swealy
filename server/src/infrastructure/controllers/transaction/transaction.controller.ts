@@ -1,12 +1,4 @@
-import {
-  Body,
-  Controller,
-  Post,
-  Inject,
-  Get,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Body, Controller, Post, Get, Param, Delete } from '@nestjs/common';
 import {
   ApiBody,
   ApiExtraModels,
@@ -14,9 +6,6 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-
-import { UseCaseProxy } from '../../../infrastructure/usecases-proxy/usecases-proxy';
-import { UsecasesProxyModule } from '../../../infrastructure/usecases-proxy/usecases-proxy.module';
 
 import { CreateTransactionUseCase } from '../../../usecases/transaction/create-transaction.usecase';
 import { DeleteTransactionUseCase } from '../../../usecases/transaction/delete-transaction.usecase';
@@ -33,18 +22,15 @@ import {
 @ApiExtraModels(CreateTransactionDTO, TransactionPresenter)
 class TransactionController {
   constructor(
-    @Inject(UsecasesProxyModule.FETCH_TRANSACTION_USECASE_PROXY)
-    private readonly fetchTransactionUsecase: UseCaseProxy<FetchTransactionUseCase>,
-    @Inject(UsecasesProxyModule.CREATE_TRANSACTION_USECASE_PROXY)
-    private readonly createTransactionUsecase: UseCaseProxy<CreateTransactionUseCase>,
-    @Inject(UsecasesProxyModule.DELETE_TRANSACTION_USECASE_PROXY)
-    private readonly deleteTransactionUsecase: UseCaseProxy<DeleteTransactionUseCase>,
+    private readonly fetchTransactionUsecase: FetchTransactionUseCase,
+    private readonly createTransactionUsecase: CreateTransactionUseCase,
+    private readonly deleteTransactionUsecase: DeleteTransactionUseCase,
   ) {}
 
   @Get()
   @ApiResponse({ status: 200, type: TransactionPresenter, isArray: true })
   fetchTransaction(): Promise<TransactionPresenter[]> {
-    return this.fetchTransactionUsecase.getInstance().execute();
+    return this.fetchTransactionUsecase.execute();
   }
 
   @Post()
@@ -54,16 +40,14 @@ class TransactionController {
     @Body()
     createTransactionDTO: CreateTransactionDTO | CreateManualTransactionDTO,
   ): Promise<TransactionPresenter> {
-    return this.createTransactionUsecase
-      .getInstance()
-      .execute(createTransactionDTO);
+    return this.createTransactionUsecase.execute(createTransactionDTO);
   }
 
   @Delete(':id')
   @ApiParam({ name: 'id', type: String })
   @ApiResponse({ status: 200, type: TransactionPresenter })
   deleteTransaction(@Param('id') id: string): Promise<TransactionPresenter> {
-    return this.deleteTransactionUsecase.getInstance().execute(id);
+    return this.deleteTransactionUsecase.execute(id);
   }
 }
 

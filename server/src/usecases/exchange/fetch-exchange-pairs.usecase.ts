@@ -1,7 +1,10 @@
+import { Injectable } from '@nestjs/common';
+
 import { IExchangeApiRepository } from '../../domain/repositories/exchange-api.repository';
 import { IExchangeDbRepository } from '../../domain/repositories/exchange-db.repository';
 
-class PairsExchangeApiKeyUseCase {
+@Injectable()
+class FetchExchangePairsUseCase {
   constructor(
     private readonly exchangeDbRepository: IExchangeDbRepository,
     private readonly exchangeApiRepository: IExchangeApiRepository,
@@ -16,4 +19,4 @@ class PairsExchangeApiKeyUseCase {
   };
 }
 
-export { PairsExchangeApiKeyUseCase };
+export { FetchExchangePairsUseCase };

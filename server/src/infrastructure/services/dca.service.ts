@@ -1,20 +1,20 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 
-import { DcaRepository } from '../repositories/dca.repository';
-import { TransactionRepository } from '../repositories/transaction.repository';
-import { ExchangeApiRepository } from '../repositories/exchange-api.repository';
-import { CreateOrderUseCase } from '../../usecases/order/create-order.usecase';
 import { DcaStatusEnum } from '../../domain/models/dca';
+import { IDcaRepository } from '../../domain/repositories/dca.repository.interface';
+import { ITransactionRepository } from '../../domain/repositories/transaction.repository';
+import { IExchangeApiRepository } from '../../domain/repositories/exchange-api.repository';
+import { CreateOrderUseCase } from '../../usecases/order/create-order.usecase';
 
 @Injectable()
 export class DcaService {
   private readonly logger = new Logger(DcaService.name);
 
   constructor(
-    private readonly dcaRepository: DcaRepository,
-    private readonly transactionRepository: TransactionRepository,
-    private readonly exchangeApiRepository: ExchangeApiRepository,
+    private readonly dcaRepository: IDcaRepository,
+    private readonly transactionRepository: ITransactionRepository,
+    private readonly exchangeApiRepository: IExchangeApiRepository,
   ) {}
 
   @Cron('00 00 * * * *')

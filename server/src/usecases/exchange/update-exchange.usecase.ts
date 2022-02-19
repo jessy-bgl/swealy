@@ -1,9 +1,12 @@
+import { Injectable } from '@nestjs/common';
+
 import {
   IExchangeDbRepository,
   IUpdateExchangeDTO,
 } from '../../domain/repositories/exchange-db.repository';
 import { ExchangePresenter } from './exchange.presenter';
 
+@Injectable()
 class UpdateExchangeUseCase {
   constructor(private readonly exchangeDbRepository: IExchangeDbRepository) {}
 

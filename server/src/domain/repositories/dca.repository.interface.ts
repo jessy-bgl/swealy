@@ -19,14 +19,17 @@ interface IUpdateDcaStatusDTO {
   status: DcaStatusEnum;
 }
 
-interface IDcaRepository {
-  fetch(): Promise<Dca[]>;
-  create(createDcaDTO: ICreateDcaDTO): Promise<Dca>;
-  update(id: string, updateDcaDTO: IUpdateDcaDTO): Promise<Dca>;
-  updateStatus(id: string, status: IUpdateDcaStatusDTO): Promise<Dca>;
-  delete(id: string): Promise<Dca>;
-  deleteByExchangeId(exchangeId: string): Promise<Dca[]>;
-  incSuccessfulTransactionsCounter(id: string, value: number): Promise<void>;
+abstract class IDcaRepository {
+  abstract fetch(): Promise<Dca[]>;
+  abstract create(createDcaDTO: ICreateDcaDTO): Promise<Dca>;
+  abstract update(id: string, updateDcaDTO: IUpdateDcaDTO): Promise<Dca>;
+  abstract updateStatus(id: string, status: IUpdateDcaStatusDTO): Promise<Dca>;
+  abstract delete(id: string): Promise<Dca>;
+  abstract deleteByExchangeId(exchangeId: string): Promise<Dca[]>;
+  abstract incSuccessfulTransactionsCounter(
+    id: string,
+    value: number,
+  ): Promise<void>;
 }
 
 export { IDcaRepository, ICreateDcaDTO, IUpdateDcaDTO, IUpdateDcaStatusDTO };

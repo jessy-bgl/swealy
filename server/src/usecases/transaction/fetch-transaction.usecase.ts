@@ -1,6 +1,9 @@
+import { Injectable } from '@nestjs/common';
+
 import { ITransactionRepository } from '../../domain/repositories/transaction.repository';
 import { TransactionPresenter } from './transaction.presenter';
 
+@Injectable()
 class FetchTransactionUseCase {
   constructor(private readonly transactionRepository: ITransactionRepository) {}
 

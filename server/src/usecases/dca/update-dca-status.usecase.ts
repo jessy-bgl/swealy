@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common';
+
 import { DcaStatusEnum } from '../../domain/models/dca';
 import {
   IDcaRepository,
@@ -6,6 +8,7 @@ import {
 import { DcaPresenter } from './dca.presenter';
 import { computeNextDcaTransactionDatetime } from './utils';
 
+@Injectable()
 class UpdateDcaStatusUseCase {
   constructor(private readonly dcaRepository: IDcaRepository) {}
 

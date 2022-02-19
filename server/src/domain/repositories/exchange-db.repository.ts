@@ -15,12 +15,15 @@ interface IUpdateExchangeDTO {
   subaccountName?: string;
 }
 
-interface IExchangeDbRepository {
-  fetch(): Promise<Exchange[]>;
-  fetchOne(id: string): Promise<Exchange>;
-  create(createExchangeDTO: ICreateExchangeDTO): Promise<Exchange>;
-  update(id: string, updateExchangeDTO: IUpdateExchangeDTO): Promise<Exchange>;
-  delete(id: string): Promise<Exchange>;
+abstract class IExchangeDbRepository {
+  abstract fetch(): Promise<Exchange[]>;
+  abstract fetchOne(id: string): Promise<Exchange>;
+  abstract create(createExchangeDTO: ICreateExchangeDTO): Promise<Exchange>;
+  abstract update(
+    id: string,
+    updateExchangeDTO: IUpdateExchangeDTO,
+  ): Promise<Exchange>;
+  abstract delete(id: string): Promise<Exchange>;
 }
 
 export { IExchangeDbRepository, ICreateExchangeDTO, IUpdateExchangeDTO };
