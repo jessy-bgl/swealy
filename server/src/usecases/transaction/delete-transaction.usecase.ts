@@ -1,7 +1,10 @@
+import { Injectable } from '@nestjs/common';
+
 import { IDcaRepository } from '../../domain/repositories/dca.repository.interface';
 import { ITransactionRepository } from '../../domain/repositories/transaction.repository';
 import { TransactionPresenter } from './transaction.presenter';
 
+@Injectable()
 class DeleteTransactionUseCase {
   constructor(
     private readonly transactionRepository: ITransactionRepository,

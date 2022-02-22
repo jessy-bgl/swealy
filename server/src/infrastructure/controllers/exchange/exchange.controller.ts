@@ -2,7 +2,6 @@ import {
   Body,
   Controller,
   Post,
-  Inject,
   Get,
   Param,
   Put,
@@ -17,14 +16,12 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 
-import { UsecasesProxyModule } from '../../usecases-proxy/usecases-proxy.module';
 import { VerifyExchangeApiKeyUseCase } from '../../../usecases/exchange/verify-exchange.usecase';
 import { FetchExchangesUseCase } from '../../../usecases/exchange/fetch-exchanges.usecase';
 import { AddExchangeUseCase } from '../../../usecases/exchange/add-exchange.usecase';
-import { UseCaseProxy } from '../../usecases-proxy/usecases-proxy';
 import { UpdateExchangeUseCase } from '../../../usecases/exchange/update-exchange.usecase';
 import { DeleteExchangeUseCase } from '../../../usecases/exchange/delete-exchange.usecase';
-import { PairsExchangeApiKeyUseCase } from '../../../usecases/exchange/fetch-exchange-pairs.usecase';
+import { FetchExchangePairsUseCase } from '../../../usecases/exchange/fetch-exchange-pairs.usecase';
 
 import { CreateExchangeDTO, UpdateExchangeDTO } from './exchange.dto';
 import {
@@ -39,24 +36,18 @@ import { IPairResult } from '../../../domain/repositories/types';
 @ApiExtraModels(CreateExchangeDTO, UpdateExchangeDTO, ExchangePresenter)
 class ExchangeController {
   constructor(
-    @Inject(UsecasesProxyModule.FETCH_EXCHANGES_USECASE_PROXY)
-    private readonly fetchExchangesUsecase: UseCaseProxy<FetchExchangesUseCase>,
-    @Inject(UsecasesProxyModule.ADD_EXCHANGE_USECASE_PROXY)
-    private readonly addExchangeUsecase: UseCaseProxy<AddExchangeUseCase>,
-    @Inject(UsecasesProxyModule.UPDATE_EXCHANGE_USECASE_PROXY)
-    private readonly updateExchangeUsecase: UseCaseProxy<UpdateExchangeUseCase>,
-    @Inject(UsecasesProxyModule.DELETE_EXCHANGE_USECASE_PROXY)
-    private readonly deleteExchangeUsecase: UseCaseProxy<DeleteExchangeUseCase>,
-    @Inject(UsecasesProxyModule.VERIFY_EXCHANGE_USECASE_PROXY)
-    private readonly verifyExchangeApiKeyUsecase: UseCaseProxy<VerifyExchangeApiKeyUseCase>,
-    @Inject(UsecasesProxyModule.GET_MARKETS_EXCHANGE_USECASE_PROXY)
-    private readonly getPairsExchangeApiKeyUsecase: UseCaseProxy<PairsExchangeApiKeyUseCase>,
+    private readonly fetchExchangesUsecase: FetchExchangesUseCase,
+    private readonly addExchangeUsecase: AddExchangeUseCase,
+    private readonly updateExchangeUsecase: UpdateExchangeUseCase,
+    private readonly deleteExchangeUsecase: DeleteExchangeUseCase,
+    private readonly verifyExchangeApiKeyUsecase: VerifyExchangeApiKeyUseCase,
+    private readonly fetchExchangePairsUseCase: FetchExchangePairsUseCase,
   ) {}
 
   @Get()
   @ApiResponse({ status: 200, type: ExchangePresenter, isArray: true })
   fetchExchanges(): Promise<ExchangePresenter[]> {
-    return this.fetchExchangesUsecase.getInstance().execute();
+    return this.fetchExchangesUsecase.execute();
   }
 
   @Post()
@@ -65,7 +56,7 @@ class ExchangeController {
   addExchange(
     @Body() createExchangeDTO: CreateExchangeDTO,
   ): Promise<ExchangePresenter> {
-    return this.addExchangeUsecase.getInstance().execute(createExchangeDTO);
+    return this.addExchangeUsecase.execute(createExchangeDTO);
   }
 
   @Put(':id')
@@ -76,16 +67,14 @@ class ExchangeController {
     @Param('id') id: string,
     @Body() updateExchangeDTO: UpdateExchangeDTO,
   ): Promise<ExchangePresenter> {
-    return this.updateExchangeUsecase
-      .getInstance()
-      .execute(id, updateExchangeDTO);
+    return this.updateExchangeUsecase.execute(id, updateExchangeDTO);
   }
 
   @Delete(':id')
   @ApiParam({ name: 'id', type: String })
   @ApiResponse({ status: 200, type: ExchangePresenter })
   deleteExchange(@Param('id') id: string): Promise<ExchangePresenter> {
-    return this.deleteExchangeUsecase.getInstance().execute(id);
+    return this.deleteExchangeUsecase.execute(id);
   }
 
   @Get(':id/check')
@@ -93,14 +82,14 @@ class ExchangeController {
   @ApiParam({ name: 'id', type: String })
   @ApiResponse({ status: 204, description: 'Success' })
   checkApiKeyValidity(@Param('id') id: string): Promise<void> {
-    return this.verifyExchangeApiKeyUsecase.getInstance().execute(id);
+    return this.verifyExchangeApiKeyUsecase.execute(id);
   }
 
   @Get(':id/pairs')
   @ApiParam({ name: 'id', type: String })
   @ApiResponse({ status: 200, type: PairsResult, isArray: true })
   getPairs(@Param('id') id: string): Promise<IPairResult[]> {
-    return this.getPairsExchangeApiKeyUsecase.getInstance().execute(id);
+    return this.fetchExchangePairsUseCase.execute(id);
   }
 }
 

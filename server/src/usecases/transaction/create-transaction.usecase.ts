@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common';
+
 import { IDcaRepository } from '../../domain/repositories/dca.repository.interface';
 import {
   ICreateManualTransactionDTO,
@@ -12,6 +14,7 @@ function isAutoTransaction(
   return (<ICreateTransactionDTO>transaction).amount !== undefined;
 }
 
+@Injectable()
 class CreateTransactionUseCase {
   constructor(
     private readonly transactionRepository: ITransactionRepository,

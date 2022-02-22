@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common';
+
 import {
   ICreateDcaDTO,
   IDcaRepository,
@@ -5,6 +7,7 @@ import {
 import { DcaPresenter } from './dca.presenter';
 import { computeNextDcaTransactionDatetime } from './utils';
 
+@Injectable()
 class CreateDcaUseCase {
   constructor(private readonly dcaRepository: IDcaRepository) {}
 

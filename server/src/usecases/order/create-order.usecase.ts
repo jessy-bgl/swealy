@@ -1,4 +1,4 @@
-import { Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 
 import { Dca } from '../../domain/models/dca';
 import { CreateTransactionDTO } from '../../infrastructure/controllers/transaction/transaction.dto';
@@ -6,6 +6,7 @@ import { IDcaRepository } from '../../domain/repositories/dca.repository.interfa
 import { ITransactionRepository } from '../../domain/repositories/transaction.repository';
 import { IExchangeApiRepository } from '../../domain/repositories/exchange-api.repository';
 
+@Injectable()
 class CreateOrderUseCase {
   private readonly logger = new Logger(CreateOrderUseCase.name);
 
