@@ -16,6 +16,7 @@ import { ExchangeDbRepository } from '../repositories/exchange-db.repository';
 import { ExchangeApiRepository } from '../repositories/exchange-api.repository';
 import { DcaRepository } from '../repositories/dca.repository';
 import { TransactionRepository } from '../repositories/transaction.repository';
+import { FtxApiRepository } from '../repositories/ftx/ftx-api.repository';
 
 import { AddExchangeUseCase } from '../../usecases/exchange/add-exchange.usecase';
 import { DeleteExchangeUseCase } from '../../usecases/exchange/delete-exchange.usecase';
@@ -41,6 +42,7 @@ import { ExchangeController } from '../controllers/exchange/exchange.controller'
     { provide: IExchangeApiRepository, useClass: ExchangeApiRepository },
     { provide: IDcaRepository, useClass: DcaRepository },
     { provide: ITransactionRepository, useClass: TransactionRepository },
+    FtxApiRepository,
     AddExchangeUseCase,
     DeleteExchangeUseCase,
     UpdateExchangeUseCase,

@@ -1,20 +1,17 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
+import { StatisticsController } from '../controllers/statistics/statistics.controller';
+import { FetchGlobalStatsUseCase } from '../../usecases/statistics/fetch-global-statistics.usecase';
+
 import { IDcaRepository } from '../../domain/repositories/dca.repository.interface';
-import { IExchangeApiRepository } from '../../domain/repositories/exchange-api.repository';
 import { ITransactionRepository } from '../../domain/repositories/transaction.repository';
+
+import { DcaRepository } from '../repositories/dca.repository';
+import { TransactionRepository } from '../repositories/transaction.repository';
 
 import { Dca, DcaSchema } from '../entities/dca.entity';
 import { Transaction, TransactionSchema } from '../entities/transaction.entity';
-
-import { DcaRepository } from '../repositories/dca.repository';
-import { ExchangeApiRepository } from '../repositories/exchange-api.repository';
-import { TransactionRepository } from '../repositories/transaction.repository';
-import { FtxApiRepository } from '../repositories/ftx/ftx-api.repository';
-
-import { HttpCustomModule } from '../config/axios/http.module';
-import { DcaService } from './dca.service';
 
 @Module({
   imports: [
@@ -22,14 +19,12 @@ import { DcaService } from './dca.service';
       { name: Dca.name, schema: DcaSchema },
       { name: Transaction.name, schema: TransactionSchema },
     ]),
-    HttpCustomModule,
   ],
+  controllers: [StatisticsController],
   providers: [
-    DcaService,
+    FetchGlobalStatsUseCase,
     { provide: IDcaRepository, useClass: DcaRepository },
     { provide: ITransactionRepository, useClass: TransactionRepository },
-    { provide: IExchangeApiRepository, useClass: ExchangeApiRepository },
-    FtxApiRepository,
   ],
 })
-export class ServicesModule {}
+export class StatisticsModule {}

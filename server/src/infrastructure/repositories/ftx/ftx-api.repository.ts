@@ -40,8 +40,10 @@ const handleFtxApiError = (e: any) => {
 };
 
 @Injectable()
-class FtxApiRepository implements Partial<IExchangeApiRepository> {
-  static getAuthRequestHeaders(
+class FtxApiRepository implements IExchangeApiRepository {
+  constructor(private readonly httpService: HttpService) {}
+
+  private getAuthRequestHeaders(
     httpMethod: HttpMethodsEnum,
     endpoint: string,
     params: IExchangeAuthParams,
@@ -67,12 +69,9 @@ class FtxApiRepository implements Partial<IExchangeApiRepository> {
     };
   }
 
-  static async checkApiKeyValidity(
-    httpService: HttpService,
-    exchange: Exchange,
-  ): Promise<void> {
+  async checkApiKeyValidity(exchange: Exchange): Promise<void> {
     try {
-      const res = await httpService.get(`${FTX_API_BASE_URL}/account`, {
+      const res = await this.httpService.get(`${FTX_API_BASE_URL}/account`, {
         headers: this.getAuthRequestHeaders(
           HttpMethodsEnum.GET,
           '/api/account',
@@ -86,13 +85,10 @@ class FtxApiRepository implements Partial<IExchangeApiRepository> {
     }
   }
 
-  static async createSpotOrder(
-    httpService: HttpService,
-    dca: Dca,
-  ): Promise<IOrderResult> {
+  async createSpotOrder(dca: Dca): Promise<IOrderResult> {
     try {
       const currentPrice = await this.getSpotPairCurrentPrice(
-        httpService,
+        this.httpService,
         dca.pair,
       );
       const requestBody: IFtxApiPlaceOrderBody = {
@@ -102,7 +98,7 @@ class FtxApiRepository implements Partial<IExchangeApiRepository> {
         price: null, // null because it is a market order
         size: dca.amount / currentPrice,
       };
-      const res = await httpService.post(
+      const res = await this.httpService.post(
         `${FTX_API_BASE_URL}/orders`,
         requestBody,
         {
@@ -130,11 +126,9 @@ class FtxApiRepository implements Partial<IExchangeApiRepository> {
     }
   }
 
-  static async getAvailableSpotPairs(
-    httpService: HttpService,
-  ): Promise<IPairResult[]> {
+  async getAvailableSpotPairs(): Promise<IPairResult[]> {
     try {
-      const res = await httpService.get<IFtxApiResponse<IPairResult[]>>(
+      const res = await this.httpService.get<IFtxApiResponse<IPairResult[]>>(
         `${FTX_API_BASE_URL}/markets`,
       );
       if (!res.data || !res.data.success)
@@ -153,7 +147,7 @@ class FtxApiRepository implements Partial<IExchangeApiRepository> {
     }
   }
 
-  static async getSpotPairCurrentPrice(
+  private async getSpotPairCurrentPrice(
     httpService: HttpService,
     pair: string,
   ): Promise<number> {

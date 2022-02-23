@@ -7,6 +7,7 @@ import { ServicesModule } from './infrastructure/services/services.module';
 import { ExchangeModule } from './infrastructure/ioc/exchange.module';
 import { DcaModule } from './infrastructure/ioc/dca.module';
 import { TransactionModule } from './infrastructure/ioc/transaction.module';
+import { StatisticsModule } from './infrastructure/ioc/statistics.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { TransactionModule } from './infrastructure/ioc/transaction.module';
     ExchangeModule,
     DcaModule,
     TransactionModule,
+    StatisticsModule,
   ],
   controllers: [],
   providers: [],

@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { HttpService } from 'nestjs-http-promise';
 
 import { Exchange } from '../../domain/models/exchange';
 import { Dca } from '../../domain/models/dca';
@@ -17,12 +16,12 @@ interface IExchangeAuthParams {
 
 @Injectable()
 class ExchangeApiRepository implements IExchangeApiRepository {
-  constructor(private readonly httpService: HttpService) {}
+  constructor(private readonly ftxApiRepository: FtxApiRepository) {}
 
   checkApiKeyValidity(exchange: Exchange): Promise<void> {
     switch (exchange.name) {
       case ExchangesEnum.FTX: {
-        return FtxApiRepository.checkApiKeyValidity(this.httpService, exchange);
+        return this.ftxApiRepository.checkApiKeyValidity(exchange);
       }
       default: {
         break;
@@ -33,7 +32,7 @@ class ExchangeApiRepository implements IExchangeApiRepository {
   createSpotOrder(dca: Dca): Promise<IOrderResult> {
     switch (dca.exchange.name) {
       case ExchangesEnum.FTX: {
-        return FtxApiRepository.createSpotOrder(this.httpService, dca);
+        return this.ftxApiRepository.createSpotOrder(dca);
       }
       default: {
         break;
@@ -44,7 +43,7 @@ class ExchangeApiRepository implements IExchangeApiRepository {
   getAvailableSpotPairs(exchange: Exchange): Promise<IPairResult[]> {
     switch (exchange.name) {
       case ExchangesEnum.FTX: {
-        return FtxApiRepository.getAvailableSpotPairs(this.httpService);
+        return this.ftxApiRepository.getAvailableSpotPairs();
       }
       default: {
         break;
