@@ -1,19 +1,10 @@
 enum ExchangesEnum {
-  // BINANCE = "binance",
+  BINANCE = "binance",
   FTX = "ftx",
 }
 
-enum PairTypesEnum {
-  SPOT = "spot",
-  FUTURE = "future",
-}
-
 interface Pair {
-  name: string;
-  type: PairTypesEnum;
-  price: number;
-  priceIncrement: number;
-  sizeIncrement: number;
+  name: string; // contains a '/' separator between base and quote assets
 }
 
 interface Exchange {
