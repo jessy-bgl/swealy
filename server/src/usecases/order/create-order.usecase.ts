@@ -5,6 +5,7 @@ import { CreateTransactionDTO } from '../../infrastructure/controllers/transacti
 import { IDcaRepository } from '../../domain/repositories/dca.repository.interface';
 import { ITransactionRepository } from '../../domain/repositories/transaction.repository';
 import { IExchangeApiRepository } from '../../domain/repositories/exchange-api.repository';
+import { OrderTypesEnum } from '../../domain/models/transaction';
 
 @Injectable()
 class CreateOrderUseCase {
@@ -26,7 +27,7 @@ class CreateOrderUseCase {
       createTransactionDto.success = true;
       createTransactionDto.price = order.price;
       createTransactionDto.size = order.size;
-      createTransactionDto.type = order.type;
+      createTransactionDto.type = OrderTypesEnum.MARKET;
       const pairSplitted = dca.pair.split('/');
       const successLog =
         `Spot order success : ${order.size} ${pairSplitted[0]} ` +
@@ -35,7 +36,8 @@ class CreateOrderUseCase {
       await this.transactionRepository.create(createTransactionDto);
       await this.dcaRepository.incSuccessfulTransactionsCounter(dca.id, 1);
     } catch (e) {
-      this.logger.error(e.message);
+      if (e.response) this.logger.error(e.response.error);
+      else this.logger.error(e.message);
       createTransactionDto.success = false;
       createTransactionDto.description = e.message;
       await this.transactionRepository.create(createTransactionDto);
