@@ -22,8 +22,48 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push client
-        id: docker_build_client
+      - name: Build and push latest client
+        if: ${{ github.event.release.prerelease }}
+        uses: docker/build-push-action@v2
+        with:
+          context: client
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ghcr.io/jessy-bgl/swealy-client:latest
+
+      - name: Build and push latest api
+        if: ${{ github.event.release.prerelease }}
+        uses: docker/build-push-action@v2
+        with:
+          context: server
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ghcr.io/jessy-bgl/swealy-api:latest
+
+      - name: Build and push latest database
+        if: ${{ github.event.release.prerelease }}
+        uses: docker/build-push-action@v2
+        with:
+          context: database
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ghcr.io/jessy-bgl/swealy-db:latest
+
+      - name: Build and push latest proxy
+        if: ${{ github.event.release.prerelease }}
+        uses: docker/build-push-action@v2
+        with:
+          context: proxy
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ghcr.io/jessy-bgl/swealy-proxy:latest
+
+      - name: Build and push stable client
+        if: ${{ !github.event.release.prerelease }}
         uses: docker/build-push-action@v2
         with:
           context: client
@@ -32,8 +72,8 @@ jobs:
           tags: |
             ghcr.io/jessy-bgl/swealy-client:stable
 
-      - name: Build and push api
-        id: docker_build_api
+      - name: Build and push stable api
+        if: ${{ !github.event.release.prerelease }}
         uses: docker/build-push-action@v2
         with:
           context: server
@@ -42,8 +82,8 @@ jobs:
           tags: |
             ghcr.io/jessy-bgl/swealy-api:stable
 
-      - name: Build and push database
-        id: docker_build_database
+      - name: Build and push stable database
+        if: ${{ !github.event.release.prerelease }}
         uses: docker/build-push-action@v2
         with:
           context: database
@@ -52,8 +92,8 @@ jobs:
           tags: |
             ghcr.io/jessy-bgl/swealy-db:stable
 
-      - name: Build and push proxy
-        id: docker_build_proxy
+      - name: Build and push stable proxy
+        if: ${{ !github.event.release.prerelease }}
         uses: docker/build-push-action@v2
         with:
           context: proxy
