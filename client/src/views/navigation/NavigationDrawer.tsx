@@ -111,7 +111,6 @@ export default function NavigationDrawer(props: Props) {
           selected={selectedItem === "/settings"}
         />
         <ListItemWithIcon
-          disabled
           name={t("about")}
           muiIcon={<AboutIcon />}
           onClick={() => handleClickItem("/about")}

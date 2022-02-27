@@ -7,6 +7,7 @@ import { Settings } from "../views/settings/Settings";
 import { DcaStatusEnum } from "../models/Dca";
 import { Transactions } from "../views/transactions/Transactions";
 import { Dashboard } from "../views/dca/Dashboard";
+import { About } from "../views/about/About";
 
 function Router() {
   const { t } = useTranslation("navigation");
@@ -62,6 +63,10 @@ function Router() {
       <Route
         path="/settings"
         element={<Navigation child={<Settings />} title={t("settings")} />}
+      />
+      <Route
+        path="/about"
+        element={<Navigation child={<About />} title={t("about")} />}
       />
     </Routes>
   );
