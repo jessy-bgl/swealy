@@ -3,13 +3,12 @@ version: "3.4"
 services:
   db:
     container_name: "swealy-db"
+    image: ghcr.io/jessy-bgl/swealy-db:latest
     logging:
       driver: "json-file"
       options:
         max-size: "200k"
         max-file: "5"
-    build:
-      context: ../database
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=root_db!
@@ -21,13 +20,12 @@ services:
 
   api:
     container_name: "swealy-api"
+    image: ghcr.io/jessy-bgl/swealy-api:latest
     logging:
       driver: "json-file"
       options:
         max-size: "200k"
         max-file: "5"
-    build:
-      context: ../server
     environment:
       - COOKIE_SECRET=2x4tTxQ7jRHqLRl8bbFYoUADDLbyfcNh
       - JWT_SECRET=De3Y6aKGywtQzWl7c0e4hYslK1lRb85u
@@ -38,26 +36,24 @@ services:
 
   client:
     container_name: "swealy-client"
+    image: ghcr.io/jessy-bgl/swealy-client:latest
     logging:
       driver: "json-file"
       options:
         max-size: "200k"
         max-file: "5"
-    build:
-      context: ../client
     restart: unless-stopped
     depends_on:
       - api
 
   proxy:
     container_name: "swealy-proxy"
+    image: ghcr.io/jessy-bgl/swealy-proxy:latest
     logging:
       driver: "json-file"
       options:
         max-size: "200k"
         max-file: "5"
-    build:
-      context: ../proxy
     restart: unless-stopped
     depends_on:
       - client
