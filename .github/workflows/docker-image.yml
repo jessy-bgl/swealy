@@ -23,7 +23,6 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push latest client
-        if: ${{ github.event.release.prerelease }}
         uses: docker/build-push-action@v2
         with:
           context: client
@@ -33,7 +32,6 @@ jobs:
             ghcr.io/jessy-bgl/swealy-client:latest
 
       - name: Build and push latest api
-        if: ${{ github.event.release.prerelease }}
         uses: docker/build-push-action@v2
         with:
           context: server
@@ -43,7 +41,6 @@ jobs:
             ghcr.io/jessy-bgl/swealy-api:latest
 
       - name: Build and push latest database
-        if: ${{ github.event.release.prerelease }}
         uses: docker/build-push-action@v2
         with:
           context: database
@@ -53,7 +50,6 @@ jobs:
             ghcr.io/jessy-bgl/swealy-db:latest
 
       - name: Build and push latest proxy
-        if: ${{ github.event.release.prerelease }}
         uses: docker/build-push-action@v2
         with:
           context: proxy
