@@ -7,6 +7,7 @@ import settingsFR from "./fr/settings.json";
 import exchangeFR from "./fr/exchange.json";
 import dcaFR from "./fr/dca.json";
 import transactionFR from "./fr/transaction.json";
+import aboutFR from "./fr/about.json";
 
 import commonEN from "./en/common.json";
 import navigationEN from "./en/navigation.json";
@@ -14,6 +15,7 @@ import settingsEN from "./en/settings.json";
 import exchangeEN from "./en/exchange.json";
 import dcaEN from "./en/dca.json";
 import transactionEN from "./en/transaction.json";
+import aboutEN from "./en/about.json";
 
 export const defaultNS = "common";
 
@@ -25,6 +27,7 @@ export const resources = {
     exchange: exchangeFR,
     transaction: transactionFR,
     dca: dcaFR,
+    about: aboutFR,
   },
   en: {
     common: commonEN,
@@ -33,12 +36,21 @@ export const resources = {
     exchange: exchangeEN,
     transaction: transactionEN,
     dca: dcaEN,
+    about: aboutEN,
   },
 };
 
 i18n.use(initReactI18next).init({
   lng: "fr",
-  ns: ["common", "navigation", "settings", "exchange", "dca", "transaction"],
+  ns: [
+    "common",
+    "navigation",
+    "settings",
+    "exchange",
+    "dca",
+    "transaction",
+    "about",
+  ],
   defaultNS,
   resources,
 });
