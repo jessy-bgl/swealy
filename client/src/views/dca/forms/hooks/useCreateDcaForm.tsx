@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import * as yup from "yup";
@@ -22,6 +23,7 @@ const useCreateDcaFirstForm = () => {
 
 const useCreateDcaSecondForm = () => {
   const { t } = useTranslation("dca");
+  const [inputValue, setInputValue] = useState("");
   const schema = yup.object({
     pair: yup.string().required(t("form.requiredField")),
   });
@@ -32,7 +34,7 @@ const useCreateDcaSecondForm = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  return { handleSubmit, errors, isDirty, control };
+  return { handleSubmit, errors, isDirty, control, inputValue, setInputValue };
 };
 
 const useCreateDcaThirdForm = () => {

@@ -1,4 +1,4 @@
-import { Grid, TextField, MenuItem, Button, Skeleton } from "@mui/material";
+import { Grid, TextField, Button, Skeleton, Autocomplete } from "@mui/material";
 import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -22,7 +22,8 @@ const SecondForm = ({
 }: Props) => {
   const { t } = useTranslation("dca");
 
-  const { handleSubmit, control } = useCreateDcaSecondForm();
+  const { handleSubmit, control, inputValue, setInputValue } =
+    useCreateDcaSecondForm();
 
   const { data, isLoading } = useFetchExchangePairs(exchangeId);
 
@@ -47,22 +48,24 @@ const SecondForm = ({
                 field: { onChange, value },
                 fieldState: { error },
               }) => (
-                <TextField
-                  fullWidth
-                  select
-                  label={t("form.pair")}
-                  value={value}
-                  onChange={onChange}
-                  helperText={error?.message}
-                  error={error ? true : false}
+                <Autocomplete
+                  value={value ? value : null}
+                  onChange={(event, newInputValue) => onChange(newInputValue)}
+                  inputValue={inputValue}
+                  onInputChange={(event, newInputValue) => {
+                    setInputValue(newInputValue);
+                  }}
+                  options={data?.map((pair) => pair.name) || []}
                   sx={{ minWidth: FIELD_WIDTH }}
-                >
-                  {data?.map((pair) => (
-                    <MenuItem key={pair.name} value={pair.name}>
-                      {pair.name}
-                    </MenuItem>
-                  ))}
-                </TextField>
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label={t("form.pair")}
+                      helperText={error?.message}
+                      error={error ? true : false}
+                    />
+                  )}
+                />
               )}
             />
           )}
