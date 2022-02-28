@@ -26,7 +26,7 @@ import { FetchExchangePairsUseCase } from '../../../usecases/exchange/fetch-exch
 import { CreateExchangeDTO, UpdateExchangeDTO } from './exchange.dto';
 import {
   ExchangePresenter,
-  PairsResult,
+  PairResult,
 } from '../../../usecases/exchange/exchange.presenter';
 import { IPairResult } from '../../../domain/repositories/types';
 
@@ -87,7 +87,7 @@ class ExchangeController {
 
   @Get(':id/pairs')
   @ApiParam({ name: 'id', type: String })
-  @ApiResponse({ status: 200, type: PairsResult, isArray: true })
+  @ApiResponse({ status: 200, type: PairResult, isArray: true })
   getPairs(@Param('id') id: string): Promise<IPairResult[]> {
     return this.fetchExchangePairsUseCase.execute(id);
   }

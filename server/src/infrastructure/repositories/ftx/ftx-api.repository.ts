@@ -16,12 +16,14 @@ import {
 } from '../../../domain/models/transaction';
 
 import { IExchangeApiRepository } from '../../../domain/repositories/exchange-api.repository';
-import { IExchangeAuthParams } from '../exchange-api.repository';
+
 import {
   IFtxApiResponse,
   IFtxAuthHttpHeaders,
   IFtxApiPlaceOrderBody,
   IFtxPlaceOrderResult,
+  IFtxPairResult,
+  IFtxAuthParams,
 } from './ftx-api.types';
 
 const FTX_API_BASE_URL = 'https://ftx.com/api';
@@ -32,11 +34,15 @@ const handleFtxApiError = (e: any) => {
     throw new HttpException(
       {
         status: e.response.status || 500,
-        error: `FTX API error - ${e.response.data.error}`,
+        error: `FTX API error : ${e.response.data.error}`,
       },
       e.response.status || 500,
     );
   else throw e;
+};
+
+const handleFtxApiSuccessError = (data: IFtxApiResponse<any>) => {
+  if (!data || !data.success) throw new Error(FTX_API_DEFAULT_ERROR);
 };
 
 @Injectable()
@@ -46,7 +52,7 @@ class FtxApiRepository implements IExchangeApiRepository {
   private getAuthRequestHeaders(
     httpMethod: HttpMethodsEnum,
     endpoint: string,
-    params: IExchangeAuthParams,
+    params: IFtxAuthParams,
     body?: string,
   ): IFtxAuthHttpHeaders & AxiosRequestHeaders {
     const { apiKey, apiSecret, subaccountName } = params;
@@ -61,25 +67,27 @@ class FtxApiRepository implements IExchangeApiRepository {
       .update(body ? signature_payload + body : signature_payload)
       .digest('hex');
 
-    return {
+    const res = {
       'FTX-TS': ftx_ts,
       'FTX-KEY': ftx_key,
       'FTX-SIGN': ftx_sign,
-      'FTX-SUBACCOUNT': ftx_subaccount,
     };
+    if (ftx_subaccount) res['FTX-SUBACCOUNT'] = ftx_subaccount;
+    return res;
   }
 
   async checkApiKeyValidity(exchange: Exchange): Promise<void> {
     try {
-      const res = await this.httpService.get(`${FTX_API_BASE_URL}/account`, {
-        headers: this.getAuthRequestHeaders(
-          HttpMethodsEnum.GET,
-          '/api/account',
-          exchange,
-        ),
-      });
-      if (res.data.success === true) return;
-      else throw new Error(FTX_API_DEFAULT_ERROR);
+      const headers = this.getAuthRequestHeaders(
+        HttpMethodsEnum.GET,
+        '/api/account',
+        exchange,
+      );
+      const res = await this.httpService.get<IFtxApiResponse<any>>(
+        `${FTX_API_BASE_URL}/account`,
+        { headers },
+      );
+      handleFtxApiSuccessError(res.data);
     } catch (e) {
       handleFtxApiError(e);
     }
@@ -87,10 +95,7 @@ class FtxApiRepository implements IExchangeApiRepository {
 
   async createSpotOrder(dca: Dca): Promise<IOrderResult> {
     try {
-      const currentPrice = await this.getSpotPairCurrentPrice(
-        this.httpService,
-        dca.pair,
-      );
+      const currentPrice = await this.getSpotPairCurrentPrice(dca.pair);
       const requestBody: IFtxApiPlaceOrderBody = {
         market: dca.pair,
         side: OrderSidesEnum.BUY,
@@ -98,21 +103,17 @@ class FtxApiRepository implements IExchangeApiRepository {
         price: null, // null because it is a market order
         size: dca.amount / currentPrice,
       };
-      const res = await this.httpService.post(
-        `${FTX_API_BASE_URL}/orders`,
-        requestBody,
-        {
-          headers: this.getAuthRequestHeaders(
-            HttpMethodsEnum.POST,
-            '/api/orders',
-            dca.exchange,
-            JSON.stringify(requestBody),
-          ),
-        },
+      const headers = this.getAuthRequestHeaders(
+        HttpMethodsEnum.POST,
+        '/api/orders',
+        dca.exchange,
+        JSON.stringify(requestBody),
       );
-      if (!res.data.success) throw new Error(FTX_API_DEFAULT_ERROR);
-      const { createdAt, size, status, type } = res.data
-        .result as IFtxPlaceOrderResult;
+      const res = await this.httpService.post<
+        IFtxApiResponse<IFtxPlaceOrderResult>
+      >(`${FTX_API_BASE_URL}/orders`, requestBody, { headers });
+      handleFtxApiSuccessError(res.data);
+      const { createdAt, size, status, type } = res.data.result;
       // NB : we don't use the price from the result because it is null as we place a market order
       return {
         datetime: createdAt,
@@ -128,35 +129,26 @@ class FtxApiRepository implements IExchangeApiRepository {
 
   async getAvailableSpotPairs(): Promise<IPairResult[]> {
     try {
-      const res = await this.httpService.get<IFtxApiResponse<IPairResult[]>>(
+      const res = await this.httpService.get<IFtxApiResponse<IFtxPairResult[]>>(
         `${FTX_API_BASE_URL}/markets`,
       );
-      if (!res.data || !res.data.success)
-        throw new Error(FTX_API_DEFAULT_ERROR);
+      handleFtxApiSuccessError(res.data);
       return res.data.result
         .filter((d) => d.type === 'spot')
         .map((d) => ({
           name: d.name,
-          type: d.type,
-          price: d.price,
-          priceIncrement: d.priceIncrement,
-          sizeIncrement: d.sizeIncrement,
         }));
     } catch (e) {
       handleFtxApiError(e);
     }
   }
 
-  private async getSpotPairCurrentPrice(
-    httpService: HttpService,
-    pair: string,
-  ): Promise<number> {
+  private async getSpotPairCurrentPrice(pair: string): Promise<number> {
     try {
-      const res = await httpService.get<IFtxApiResponse<IPairResult>>(
+      const res = await this.httpService.get<IFtxApiResponse<IFtxPairResult>>(
         `${FTX_API_BASE_URL}/markets/${pair}`,
       );
-      if (!res.data || !res.data.success)
-        throw new Error(FTX_API_DEFAULT_ERROR);
+      handleFtxApiSuccessError(res.data);
       return res.data.result.price;
     } catch (e) {
       handleFtxApiError(e);

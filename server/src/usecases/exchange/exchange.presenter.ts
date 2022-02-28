@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IPairResult, PairTypesEnum } from '../../domain/repositories/types';
+import { IPairResult } from '../../domain/repositories/types';
 import { Exchange, ExchangesEnum } from '../../domain/models/exchange';
 
 class ExchangePresenter {
@@ -38,17 +38,9 @@ class ExchangePresenter {
   }
 }
 
-class PairsResult implements IPairResult {
+class PairResult implements IPairResult {
   @ApiProperty({ example: 'BTC/USDT' })
   name: string;
-  @ApiProperty({ enum: PairTypesEnum })
-  type: PairTypesEnum;
-  @ApiProperty()
-  price: number;
-  @ApiProperty()
-  priceIncrement: number;
-  @ApiProperty()
-  sizeIncrement: number;
 }
 
-export { ExchangePresenter, PairsResult };
+export { ExchangePresenter, PairResult };

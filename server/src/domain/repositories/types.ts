@@ -10,27 +10,24 @@ enum PairTypesEnum {
   FUTURE = 'future',
 }
 
-enum OrderStatusEnum {
-  NEW = 'new',
-  OPEN = 'open',
-  CLOSED = 'closed',
-}
+// NB : this depends on the Exchange API
+// enum OrderStatusEnum {
+//   NEW = 'new',
+//   OPEN = 'open',
+//   CLOSED = 'closed',
+// }
 
 interface IPairResult {
-  name: string;
-  type: PairTypesEnum;
-  price: number;
-  priceIncrement: number;
-  sizeIncrement: number;
+  name: string; // NB : '/' separator between base and quote assets is expected
 }
 
 interface IOrderResult {
   datetime: Date;
   price: number;
   size: number;
-  status: OrderStatusEnum;
+  status: string;
   type: OrderTypesEnum;
 }
 
 export type { IPairResult, IOrderResult };
-export { HttpMethodsEnum, PairTypesEnum, OrderStatusEnum };
+export { HttpMethodsEnum, PairTypesEnum };

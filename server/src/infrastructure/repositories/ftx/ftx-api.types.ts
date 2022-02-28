@@ -1,4 +1,4 @@
-import { OrderStatusEnum } from '../../../domain/repositories/types';
+import { PairTypesEnum } from '../../../domain/repositories/types';
 import {
   OrderSidesEnum,
   OrderTypesEnum,
@@ -8,7 +8,13 @@ interface IFtxAuthHttpHeaders {
   'FTX-TS': string;
   'FTX-KEY': string;
   'FTX-SIGN': string;
-  'FTX-SUBACCOUNT': string;
+  'FTX-SUBACCOUNT'?: string;
+}
+
+interface IFtxAuthParams {
+  apiKey: string;
+  apiSecret: string;
+  subaccountName?: string;
 }
 
 interface IFtxApiResponse<T> {
@@ -28,8 +34,16 @@ interface IFtxPlaceOrderResult {
   createdAt: Date;
   price: number;
   size: number;
-  status: OrderStatusEnum;
+  status: string;
   type: OrderTypesEnum;
+}
+
+interface IFtxPairResult {
+  name: string;
+  type: PairTypesEnum;
+  price: number;
+  priceIncrement: number;
+  sizeIncrement: number;
 }
 
 export type {
@@ -37,4 +51,6 @@ export type {
   IFtxAuthHttpHeaders,
   IFtxApiPlaceOrderBody,
   IFtxPlaceOrderResult,
+  IFtxPairResult,
+  IFtxAuthParams,
 };

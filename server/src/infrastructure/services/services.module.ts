@@ -12,6 +12,7 @@ import { DcaRepository } from '../repositories/dca.repository';
 import { ExchangeApiRepository } from '../repositories/exchange-api.repository';
 import { TransactionRepository } from '../repositories/transaction.repository';
 import { FtxApiRepository } from '../repositories/ftx/ftx-api.repository';
+import { BinanceApiRepository } from '../repositories/binance/binance-api.repository';
 
 import { HttpCustomModule } from '../config/axios/http.module';
 import { DcaService } from './dca.service';
@@ -30,6 +31,7 @@ import { DcaService } from './dca.service';
     { provide: ITransactionRepository, useClass: TransactionRepository },
     { provide: IExchangeApiRepository, useClass: ExchangeApiRepository },
     FtxApiRepository,
+    BinanceApiRepository,
   ],
 })
 export class ServicesModule {}
