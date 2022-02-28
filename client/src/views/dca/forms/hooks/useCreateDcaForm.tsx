@@ -25,7 +25,7 @@ const useCreateDcaSecondForm = () => {
   const { t } = useTranslation("dca");
   const [inputValue, setInputValue] = useState("");
   const schema = yup.object({
-    pair: yup.string().required(t("form.requiredField")),
+    pair: yup.string().required(t("form.requiredField")).nullable(),
   });
   const {
     handleSubmit,
