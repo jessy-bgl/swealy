@@ -1,6 +1,6 @@
 # Swealy
 
-Open source web app to automate your crypto investments based on the DCA strategy.
+Open source web app to automate your crypto investments based on the DCA strategy. Compatible with Binance and FTX.
 
 ![swealy](https://github.com/jessy-bgl/swealy/blob/main/docs/swealy-dashboard.png)
 
