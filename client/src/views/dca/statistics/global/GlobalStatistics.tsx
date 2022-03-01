@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 
 import { useFetchGlobalStats } from "../../hooks/useStatsQueries";
-import { ClassificationGlobalStats } from "./DcaClassificationStats";
+import { AssetsAllocationStats } from "./AssetsAllocationStats";
 import { DcaGlobalStatsCard } from "./DcaStatsCard";
 import { TransactionGlobalStatsCard } from "./TransactionStatsCard";
 
@@ -43,7 +43,7 @@ const GlobalStatistics = () => {
       </Grid>
 
       <Grid item xs={12} sm={6}>
-        <ClassificationGlobalStats data={globalStatsQuery.data.currencies} />
+        <AssetsAllocationStats data={globalStatsQuery.data.currencies} />
       </Grid>
     </Grid>
   );
