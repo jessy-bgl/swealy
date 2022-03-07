@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
-import { Button, Grid } from "@mui/material";
+import SimpleBar from "simplebar-react";
 
+import { Button, Grid } from "@mui/material";
 import AddIcon from "@mui/icons-material/AddCircle";
 
 import { Dca } from "../../models/Dca";
@@ -36,18 +37,24 @@ const Dcas = ({
   return (
     <>
       <Grid container direction="column" alignItems="center" spacing={2}>
-        {data.map((dca) => (
-          <Grid item key={dca.id} sx={{ width: "100%" }}>
-            <DcaCard
-              data={dca}
-              isSelected={dca.id === selectedDcaId}
-              onClickDca={handleSelectDca}
-            />
-          </Grid>
-        ))}
+        <Grid item sx={{ width: "100%" }}>
+          <SimpleBar style={{ maxHeight: 559 }}>
+            <Grid container direction="column" alignItems="center" spacing={2}>
+              {data.map((dca) => (
+                <Grid item key={dca.id} sx={{ width: "100%" }}>
+                  <DcaCard
+                    data={dca}
+                    isSelected={dca.id === selectedDcaId}
+                    onClickDca={handleSelectDca}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </SimpleBar>
+        </Grid>
 
         {showAddDca && (
-          <Grid item>
+          <Grid item sx={{ width: "100%" }}>
             <Button
               fullWidth
               variant="outlined"

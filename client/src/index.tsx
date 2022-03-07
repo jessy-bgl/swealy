@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 import { QueryClientProvider } from "react-query";
+import "simplebar/dist/simplebar.min.css";
 
 import "./index.css";
 import "./i18n/i18n.js";
