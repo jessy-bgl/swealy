@@ -30,7 +30,6 @@ const COLORS = [
 ];
 
 const renderActiveShape = (props) => {
-  const RADIAN = Math.PI / 180;
   const {
     cx,
     cy,
@@ -43,6 +42,8 @@ const renderActiveShape = (props) => {
     payload,
     value,
   } = props;
+
+  const RADIAN = Math.PI / 180;
   const sin = Math.sin(-RADIAN * midAngle);
   const cos = Math.cos(-RADIAN * midAngle);
   const sx = cx + (outerRadius + 10) * cos;
@@ -52,6 +53,7 @@ const renderActiveShape = (props) => {
   const ex = mx + (cos >= 0 ? 1 : -1) * 22;
   const ey = my;
   const textAnchor = cos >= 0 ? "start" : "end";
+  const percent = Math.round(value * 100);
 
   return (
     <g>
@@ -88,16 +90,12 @@ const renderActiveShape = (props) => {
         y={ey + 5}
         textAnchor={textAnchor}
         fill="#999"
-      >{`${value * 100}%`}</text>
+      >{`${percent}%`}</text>
     </g>
   );
 };
 
-const ClassificationGlobalStats = ({
-  data,
-}: {
-  data: CurrenciesGlobalStats;
-}) => {
+const AssetsAllocationStats = ({ data }: { data: CurrenciesGlobalStats }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [expanded, setExpanded] = useState(false);
 
@@ -167,10 +165,10 @@ const ClassificationGlobalStats = ({
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Grid container spacing={1}>
-            {data.map((currency) => (
-              <Grid item key={currency.name} xs={6}>
+            {pieData.map((currency, index) => (
+              <Grid item key={`currency-${index}`} xs={6}>
                 <Typography>
-                  {currency.name} : {currency.weight * 100}%
+                  {currency.name} : {Math.round(currency.value * 100)}%
                 </Typography>
               </Grid>
             ))}
@@ -181,4 +179,4 @@ const ClassificationGlobalStats = ({
   );
 };
 
-export { ClassificationGlobalStats };
+export { AssetsAllocationStats };
