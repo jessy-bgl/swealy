@@ -9,8 +9,8 @@ const useTransactionStyles = () => {
     (theme) => {
       const getBackgroundColor = (color) =>
         appTheme.palette.mode === "dark"
-          ? darken(color, 0.6)
-          : lighten(color, 0.6);
+          ? darken(color, 0.5)
+          : lighten(color, 0.5);
 
       const getHoverBackgroundColor = (color) =>
         appTheme.palette.mode === "dark"
