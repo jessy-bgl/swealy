@@ -58,9 +58,7 @@ const Transactions = () => {
                     getRowClassName={(params) =>
                       `transaction-${params.row.success ? "success" : "fail"}`
                     }
-                    components={{
-                      Toolbar: GridToolbar,
-                    }}
+                    components={{ Toolbar: GridToolbar }}
                   />
                 </div>
               </div>
