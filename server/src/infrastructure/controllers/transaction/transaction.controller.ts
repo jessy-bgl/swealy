@@ -37,8 +37,7 @@ class TransactionController {
   @ApiBody({ type: CreateManualTransactionDTO })
   @ApiResponse({ status: 201, type: TransactionPresenter })
   createTransaction(
-    @Body()
-    createTransactionDTO: CreateTransactionDTO | CreateManualTransactionDTO,
+    @Body() createTransactionDTO: CreateManualTransactionDTO,
   ): Promise<TransactionPresenter> {
     return this.createTransactionUsecase.execute(createTransactionDTO);
   }
