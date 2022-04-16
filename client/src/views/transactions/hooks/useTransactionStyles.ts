@@ -7,12 +7,12 @@ const useTransactionStyles = () => {
 
   return makeStyles(
     (theme) => {
-      const getBackgroundColor = (color) =>
+      const getBackgroundColor = (color: string) =>
         appTheme.palette.mode === "dark"
           ? darken(color, 0.5)
           : lighten(color, 0.5);
 
-      const getHoverBackgroundColor = (color) =>
+      const getHoverBackgroundColor = (color: string) =>
         appTheme.palette.mode === "dark"
           ? darken(color, 0.5)
           : lighten(color, 0.5);

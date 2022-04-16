@@ -21,7 +21,7 @@ const useDashboard = (dcaStatus: DcaStatusEnum) => {
     setSelectedDcaId("");
   }, [data, dcaStatus]);
 
-  const handleSelectTab = (event: SyntheticEvent, newTab: DcaTabs) => {
+  const handleSelectTab = (_: SyntheticEvent, newTab: DcaTabs) => {
     setSelectedTab(newTab);
   };
 
