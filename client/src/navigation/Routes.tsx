@@ -6,7 +6,7 @@ import { Exchanges } from "../views/exchanges/Exchanges";
 import { Settings } from "../views/settings/Settings";
 import { DcaStatusEnum } from "../models/Dca";
 import { Transactions } from "../views/transactions/Transactions";
-import { Dashboard } from "../views/dca/Dashboard";
+import { Dashboard } from "../views/dashboard/Dashboard";
 import { About } from "../views/about/About";
 
 function Router() {

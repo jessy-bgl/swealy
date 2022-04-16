@@ -21,7 +21,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import CloseIcon from "@mui/icons-material/Close";
 
 import { CreateTransactionDTO, OrderTypesEnum } from "../../models/Transaction";
-import { useFetchDcas } from "../dca/hooks/useDcaQueries";
+import { useFetchDcas } from "../dashboard/dca/hooks/useDcaQueries";
 import { useCreateTransactionForm } from "./hooks/useTransactionForm";
 import { useCreateTransaction } from "./hooks/useTransactionQueries";
 

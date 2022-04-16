@@ -6,9 +6,9 @@ import ActivateIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import ArchiveIcon from "@mui/icons-material/Archive";
 
-import { Dca, DcaStatusEnum, UpdateDcaDTO } from "../../models/Dca";
+import { Dca, DcaStatusEnum, UpdateDcaDTO } from "../../../models/Dca";
 import { useUpdateDca, useUpdateDcaStatus } from "./hooks/useDcaQueries";
-import { useUpdateDcaForm } from "./forms/hooks/useUpdateDcaForm";
+import { useUpdateDcaForm } from "./hooks/useUpdateDcaForm";
 
 type Props = {
   data?: Dca;

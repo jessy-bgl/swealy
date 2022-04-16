@@ -11,9 +11,9 @@ import { useTranslation } from "react-i18next";
 import { format } from "date-fns";
 import * as locale from "date-fns/locale";
 
-import { Dca } from "../../models/Dca";
-import { getExchangeLogo } from "../../utils/exchange";
-import { LanguageContext } from "../../services/stores/language/LanguageContext";
+import { Dca } from "../../../models/Dca";
+import { getExchangeLogo } from "../../../utils/exchange";
+import { LanguageContext } from "../../../services/stores/language/LanguageContext";
 
 type Props = {
   data: Dca;

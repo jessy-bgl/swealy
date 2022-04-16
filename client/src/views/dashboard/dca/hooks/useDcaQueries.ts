@@ -2,10 +2,10 @@ import { useSnackbar } from "notistack";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-import { Dca } from "../../../models/Dca";
-import { Pair } from "../../../models/Exchange";
-import { DcaService } from "../../../services/api/DcaService";
-import { ExchangeService } from "../../../services/api/ExchangeService";
+import { Dca } from "../../../../models/Dca";
+import { Pair } from "../../../../models/Exchange";
+import { DcaService } from "../../../../services/api/DcaService";
+import { ExchangeService } from "../../../../services/api/ExchangeService";
 
 const DCAS_QUERY_KEY = "dcas";
 const EXCHANGE_PAIRS_QUERY_KEY = "pairs";

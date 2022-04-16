@@ -4,9 +4,9 @@ import SimpleBar from "simplebar-react";
 import { Button, Grid } from "@mui/material";
 import AddIcon from "@mui/icons-material/AddCircle";
 
-import { Dca } from "../../models/Dca";
+import { Dca } from "../../../models/Dca";
 import { CreateDcaDialog } from "./CreateDcaDialog";
-import { useFetchExchanges } from "../exchanges/hooks/useExchangeQueries";
+import { useFetchExchanges } from "../../exchanges/hooks/useExchangeQueries";
 import { DcaCard } from "./Dca";
 import { useDcas } from "./hooks/useDcas";
 
