@@ -20,6 +20,7 @@
   "form": {
     "requiredField": "Champ requis",
     "dateRequired": "Date requise",
+    "numberRequired": "Doit être un nombre",
     "mustBePositive": "Doit être positif",
     "datetime": "Date",
     "dca": "DCA",

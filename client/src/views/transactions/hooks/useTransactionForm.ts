@@ -19,12 +19,12 @@ const useCreateTransactionForm = () => {
     dca: yup.string().required(t("form.requiredField")),
     price: yup
       .number()
-      .typeError(t("form.requiredField"))
+      .typeError(t("form.numberRequired"))
       .required(t("form.requiredField"))
       .positive(t("form.mustBePositive")),
     size: yup
       .number()
-      .typeError(t("form.requiredField"))
+      .typeError(t("form.numberRequired"))
       .required(t("form.requiredField"))
       .positive(t("form.mustBePositive")),
     type: yup
