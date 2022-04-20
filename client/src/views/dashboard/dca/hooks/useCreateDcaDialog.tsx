@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { CreateDcaDTO } from "../../../models/Dca";
+import { CreateDcaDTO } from "../../../../models/Dca";
 import { useCreateDca } from "./useDcaQueries";
 
 type Props = {

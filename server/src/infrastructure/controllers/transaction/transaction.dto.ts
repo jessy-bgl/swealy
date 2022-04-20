@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   IsBoolean,
   IsDate,
+  IsDateString,
   IsEnum,
   IsMongoId,
   IsNotEmpty,
@@ -68,7 +69,7 @@ class CreateTransactionDTO implements ICreateTransactionDTO {
 
 class CreateManualTransactionDTO implements ICreateManualTransactionDTO {
   @ApiProperty({ required: true })
-  @IsDate()
+  @IsDateString()
   datetime: Date = new Date();
 
   success = true;

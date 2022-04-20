@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 
-import { useFetchGlobalStats } from "../../hooks/useStatsQueries";
+import { useFetchGlobalStats } from "../hooks/useStatsQueries";
 import { AssetsAllocationStats } from "./AssetsAllocationStats";
 import { DcaGlobalStatsCard } from "./DcaStatsCard";
 import { TransactionGlobalStatsCard } from "./TransactionStatsCard";

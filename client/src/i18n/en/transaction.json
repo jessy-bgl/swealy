@@ -20,6 +20,7 @@
   "form": {
     "requiredField": "Required field",
     "dateRequired": "Required date",
+    "numberRequired": "Must be a number",
     "mustBePositive": "Must be positive",
     "datetime": "Date",
     "dca": "DCA",

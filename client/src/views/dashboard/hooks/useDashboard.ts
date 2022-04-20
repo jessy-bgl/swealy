@@ -1,7 +1,7 @@
 import { SyntheticEvent, useEffect, useState } from "react";
 
 import { Dca, DcaStatusEnum } from "../../../models/Dca";
-import { useFetchDcas } from "./useDcaQueries";
+import { useFetchDcas } from "../dca/hooks/useDcaQueries";
 
 enum DcaTabs {
   STATISTICS = "statistics",
@@ -21,7 +21,7 @@ const useDashboard = (dcaStatus: DcaStatusEnum) => {
     setSelectedDcaId("");
   }, [data, dcaStatus]);
 
-  const handleSelectTab = (event: SyntheticEvent, newTab: DcaTabs) => {
+  const handleSelectTab = (_: SyntheticEvent, newTab: DcaTabs) => {
     setSelectedTab(newTab);
   };
 

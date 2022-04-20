@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
-import { Exchange } from "../../models/Exchange";
+import { Exchange } from "../../../models/Exchange";
 import { FirstForm } from "./forms/CreateDcaFirstForm";
 import { SecondForm } from "./forms/CreateDcaSecondForm";
 import { ThirdForm } from "./forms/CreateDcaThirdForm";

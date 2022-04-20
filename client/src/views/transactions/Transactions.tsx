@@ -46,7 +46,7 @@ const Transactions = () => {
 
         <Grid item>
           <Paper>
-            <div style={{ height: 500, width: "100%" }}>
+            <div style={{ height: 670, width: "100%" }}>
               <div style={{ display: "flex", height: "100%" }}>
                 <div style={{ flexGrow: 1 }} className={classes.root}>
                   <DataGrid
@@ -58,9 +58,7 @@ const Transactions = () => {
                     getRowClassName={(params) =>
                       `transaction-${params.row.success ? "success" : "fail"}`
                     }
-                    components={{
-                      Toolbar: GridToolbar,
-                    }}
+                    components={{ Toolbar: GridToolbar }}
                   />
                 </div>
               </div>

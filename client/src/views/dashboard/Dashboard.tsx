@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 import { DcaStatusEnum } from "../../models/Dca";
 import { GlobalStatistics } from "./statistics/global/GlobalStatistics";
 import { DcaStatistics } from "./statistics/dca/DcaStatistics";
-import { DcaInfo } from "./DcaInfo";
-import { Dcas } from "./Dcas";
+import { DcaInfo } from "./dca/DcaInfo";
+import { Dcas } from "./dca/Dcas";
 import { DcaTabs, useDashboard } from "./hooks/useDashboard";
 
 type Props = {

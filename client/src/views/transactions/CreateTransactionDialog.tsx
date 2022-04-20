@@ -21,7 +21,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import CloseIcon from "@mui/icons-material/Close";
 
 import { CreateTransactionDTO, OrderTypesEnum } from "../../models/Transaction";
-import { useFetchDcas } from "../dca/hooks/useDcaQueries";
+import { useFetchDcas } from "../dashboard/dca/hooks/useDcaQueries";
 import { useCreateTransactionForm } from "./hooks/useTransactionForm";
 import { useCreateTransaction } from "./hooks/useTransactionQueries";
 
@@ -79,6 +79,7 @@ const CreateTransactionDialog = ({ onClose }: Props) => {
                 }) => (
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DateTimePicker
+                      disableFuture
                       renderInput={(props) => (
                         <TextField
                           {...props}
@@ -91,7 +92,6 @@ const CreateTransactionDialog = ({ onClose }: Props) => {
                       label={t("transaction:form.datetime")}
                       value={value}
                       onChange={onChange}
-                      maxDateTime={new Date()}
                     />
                   </LocalizationProvider>
                 )}
@@ -124,7 +124,7 @@ const CreateTransactionDialog = ({ onClose }: Props) => {
               <TextField
                 fullWidth
                 {...register("price")}
-                type="number"
+                type="string"
                 label={t("transaction:form.price")}
                 helperText={errors["price"]?.message}
                 error={errors["price"] ? true : false}
@@ -135,7 +135,7 @@ const CreateTransactionDialog = ({ onClose }: Props) => {
               <TextField
                 fullWidth
                 {...register("size")}
-                type="number"
+                type="string"
                 label={t("transaction:form.size")}
                 helperText={errors["size"]?.message}
                 error={errors["size"] ? true : false}

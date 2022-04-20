@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { Exchange } from "../../../models/Exchange";
 import {
   useFetchExchanges,
@@ -19,7 +20,6 @@ const useExchanges = () => {
   });
 
   const { data, isLoading } = useFetchExchanges();
-
   const checkApiKeysValidityQuery = useCheckApiKeysValidity();
 
   const handleClickApiKeysCheck = (exchangeID: string) =>
@@ -35,8 +35,8 @@ const useExchanges = () => {
   const handleCloseDeleteDialog = () =>
     setDeleteDialog({ data: {} as Exchange, open: false });
 
-  const handleOpenCreateDialog = () => setOpenCreateDialog(true);
-  const handleCloseCreateDialog = () => setOpenCreateDialog(false);
+  const handleOpenCreateDialog: () => void = () => setOpenCreateDialog(true);
+  const handleCloseCreateDialog: () => void = () => setOpenCreateDialog(false);
 
   return {
     openCreateDialog,

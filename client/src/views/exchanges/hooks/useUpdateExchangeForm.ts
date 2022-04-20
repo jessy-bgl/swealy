@@ -3,20 +3,14 @@ import { useTranslation } from "react-i18next";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { useUpdateExchange } from "./useExchangeQueries";
 import { UpdateExchangeDTO } from "../../../models/Exchange";
 
 type Props = {
   data: UpdateExchangeDTO;
-  closeDialog: () => void;
 };
 
-const useUpdateExchangeForm = ({
-  data = {} as UpdateExchangeDTO,
-  closeDialog,
-}: Props) => {
+const useUpdateExchangeForm = ({ data = {} as UpdateExchangeDTO }: Props) => {
   const { t } = useTranslation("exchange");
-  const updateExchangeQuery = useUpdateExchange();
 
   const schema = yup.object({
     label: yup.string().required(t("form.requiredField")),
@@ -41,17 +35,7 @@ const useUpdateExchangeForm = ({
     defaultValues,
   });
 
-  const onSubmit = (values: UpdateExchangeDTO) => {
-    updateExchangeQuery
-      .mutateAsync({ ...values, id: data.id })
-      .then(() => closeDialog());
-  };
-
-  const submit = handleSubmit(onSubmit);
-
-  const isLoading = updateExchangeQuery.isLoading;
-
-  return { submit, register, errors, isDirty, isLoading };
+  return { handleSubmit, register, errors, isDirty };
 };
 
 export { useUpdateExchangeForm };

@@ -13,8 +13,9 @@ import {
 import { useTheme } from "@mui/material/styles";
 import CloseIcon from "@mui/icons-material/Close";
 
-import { Exchange } from "../../models/Exchange";
+import { Exchange, UpdateExchangeDTO } from "../../models/Exchange";
 import { useUpdateExchangeForm } from "./hooks/useUpdateExchangeForm";
+import { useUpdateExchange } from "./hooks/useExchangeQueries";
 
 type Props = {
   data: Exchange;
@@ -27,8 +28,15 @@ const UpdateExchangeDialog = ({ data, onClose }: Props) => {
   const theme = useTheme();
   const fullScreenDialog = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const { submit, register, errors, isDirty, isLoading } =
-    useUpdateExchangeForm({ data, closeDialog: onClose });
+  const updateExchangeQuery = useUpdateExchange();
+
+  const handleUpdateExchange = (values: UpdateExchangeDTO) => {
+    updateExchangeQuery.mutateAsync({ ...values, id: data.id }).then(onClose);
+  };
+
+  const { handleSubmit, register, errors, isDirty } = useUpdateExchangeForm({
+    data,
+  });
 
   const dialogTitle = data.subaccountName
     ? `${data.name.toUpperCase()} - ${data.subaccountName}`
@@ -36,7 +44,7 @@ const UpdateExchangeDialog = ({ data, onClose }: Props) => {
 
   return (
     <Dialog fullScreen={fullScreenDialog} open={true} onClose={onClose}>
-      <form onSubmit={submit}>
+      <form onSubmit={handleSubmit(handleUpdateExchange)}>
         <DialogTitle>
           {dialogTitle}
           <IconButton
@@ -96,7 +104,7 @@ const UpdateExchangeDialog = ({ data, onClose }: Props) => {
                 type="submit"
                 color="warning"
                 variant="outlined"
-                disabled={!isDirty || isLoading}
+                disabled={!isDirty || updateExchangeQuery.isLoading}
               >
                 {t("common:update")}
               </Button>

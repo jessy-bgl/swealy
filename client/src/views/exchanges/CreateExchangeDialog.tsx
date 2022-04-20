@@ -15,7 +15,8 @@ import { useTheme } from "@mui/material/styles";
 import CloseIcon from "@mui/icons-material/Close";
 
 import { useCreateExchangeForm } from "./hooks/useCreateExchangeForm";
-import { ExchangesEnum } from "../../models/Exchange";
+import { CreateExchangeDTO, ExchangesEnum } from "../../models/Exchange";
+import { useCreateExchange } from "./hooks/useExchangeQueries";
 
 type Props = {
   onClose: () => void;
@@ -31,12 +32,17 @@ const CreateExchangeDialog = ({ onClose }: Props) => {
   const theme = useTheme();
   const fullScreenDialog = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const { submit, register, errors, isDirty, isLoading } =
-    useCreateExchangeForm({ closeDialog: onClose });
+  const createExchangeQuery = useCreateExchange();
+
+  const handleCreateExchange = (values: CreateExchangeDTO) => {
+    createExchangeQuery.mutateAsync(values).then(onClose);
+  };
+
+  const { handleSubmit, register, errors, isDirty } = useCreateExchangeForm();
 
   return (
     <Dialog fullScreen={fullScreenDialog} open={true} onClose={onClose}>
-      <form onSubmit={submit}>
+      <form onSubmit={handleSubmit(handleCreateExchange)}>
         <DialogTitle>
           {t("exchange:newExchange")}
           <IconButton
@@ -117,7 +123,7 @@ const CreateExchangeDialog = ({ onClose }: Props) => {
                 type="submit"
                 color="primary"
                 variant="outlined"
-                disabled={!isDirty || isLoading}
+                disabled={!isDirty || createExchangeQuery.isLoading}
               >
                 {t("common:submit")}
               </Button>

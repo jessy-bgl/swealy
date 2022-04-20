@@ -3,16 +3,10 @@ import { useTranslation } from "react-i18next";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { useCreateExchange } from "./useExchangeQueries";
 import { CreateExchangeDTO } from "../../../models/Exchange";
 
-type Props = {
-  closeDialog: () => void;
-};
-
-const useCreateExchangeForm = ({ closeDialog }: Props) => {
+const useCreateExchangeForm = () => {
   const { t } = useTranslation("exchange");
-  const createExchangeQuery = useCreateExchange();
 
   const schema = yup.object({
     name: yup.string().required(t("form.requiredField")),
@@ -30,15 +24,7 @@ const useCreateExchangeForm = ({ closeDialog }: Props) => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (values: CreateExchangeDTO) => {
-    createExchangeQuery.mutateAsync(values).then(() => closeDialog());
-  };
-
-  const submit = handleSubmit(onSubmit);
-
-  const isLoading = createExchangeQuery.isLoading;
-
-  return { submit, register, errors, isDirty, isLoading };
+  return { handleSubmit, register, errors, isDirty };
 };
 
 export { useCreateExchangeForm };
