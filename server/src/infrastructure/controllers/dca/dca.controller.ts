@@ -23,6 +23,7 @@ import { CreateDcaUseCase } from '../../../usecases/dca/create-dca.usecase';
 import { UpdateDcaUseCase } from '../../../usecases/dca/update-dca.usecase';
 import { UpdateDcaStatusUseCase } from '../../../usecases/dca/update-dca-status.usecase';
 import { DeleteDcaUseCase } from '../../../usecases/dca/delete-dca.usecase';
+import { FetchOneDcaUseCase } from '../../../usecases/dca/fetch-one-dca.usecase';
 
 @Controller('dca')
 @ApiTags('dca')
@@ -31,6 +32,7 @@ import { DeleteDcaUseCase } from '../../../usecases/dca/delete-dca.usecase';
 class DcaController {
   constructor(
     private readonly fetchDcaUseCase: FetchDcaUseCase,
+    private readonly fetchOneDcaUseCase: FetchOneDcaUseCase,
     private readonly createDcaUsecase: CreateDcaUseCase,
     private readonly updateDcaUsecase: UpdateDcaUseCase,
     private readonly updateDcaStatusUsecase: UpdateDcaStatusUseCase,
@@ -41,6 +43,13 @@ class DcaController {
   @ApiResponse({ status: 200, type: DcaPresenter, isArray: true })
   fetchDca(): Promise<DcaPresenter[]> {
     return this.fetchDcaUseCase.execute();
+  }
+
+  @Get(':id')
+  @ApiParam({ name: 'id', type: String })
+  @ApiResponse({ status: 200, type: DcaPresenter })
+  fetchOneDca(@Param('id') id: string): Promise<DcaPresenter> {
+    return this.fetchOneDcaUseCase.execute(id);
   }
 
   @Post()

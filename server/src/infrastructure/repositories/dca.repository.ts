@@ -28,6 +28,15 @@ class DcaRepository implements IDcaRepository {
     }
   }
 
+  async fetchOne(id: string): Promise<Dca> {
+    try {
+      const dca = await this.dcaEntity.findById(id).populate('exchange');
+      return DcaMapper.toDca(dca);
+    } catch (e) {
+      throw e;
+    }
+  }
+
   async create(createDcaDTO: ICreateDcaDTO): Promise<Dca> {
     try {
       const dca = new this.dcaEntity(createDcaDTO);

@@ -21,6 +21,7 @@ interface IUpdateDcaStatusDTO {
 
 abstract class IDcaRepository {
   abstract fetch(): Promise<Dca[]>;
+  abstract fetchOne(id: string): Promise<Dca>;
   abstract create(createDcaDTO: ICreateDcaDTO): Promise<Dca>;
   abstract update(id: string, updateDcaDTO: IUpdateDcaDTO): Promise<Dca>;
   abstract updateStatus(id: string, status: IUpdateDcaStatusDTO): Promise<Dca>;
