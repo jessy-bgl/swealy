@@ -1,4 +1,12 @@
-import { Button, Grid, TextField, Paper, Box } from "@mui/material";
+import {
+  Button,
+  Grid,
+  TextField,
+  Typography,
+  Card,
+  CardHeader,
+  CardContent,
+} from "@mui/material";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -6,15 +14,15 @@ import ActivateIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import ArchiveIcon from "@mui/icons-material/Archive";
 
-import { Dca, DcaStatusEnum, UpdateDcaDTO } from "../../../models/Dca";
-import { useUpdateDca, useUpdateDcaStatus } from "./hooks/useDcaQueries";
-import { useUpdateDcaForm } from "./hooks/useUpdateDcaForm";
+import { Dca, DcaStatusEnum, UpdateDcaDTO } from "../../models/Dca";
+import { useUpdateDca, useUpdateDcaStatus } from "../../hooks/useDcaQueries";
+import { useUpdateBotForm } from "./hooks/useUpdateBotForm";
 
 type Props = {
-  data?: Dca;
+  data: Dca;
 };
 
-type DcaActionButton = {
+type BotActionButton = {
   color: any;
   icon: any;
   label: string;
@@ -23,10 +31,10 @@ type DcaActionButton = {
 
 const editableFieldNames = ["frequencyInDays", "hour", "amount"];
 
-const DcaInfo = ({ data }: Props) => {
+const BotInfo = ({ data }: Props) => {
   const { t } = useTranslation("dca");
 
-  const { handleSubmit, errors, isDirty, register, reset } = useUpdateDcaForm();
+  const { handleSubmit, errors, isDirty, register, reset } = useUpdateBotForm();
 
   useEffect(() => {
     if (data) {
@@ -47,7 +55,7 @@ const DcaInfo = ({ data }: Props) => {
     if (data) updateDcaStatusQuery.mutate({ id: data.id, status });
   };
 
-  const getDcaActions = (): DcaActionButton[] => {
+  const getDcaActions = (): BotActionButton[] => {
     if (data?.status === DcaStatusEnum.ACTIVE)
       return [
         {
@@ -97,16 +105,13 @@ const DcaInfo = ({ data }: Props) => {
   };
 
   return (
-    <Box style={{ display: "flex" }}>
-      <Paper sx={{ width: "100%" }}>
-        <form onSubmit={onSubmit}>
-          <Grid
-            container
-            direction="column"
-            alignItems={"center"}
-            spacing={2}
-            sx={{ padding: 2 }}
-          >
+    <Card>
+      <form onSubmit={onSubmit}>
+        <CardHeader
+          subheader={<Typography align="center">{t("info")}</Typography>}
+        />
+        <CardContent>
+          <Grid container direction="column" alignItems={"center"} spacing={2}>
             <Grid item>
               <TextField
                 disabled
@@ -155,7 +160,7 @@ const DcaInfo = ({ data }: Props) => {
               </Button>
             </Grid>
             <Grid item>
-              <Grid container spacing={1}>
+              <Grid container spacing={1} justifyContent="center">
                 {getDcaActions().map((dcaAction) => (
                   <Grid item key={dcaAction.label}>
                     <Button
@@ -173,10 +178,10 @@ const DcaInfo = ({ data }: Props) => {
               </Grid>
             </Grid>
           </Grid>
-        </form>
-      </Paper>
-    </Box>
+        </CardContent>
+      </form>
+    </Card>
   );
 };
 
-export { DcaInfo };
+export { BotInfo };

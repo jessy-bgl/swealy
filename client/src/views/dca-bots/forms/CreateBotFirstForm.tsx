@@ -2,8 +2,8 @@ import { Grid, TextField, MenuItem, Button } from "@mui/material";
 import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { Exchange } from "../../../../models/Exchange";
-import { useCreateDcaFirstForm } from "../hooks/useCreateDcaForm";
+import { Exchange } from "../../../models/Exchange";
+import { useCreateBotFirstForm } from "../hooks/useCreateBotForm";
 
 type Props = {
   exchanges: Exchange[];
@@ -14,7 +14,7 @@ type Props = {
 const FirstForm = ({ exchanges, onSubmit, defaultValues }: Props) => {
   const { t } = useTranslation("dca");
 
-  const { handleSubmit, control } = useCreateDcaFirstForm();
+  const { handleSubmit, control } = useCreateBotFirstForm();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

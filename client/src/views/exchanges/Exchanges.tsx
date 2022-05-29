@@ -3,18 +3,19 @@ import { useTranslation } from "react-i18next";
 import {
   List,
   ListItem,
-  ListItemAvatar,
   ListItemText,
-  Avatar,
   Container,
   ListItemButton,
   ListItemSecondaryAction,
   IconButton,
   Tooltip,
   ListItemIcon,
+  Paper,
+  Typography,
+  Grid,
 } from "@mui/material";
 
-import AddIcon from "@mui/icons-material/Add";
+import AddIcon from "@mui/icons-material/AddOutlined";
 import VerifyIcon from "@mui/icons-material/Key";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -48,63 +49,72 @@ const Exchanges = () => {
   return (
     <>
       <Container maxWidth="sm">
-        <List>
-          {data?.map((exchange) => (
-            <ListItem divider key={exchange.label}>
-              <ListItemIcon>
-                <img
-                  src={getExchangeLogo(exchange.name)}
-                  alt={`${exchange.name}_logo`}
-                  width={25}
+        <Paper>
+          <List disablePadding>
+            {data?.map((exchange) => (
+              <ListItem divider key={exchange.label}>
+                <ListItemIcon>
+                  <img
+                    src={getExchangeLogo(exchange.name)}
+                    alt={`${exchange.name}_logo`}
+                    width={25}
+                  />
+                </ListItemIcon>
+                <ListItemText
+                  primary={exchange.label}
+                  secondary={
+                    exchange.subaccountName
+                      ? `${exchange.name.toUpperCase()} - ${
+                          exchange.subaccountName
+                        }`
+                      : exchange.name.toUpperCase()
+                  }
                 />
-              </ListItemIcon>
-              <ListItemText
-                primary={exchange.label}
-                secondary={
-                  exchange.subaccountName
-                    ? `${exchange.name.toUpperCase()} - ${
-                        exchange.subaccountName
-                      }`
-                    : exchange.name.toUpperCase()
-                }
-              />
-              <ListItemSecondaryAction>
-                <Tooltip title={t("exchange:keysCheck") as string}>
-                  <IconButton
-                    color="primary"
-                    onClick={() => handleClickApiKeysCheck(exchange.id)}
-                  >
-                    <VerifyIcon />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title={t("exchange:editExchange") as string}>
-                  <IconButton
-                    color="warning"
-                    onClick={() => handleOpenUpdateDialog(exchange)}
-                  >
-                    <EditIcon />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title={t("exchange:removeExchange") as string}>
-                  <IconButton
-                    color="error"
-                    onClick={() => handleOpenDeleteDialog(exchange)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </Tooltip>
-              </ListItemSecondaryAction>
-            </ListItem>
-          ))}
-          <ListItemButton onClick={handleOpenCreateDialog}>
-            <ListItemAvatar>
-              <Avatar>
-                <AddIcon color="primary" />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={t("exchange:addExchange")} />
-          </ListItemButton>
-        </List>
+                <ListItemSecondaryAction>
+                  <Tooltip title={t("exchange:keysCheck") as string}>
+                    <IconButton
+                      color="primary"
+                      onClick={() => handleClickApiKeysCheck(exchange.id)}
+                    >
+                      <VerifyIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title={t("exchange:editExchange") as string}>
+                    <IconButton
+                      color="warning"
+                      onClick={() => handleOpenUpdateDialog(exchange)}
+                    >
+                      <EditIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title={t("exchange:removeExchange") as string}>
+                    <IconButton
+                      color="error"
+                      onClick={() => handleOpenDeleteDialog(exchange)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </Tooltip>
+                </ListItemSecondaryAction>
+              </ListItem>
+            ))}
+            <ListItemButton onClick={handleOpenCreateDialog}>
+              <Grid
+                container
+                justifyContent="center"
+                alignContent="center"
+                spacing={1}
+              >
+                <Grid item>
+                  <AddIcon color="primary" fontSize="small" sx={{ mt: 0.1 }} />
+                </Grid>
+                <Grid item>
+                  <Typography>{t("exchange:addExchange")}</Typography>
+                </Grid>
+              </Grid>
+            </ListItemButton>
+          </List>
+        </Paper>
       </Container>
 
       {openCreateDialog && (

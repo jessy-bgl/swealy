@@ -1,11 +1,11 @@
 import { Grid } from "@mui/material";
 
-import { useFetchGlobalStats } from "../hooks/useStatsQueries";
-import { AssetsAllocationStats } from "./AssetsAllocationStats";
-import { DcaGlobalStatsCard } from "./DcaStatsCard";
-import { TransactionGlobalStatsCard } from "./TransactionStatsCard";
+import { useFetchGlobalStats } from "./hooks/useStatsQueries";
+import { AssetsAllocationStats } from "./components/AssetsAllocationStats";
+import { DcaGlobalStatsCard } from "./components/DcaStatsCard";
+import { TransactionGlobalStatsCard } from "./components/TransactionStatsCard";
 
-const GlobalStatistics = () => {
+const Statistics = () => {
   const globalStatsQuery = useFetchGlobalStats();
 
   if (globalStatsQuery.isLoading) return <div />;
@@ -14,39 +14,39 @@ const GlobalStatistics = () => {
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} sm={6} xl={3}>
+      <Grid item xs={12} sm={6}>
         <DcaGlobalStatsCard
           data={globalStatsQuery.data.dca}
           activeDcas={true}
         />
       </Grid>
 
-      <Grid item xs={12} sm={6} xl={3}>
+      <Grid item xs={12} sm={6}>
         <DcaGlobalStatsCard
           data={globalStatsQuery.data.dca}
           activeDcas={false}
         />
       </Grid>
 
-      <Grid item xs={12} sm={6} xl={3}>
+      <Grid item xs={12} sm={6}>
         <TransactionGlobalStatsCard
           data={globalStatsQuery.data.transaction}
           success={true}
         />
       </Grid>
 
-      <Grid item xs={12} sm={6} xl={3}>
+      <Grid item xs={12} sm={6}>
         <TransactionGlobalStatsCard
           data={globalStatsQuery.data.transaction}
           success={false}
         />
       </Grid>
 
-      <Grid item xs={12} sm={6}>
+      <Grid item xs>
         <AssetsAllocationStats data={globalStatsQuery.data.currencies} />
       </Grid>
     </Grid>
   );
 };
 
-export { GlobalStatistics };
+export { Statistics };

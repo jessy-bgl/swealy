@@ -4,10 +4,11 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Navigation } from "../views/navigation/Navigation";
 import { Exchanges } from "../views/exchanges/Exchanges";
 import { Settings } from "../views/settings/Settings";
-import { DcaStatusEnum } from "../models/Dca";
 import { Transactions } from "../views/transactions/Transactions";
 import { Dashboard } from "../views/dashboard/Dashboard";
 import { About } from "../views/about/About";
+import { InactiveDcaBots } from "../views/inactive-dca-bots/InactiveDcaBots";
+import { Bot } from "../views/dca-bot/Bot";
 
 function Router() {
   const { t } = useTranslation("navigation");
@@ -16,38 +17,16 @@ function Router() {
     <Routes>
       <Route
         path="/"
-        element={
-          <Navigation
-            child={<Navigate to="/dca/active" />}
-            title={t("dashboard")}
-          />
-        }
+        element={<Navigation child={<Dashboard />} title={t("dashboard")} />}
       />
       <Route
-        path="/dca/active"
-        element={
-          <Navigation
-            child={<Dashboard dcaStatus={DcaStatusEnum.ACTIVE} />}
-            title={t("activeDcas")}
-          />
-        }
+        path="/dca/:id"
+        element={<Navigation child={<Bot />} title={t("dashboard")} />}
       />
       <Route
-        path="/dca/paused"
+        path="/inactive-bots"
         element={
-          <Navigation
-            child={<Dashboard dcaStatus={DcaStatusEnum.PAUSED} />}
-            title={t("pausedDcas")}
-          />
-        }
-      />
-      <Route
-        path="/dca/archived"
-        element={
-          <Navigation
-            child={<Dashboard dcaStatus={DcaStatusEnum.ARCHIVED} />}
-            title={t("archivedDcas")}
-          />
+          <Navigation child={<InactiveDcaBots />} title={t("inactiveDcas")} />
         }
       />
       <Route
@@ -68,6 +47,7 @@ function Router() {
         path="/about"
         element={<Navigation child={<About />} title={t("about")} />}
       />
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 }

@@ -13,8 +13,8 @@ import PairIcon from "@mui/icons-material/Paid";
 import ExchangeIcon from "@mui/icons-material/AccountBalance";
 import FrequencyIcon from "@mui/icons-material/AccessTime";
 
-import { CreateDcaDTO } from "../../../../models/Dca";
-import { Exchange } from "../../../../models/Exchange";
+import { CreateDcaDTO } from "../../../models/Dca";
+import { Exchange } from "../../../models/Exchange";
 
 type Props = {
   exchanges: Exchange[];
@@ -23,7 +23,7 @@ type Props = {
   data: CreateDcaDTO;
 };
 
-const DcaConfirmation = ({
+const BotConfirmation = ({
   exchanges,
   onSubmit,
   data,
@@ -79,4 +79,4 @@ const DcaConfirmation = ({
   );
 };
 
-export { DcaConfirmation };
+export { BotConfirmation };

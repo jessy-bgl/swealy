@@ -2,8 +2,8 @@ import { Grid, TextField, Button } from "@mui/material";
 import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { UpdateDcaDTO } from "../../../../models/Dca";
-import { useCreateDcaThirdForm } from "../hooks/useCreateDcaForm";
+import { UpdateDcaDTO } from "../../../models/Dca";
+import { useCreateBotThirdForm } from "../hooks/useCreateBotForm";
 
 type Props = {
   onSubmit: any;
@@ -14,7 +14,7 @@ type Props = {
 const ThirdForm = ({ onSubmit, onClickPrevious, defaultValues }: Props) => {
   const { t } = useTranslation("dca");
 
-  const { handleSubmit, control, fields } = useCreateDcaThirdForm();
+  const { handleSubmit, control, fields } = useCreateBotThirdForm();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

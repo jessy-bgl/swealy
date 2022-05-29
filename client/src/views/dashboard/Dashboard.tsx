@@ -1,62 +1,25 @@
-import { Grid, Tabs, Tab } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { Grid } from "@mui/material";
 
-import { DcaStatusEnum } from "../../models/Dca";
-import { GlobalStatistics } from "./statistics/global/GlobalStatistics";
-import { DcaStatistics } from "./statistics/dca/DcaStatistics";
-import { DcaInfo } from "./dca/DcaInfo";
-import { Dcas } from "./dca/Dcas";
-import { DcaTabs, useDashboard } from "./hooks/useDashboard";
+import { Statistics } from "./statistics/Statistics";
+import { Bots } from "../dca-bots/Bots";
+import { useDashboard } from "./hooks/useDashboard";
 
-type Props = {
-  dcaStatus: DcaStatusEnum;
-};
-
-const Dashboard = ({ dcaStatus }: Props) => {
-  const {
-    dcas,
-    isLoading,
-    selectedDcaId,
-    setSelectedDcaId,
-    selectedTab,
-    handleSelectTab,
-  } = useDashboard(dcaStatus);
-
+const Dashboard = () => {
   const { t } = useTranslation("dca");
 
-  const renderInfoStats = () => {
-    if (!selectedDcaId) return <GlobalStatistics />;
-    else if (selectedDcaId && selectedTab === DcaTabs.STATISTICS)
-      return <DcaStatistics />;
-    else if (selectedDcaId && selectedTab === DcaTabs.INFO)
-      return <DcaInfo data={dcas.find((dca) => dca.id === selectedDcaId)} />;
-  };
+  const { dcas, isLoading } = useDashboard();
 
   if (isLoading) return <div />;
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} md={4} xl={3}>
-        <Dcas
-          data={dcas}
-          showAddDca={dcaStatus === DcaStatusEnum.ACTIVE}
-          selectedDcaId={selectedDcaId}
-          setSelectedDcaId={setSelectedDcaId}
-        />
+      <Grid item xs={12} md={6}>
+        <Statistics />
       </Grid>
 
-      <Grid item xs={12} md={8} xl={9}>
-        {selectedDcaId && (
-          <Tabs
-            value={selectedTab}
-            onChange={handleSelectTab}
-            variant="fullWidth"
-          >
-            <Tab label={t("statistics")} value={DcaTabs.STATISTICS} />
-            <Tab label={t("info")} value={DcaTabs.INFO} />
-          </Tabs>
-        )}
-        {renderInfoStats()}
+      <Grid item xs={12} md={6}>
+        <Bots data={dcas} showAddDca={true} title={t("status.active")} />
       </Grid>
     </Grid>
   );

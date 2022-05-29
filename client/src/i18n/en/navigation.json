@@ -1,6 +1,7 @@
 {
   "dashboard": "Dashboard",
   "activeDcas": "Active bots",
+  "inactiveDcas": "Inactive bots",
   "pausedDcas": "Paused bots",
   "archivedDcas": "Archived bots",
   "theme": "Theme",

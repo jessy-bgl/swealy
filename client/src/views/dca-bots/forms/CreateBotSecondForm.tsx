@@ -2,8 +2,8 @@ import { Grid, TextField, Button, Skeleton, Autocomplete } from "@mui/material";
 import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { useCreateDcaSecondForm } from "../hooks/useCreateDcaForm";
-import { useFetchExchangePairs } from "../hooks/useDcaQueries";
+import { useCreateBotSecondForm } from "../hooks/useCreateBotForm";
+import { useFetchExchangePairs } from "../../../hooks/useDcaQueries";
 
 type Props = {
   exchangeId: string;
@@ -23,7 +23,7 @@ const SecondForm = ({
   const { t } = useTranslation("dca");
 
   const { handleSubmit, control, inputValue, setInputValue } =
-    useCreateDcaSecondForm();
+    useCreateBotSecondForm();
 
   const { data, isLoading } = useFetchExchangePairs(exchangeId);
 
