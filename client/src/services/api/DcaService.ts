@@ -8,6 +8,7 @@ import {
 
 const DcaService = {
   fetchDcas: (): Promise<Dca[]> => api.get("/dca"),
+  fetchOneDca: (id: string): Promise<Dca> => api.get(`/dca/${id}`),
   createDca: (dto: CreateDcaDTO): Promise<Dca> => api.post("/dca", dto),
   updateDca: (dto: UpdateDcaDTO): Promise<Dca> =>
     api.put(`/dca/${dto.id}`, dto),

@@ -127,7 +127,7 @@ const AssetsAllocationStats = ({ data }: { data: CurrenciesGlobalStats }) => {
       <Divider />
 
       <CardContent sx={{ padding: 0 }}>
-        <ResponsiveContainer height={240}>
+        <ResponsiveContainer height={240} width="99%">
           <PieChart>
             <Pie
               activeIndex={activeIndex}
@@ -135,13 +135,14 @@ const AssetsAllocationStats = ({ data }: { data: CurrenciesGlobalStats }) => {
               data={pieData}
               cx="50%"
               cy="50%"
+              width={100}
               innerRadius={60}
               outerRadius={80}
               paddingAngle={2}
               dataKey="value"
               onMouseEnter={onPieEnter}
             >
-              {pieData.map((entry, index) => (
+              {pieData.map((_, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={COLORS[index % COLORS.length]}

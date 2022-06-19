@@ -4,9 +4,9 @@ import { useTranslation } from "react-i18next";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { UpdateDcaDTO } from "../../../../models/Dca";
+import { UpdateDcaDTO } from "../../../models/Dca";
 
-const useCreateDcaFirstForm = () => {
+const useCreateBotFirstForm = () => {
   const { t } = useTranslation("dca");
   const schema = yup.object({
     exchange: yup.string().required(t("form.requiredField")),
@@ -21,7 +21,7 @@ const useCreateDcaFirstForm = () => {
   return { handleSubmit, errors, isDirty, control };
 };
 
-const useCreateDcaSecondForm = () => {
+const useCreateBotSecondForm = () => {
   const { t } = useTranslation("dca");
   const [inputValue, setInputValue] = useState("");
   const schema = yup.object({
@@ -37,7 +37,7 @@ const useCreateDcaSecondForm = () => {
   return { handleSubmit, errors, isDirty, control, inputValue, setInputValue };
 };
 
-const useCreateDcaThirdForm = () => {
+const useCreateBotThirdForm = () => {
   const { t } = useTranslation("dca");
   const fields = [
     { name: "amount" },
@@ -73,4 +73,4 @@ const useCreateDcaThirdForm = () => {
   return { handleSubmit, errors, isDirty, control, fields, register, reset };
 };
 
-export { useCreateDcaFirstForm, useCreateDcaSecondForm, useCreateDcaThirdForm };
+export { useCreateBotFirstForm, useCreateBotSecondForm, useCreateBotThirdForm };

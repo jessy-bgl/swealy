@@ -4,18 +4,18 @@ import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 import { Exchange } from "../../../models/Exchange";
-import { FirstForm } from "./forms/CreateDcaFirstForm";
-import { SecondForm } from "./forms/CreateDcaSecondForm";
-import { ThirdForm } from "./forms/CreateDcaThirdForm";
-import { DcaConfirmation } from "./forms/CreateDcaConfirmation";
-import { useCreateDcaDialog } from "./hooks/useCreateDcaDialog";
+import { FirstForm } from "../forms/CreateBotFirstForm";
+import { SecondForm } from "../forms/CreateBotSecondForm";
+import { ThirdForm } from "../forms/CreateBotThirdForm";
+import { BotConfirmation } from "../forms/CreateBotConfirmation";
+import { useCreateBotDialog } from "../hooks/useCreateBotDialog";
 
 type Props = {
   exchanges: Exchange[];
   onClose: () => void;
 };
 
-const CreateDcaDialog = ({ exchanges, onClose }: Props) => {
+const CreateBotDialog = ({ exchanges, onClose }: Props) => {
   const { t } = useTranslation("dca");
 
   const {
@@ -26,7 +26,7 @@ const CreateDcaDialog = ({ exchanges, onClose }: Props) => {
     handleSubmitThirdForm,
     handleClickPrevious,
     handleSubmit,
-  } = useCreateDcaDialog({ closeDialog: onClose });
+  } = useCreateBotDialog({ closeDialog: onClose });
 
   const renderForm = () => {
     if (currentStep === 1)
@@ -60,7 +60,7 @@ const CreateDcaDialog = ({ exchanges, onClose }: Props) => {
       );
     else
       return (
-        <DcaConfirmation
+        <BotConfirmation
           exchanges={exchanges}
           onSubmit={handleSubmit}
           onClickPrevious={handleClickPrevious}
@@ -86,4 +86,4 @@ const CreateDcaDialog = ({ exchanges, onClose }: Props) => {
   );
 };
 
-export { CreateDcaDialog };
+export { CreateBotDialog };

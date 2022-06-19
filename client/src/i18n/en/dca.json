@@ -7,7 +7,7 @@
   "noNextTransaction": "No planned buy",
   "summary": "Buy {{quantity}} {{cryptoToUse}} of {{cryptoToBuy}} every {{days}} days at {{hour}}h (UTC)",
   "statistics": "Statistics",
-  "info": "Info",
+  "info": "Information",
   "form": {
     "requiredField": "Required field",
     "exchange": "Exchange",
@@ -25,15 +25,15 @@
     "mustBeGreaterOrEqualTo": "Must be greater or equal to {{value}}"
   },
   "status": {
-    "active": "Active",
-    "paused": "Paused",
-    "archived": "Archived",
-    "delete": "Delete"
+    "active": "Active bots",
+    "paused": "Paused bots",
+    "archived": "Archived bots"
   },
   "action": {
     "activate": "Activate",
     "pause": "Pause",
-    "archive": "Archive"
+    "archive": "Archive",
+    "delete": "Delete"
   },
   "stats": {
     "dcaCounter": "DCA bots",

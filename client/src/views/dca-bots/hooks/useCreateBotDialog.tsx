@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-import { CreateDcaDTO } from "../../../../models/Dca";
-import { useCreateDca } from "./useDcaQueries";
+import { CreateDcaDTO } from "../../../models/Dca";
+import { useCreateDca } from "../../../hooks/useDcaQueries";
 
 type Props = {
   closeDialog: () => void;
 };
 
-const useCreateDcaDialog = ({ closeDialog }: Props) => {
+const useCreateBotDialog = ({ closeDialog }: Props) => {
   const [allFormsData, setFormsData] = useState({} as CreateDcaDTO);
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -56,4 +56,4 @@ const useCreateDcaDialog = ({ closeDialog }: Props) => {
   };
 };
 
-export { useCreateDcaDialog };
+export { useCreateBotDialog };

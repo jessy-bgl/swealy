@@ -11,14 +11,13 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-// import DashboardIcon from "@mui/icons-material/Dashboard";
+
+import DashboardIcon from "@mui/icons-material/Dashboard";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ExchangeIcon from "@mui/icons-material/AccountBalance";
 import TransactionsIcon from "@mui/icons-material/History";
 import AboutIcon from "@mui/icons-material/Info";
-import ActiveDcaIcon from "@mui/icons-material/SmartToy";
-import InactiveDcaIcon from "@mui/icons-material/Pause";
-import ArchivedDcaIcon from "@mui/icons-material/Archive";
+import BotsIcon from "@mui/icons-material/SmartToy";
 
 import ListItemWithIcon from "./components/ListItemTextIcon";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
@@ -53,10 +52,9 @@ export default function NavigationDrawer(props: Props) {
           container
           justifyContent="center"
           alignItems="center"
-          spacing={1}
           sx={{ height: "100%" }}
         >
-          <Grid item sx={{ marginTop: 0.7 }}>
+          <Grid item sx={{ marginTop: 0.7, marginRight: 1 }}>
             <SvgIcon component={Logo} inheritViewBox fontSize={"large"} />
           </Grid>
           <Grid item>
@@ -64,31 +62,18 @@ export default function NavigationDrawer(props: Props) {
           </Grid>
         </Grid>
       </div>
-      <Divider />
       <List>
-        {/* <ListItemWithIcon
+        <ListItemWithIcon
           name={t("dashboard")}
           muiIcon={<DashboardIcon />}
           onClick={() => handleClickItem("/")}
           selected={selectedItem === "/"}
-        /> */}
-        <ListItemWithIcon
-          name={t("activeDcas")}
-          muiIcon={<ActiveDcaIcon />}
-          onClick={() => handleClickItem("/dca/active")}
-          selected={selectedItem === "/dca/active"}
         />
         <ListItemWithIcon
-          name={t("pausedDcas")}
-          muiIcon={<InactiveDcaIcon />}
-          onClick={() => handleClickItem("/dca/paused")}
-          selected={selectedItem === "/dca/paused"}
-        />
-        <ListItemWithIcon
-          name={t("archivedDcas")}
-          muiIcon={<ArchivedDcaIcon />}
-          onClick={() => handleClickItem("/dca/archived")}
-          selected={selectedItem === "/dca/archived"}
+          name={t("inactiveDcas")}
+          muiIcon={<BotsIcon />}
+          onClick={() => handleClickItem("/inactive-bots")}
+          selected={selectedItem === "/inactive-bots"}
         />
         <Divider />
         <ListItemWithIcon
