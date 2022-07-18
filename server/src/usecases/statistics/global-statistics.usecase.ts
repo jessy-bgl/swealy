@@ -55,8 +55,8 @@ const getTransactionGlobalStats = (transactions: Transaction[]) => ({
 });
 
 @Injectable()
-class FetchGlobalStatsUseCase {
-  private readonly logger = new Logger(FetchGlobalStatsUseCase.name);
+class GlobalStatsUseCase {
+  private readonly logger = new Logger(GlobalStatsUseCase.name);
 
   constructor(
     private readonly dcaRepository: IDcaRepository,
@@ -89,4 +89,4 @@ class FetchGlobalStatsUseCase {
   };
 }
 
-export { FetchGlobalStatsUseCase };
+export { GlobalStatsUseCase };
