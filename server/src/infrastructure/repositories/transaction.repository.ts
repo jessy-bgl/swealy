@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 
 import {
   ICreateTransactionDTO,
+  IFetchTransactionsOptions,
   ITransactionRepository,
 } from '../../domain/repositories/transaction.repository';
 import { Transaction } from '../../domain/models/transaction';
@@ -20,10 +21,10 @@ class TransactionRepository implements ITransactionRepository {
     private readonly transactionEntity: Model<TransactionDocument>,
   ) {}
 
-  async fetch(): Promise<Transaction[]> {
+  async fetch(options: IFetchTransactionsOptions): Promise<Transaction[]> {
     try {
       const transactions = await this.transactionEntity
-        .find()
+        .find(options)
         .populate({ path: 'dca', populate: { path: 'exchange' } })
         .sort({ datetime: -1 })
         .lean();

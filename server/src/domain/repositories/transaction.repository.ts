@@ -21,8 +21,12 @@ interface ICreateManualTransactionDTO {
   description?: string;
 }
 
+interface IFetchTransactionsOptions {
+  dcaId?: string;
+}
+
 abstract class ITransactionRepository {
-  abstract fetch(): Promise<Transaction[]>;
+  abstract fetch(options?: IFetchTransactionsOptions): Promise<Transaction[]>;
   abstract fetchLastDcaAutoTransaction(dcaId: string): Promise<Transaction>;
   abstract create(
     createTransactionDTO: ICreateTransactionDTO,
@@ -36,4 +40,5 @@ export {
   ITransactionRepository,
   ICreateTransactionDTO,
   ICreateManualTransactionDTO,
+  IFetchTransactionsOptions,
 };

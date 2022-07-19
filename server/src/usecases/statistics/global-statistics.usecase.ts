@@ -11,7 +11,7 @@ import {
   GlobalStatsPresenter,
   TransactionGlobalStats,
   CurrenciesGlobalStats,
-} from './statistics.presenter';
+} from './global-statistics.presenter';
 
 const getActiveDcas = (dcas: Dca[]) =>
   dcas.filter((dca) => dca.status === DcaStatusEnum.ACTIVE);
