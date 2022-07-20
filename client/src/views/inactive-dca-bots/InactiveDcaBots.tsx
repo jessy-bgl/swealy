@@ -14,14 +14,18 @@ const InactiveDcaBots = () => {
   return (
     <Grid container spacing={2} justifyContent="center">
       <Grid item xs={12} md={7}>
-        <Bots data={pausedBots} showAddDca={false} title={t(`status.paused`)} />
+        <Bots
+          data={pausedBots}
+          showAddDca={false}
+          title={t(`status.pausedBots`)}
+        />
       </Grid>
 
       <Grid item xs={12} md={7}>
         <Bots
           data={archivedBots}
           showAddDca={false}
-          title={t(`status.archived`)}
+          title={t(`status.archivedBots`)}
         />
       </Grid>
     </Grid>

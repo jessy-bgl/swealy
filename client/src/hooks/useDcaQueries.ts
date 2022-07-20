@@ -16,7 +16,7 @@ const useFetchDcas = () => {
 };
 
 const useFetchOneDca = (id?: string) => {
-  return useQuery<Dca, Error>(SINGLE_DCA_QUERY_KEY, () => {
+  return useQuery<Dca, Error>([SINGLE_DCA_QUERY_KEY, { id }], () => {
     if (!id) throw new Error("Missing ID");
     return DcaService.fetchOneDca(id);
   });
@@ -51,12 +51,10 @@ const useUpdateDca = () => {
 
   return useMutation(DcaService.updateDca, {
     onSuccess: (updatedDca: Dca) => {
-      queryClient.setQueryData<Dca[]>(DCA_QUERY_KEY, (dcas) => {
-        if (!dcas) return [];
-        const dataIndex = dcas.findIndex((dca) => dca.id === updatedDca.id);
-        dcas[dataIndex] = updatedDca;
-        return dcas;
-      });
+      queryClient.setQueryData<Dca>(
+        [SINGLE_DCA_QUERY_KEY, { id: updatedDca.id }],
+        updatedDca
+      );
       enqueueSnackbar(t("updateDcaSuccess"), { variant: "success" });
     },
     onError: (error: Error) => {
@@ -72,8 +70,10 @@ const useUpdateDcaStatus = () => {
 
   return useMutation(DcaService.updateDcaStatus, {
     onSuccess: (updatedDca: Dca) => {
-      // this is a little hack, because using setQueryData do not trigger any update
-      queryClient.refetchQueries(DCA_QUERY_KEY);
+      queryClient.setQueryData<Dca>(
+        [SINGLE_DCA_QUERY_KEY, { id: updatedDca.id }],
+        updatedDca
+      );
       enqueueSnackbar(t("updateDcaSuccess"), { variant: "success" });
     },
     onError: (error: Error) => {

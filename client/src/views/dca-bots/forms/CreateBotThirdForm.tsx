@@ -12,7 +12,7 @@ type Props = {
 };
 
 const ThirdForm = ({ onSubmit, onClickPrevious, defaultValues }: Props) => {
-  const { t } = useTranslation("dca");
+  const { t } = useTranslation(["dca", "common"]);
 
   const { handleSubmit, control, fields } = useCreateBotThirdForm();
 
@@ -50,10 +50,10 @@ const ThirdForm = ({ onSubmit, onClickPrevious, defaultValues }: Props) => {
         <Grid item>
           <Grid container spacing={1} justifyContent="center">
             <Grid item>
-              <Button onClick={onClickPrevious}>{t("form.previous")}</Button>
+              <Button onClick={onClickPrevious}>{t("common:previous")}</Button>
             </Grid>
             <Grid item>
-              <Button type="submit">{t("form.next")}</Button>
+              <Button type="submit">{t("common:next")}</Button>
             </Grid>
           </Grid>
         </Grid>
