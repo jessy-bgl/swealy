@@ -18,16 +18,15 @@
     "frequencySummary": "Every {{days}} days at {{hour}}h (UTC)",
     "hour": "Hour (UTC)",
     "amount": "Amount",
-    "next": "Next",
-    "previous": "Previous",
-    "confirm": "Confirm",
-    "update": "Update",
     "mustBeGreaterOrEqualTo": "Must be greater or equal to {{value}}"
   },
   "status": {
-    "active": "Active bots",
-    "paused": "Paused bots",
-    "archived": "Archived bots"
+    "active": "Active",
+    "paused": "Paused",
+    "archived": "Archived",
+    "activeBots": "Active bots",
+    "pausedBots": "Paused bots",
+    "archivedBots": "Archived bots"
   },
   "action": {
     "activate": "Activate",

@@ -7,6 +7,7 @@ import * as locale from "date-fns/locale";
 import { Dca } from "../../models/Dca";
 import { getExchangeLogo } from "../../utils/exchange";
 import { LanguageContext } from "../../services/stores/language/LanguageContext";
+import { useBotConfig } from "../../utils/useBotConfig";
 
 type Props = {
   data: Dca;
@@ -17,6 +18,7 @@ const BotListItem = ({ data, onClick }: Props) => {
   const { t } = useTranslation("dca");
 
   const { language } = useContext(LanguageContext);
+  const { botConfigSummary } = useBotConfig(data);
 
   const showNextTransactionDate = (): string => {
     if (!data.nextTransactionDatetime) return t("noNextTransaction");
@@ -28,16 +30,6 @@ const BotListItem = ({ data, onClick }: Props) => {
       date: formattedDate,
       heure: `${date.getHours()}h`,
     });
-  };
-
-  const showSummary = () => {
-    const paiSplitted = data.pair.split("/");
-    const cryptoToUse = paiSplitted[1];
-    const cryptoToBuy = paiSplitted[0];
-    const days = data.frequencyInDays;
-    const hour = data.hour;
-    const quantity = data.amount;
-    return t("summary", { quantity, cryptoToUse, cryptoToBuy, days, hour });
   };
 
   return (
@@ -66,7 +58,7 @@ const BotListItem = ({ data, onClick }: Props) => {
           <Typography component="span">{data.pair}</Typography>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="body2">{showSummary()}</Typography>
+          <Typography variant="body2">{botConfigSummary}</Typography>
         </Grid>
         <Grid item xs={12}>
           <Typography variant="body2" color="primary">

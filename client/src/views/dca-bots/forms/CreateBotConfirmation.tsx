@@ -29,7 +29,7 @@ const BotConfirmation = ({
   data,
   onClickPrevious,
 }: Props) => {
-  const { t } = useTranslation("dca");
+  const { t } = useTranslation(["dca", "common"]);
 
   const items = [
     {
@@ -68,10 +68,10 @@ const BotConfirmation = ({
       <Grid item>
         <Grid container spacing={1} justifyContent="center">
           <Grid item>
-            <Button onClick={onClickPrevious}>{t("form.previous")}</Button>
+            <Button onClick={onClickPrevious}>{t("common:previous")}</Button>
           </Grid>
           <Grid item>
-            <Button onClick={onSubmit}>{t("form.confirm")}</Button>
+            <Button onClick={onSubmit}>{t("common:confirm")}</Button>
           </Grid>
         </Grid>
       </Grid>

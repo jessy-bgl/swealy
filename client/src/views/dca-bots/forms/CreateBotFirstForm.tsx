@@ -12,7 +12,7 @@ type Props = {
 };
 
 const FirstForm = ({ exchanges, onSubmit, defaultValues }: Props) => {
-  const { t } = useTranslation("dca");
+  const { t } = useTranslation(["dca", "common"]);
 
   const { handleSubmit, control } = useCreateBotFirstForm();
 
@@ -51,7 +51,7 @@ const FirstForm = ({ exchanges, onSubmit, defaultValues }: Props) => {
           />
         </Grid>
         <Grid item>
-          <Button type="submit">{t("form.next")}</Button>
+          <Button type="submit">{t("common:next")}</Button>
         </Grid>
       </Grid>
     </form>

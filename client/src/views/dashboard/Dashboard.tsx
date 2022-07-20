@@ -19,7 +19,7 @@ const Dashboard = () => {
       </Grid>
 
       <Grid item xs={12} md={6}>
-        <Bots data={dcas} showAddDca={true} title={t("status.active")} />
+        <Bots data={dcas} showAddDca={true} title={t("status.activeBots")} />
       </Grid>
     </Grid>
   );

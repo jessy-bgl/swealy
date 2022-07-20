@@ -14,5 +14,7 @@
   "yes": "Oui",
   "no": "Non",
   "none": "Aucun",
-  "goBack": "Revenir en arrière"
+  "goBack": "Revenir en arrière",
+  "next": "Suivant",
+  "previous": "Précédent"
 }

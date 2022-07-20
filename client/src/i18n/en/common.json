@@ -14,5 +14,7 @@
   "yes": "Yes",
   "no": "No",
   "none": "None",
-  "goBack": "Back"
+  "goBack": "Back",
+  "next": "Next",
+  "previous": "Previous"
 }

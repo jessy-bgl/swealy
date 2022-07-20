@@ -18,16 +18,15 @@
     "frequencySummary": "Tous les {{days}} jours à {{hour}}h (UTC)",
     "hour": "Heure (UTC)",
     "amount": "Montant",
-    "next": "Suivant",
-    "previous": "Précédent",
-    "confirm": "Confirmer",
-    "update": "Mettre à jour",
     "mustBeGreaterOrEqualTo": "Doit être supérieur ou égal à {{value}}"
   },
   "status": {
-    "active": "Bots actifs",
-    "paused": "Bots en pause",
-    "archived": "Bots archivés"
+    "active": "Actif",
+    "paused": "En pause",
+    "archived": "Archivé",
+    "activeBots": "Bots actifs",
+    "pausedBots": "Bots en pause",
+    "archivedBots": "Bots archivés"
   },
   "action": {
     "activate": "Activer",
