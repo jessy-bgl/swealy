@@ -1,5 +1,7 @@
+import { Card } from "@mui/material";
+
 const BotTransactionsChart = () => {
-  return <div></div>;
+  return <Card></Card>;
 };
 
 export { BotTransactionsChart };

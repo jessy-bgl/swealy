@@ -137,7 +137,7 @@ const BotInfo = ({ data, onClickEdit }: Props) => {
             </Tooltip>
           </Grid>
           {getActions().map((button) => (
-            <Grid item>
+            <Grid item key={button.label}>
               <Tooltip title={button.label}>
                 <IconButton onClick={button.onClick}>
                   <Avatar

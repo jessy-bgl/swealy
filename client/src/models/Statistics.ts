@@ -26,9 +26,19 @@ interface GlobalStats {
   currencies: CurrenciesGlobalStats;
 }
 
+type BotTransactionsSummary = {
+  totalSize: number;
+  avgPrice: number;
+  totalInvested: number;
+  currentValue: number;
+  pnl: number;
+  pnlPercentage: number;
+};
+
 export type {
   GlobalStats,
   TransactionGlobalStats,
   DcaGlobalStats,
   CurrenciesGlobalStats,
+  BotTransactionsSummary,
 };
