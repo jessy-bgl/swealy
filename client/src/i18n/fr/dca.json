@@ -37,6 +37,12 @@
   "stats": {
     "dcaCounter": "bots DCA",
     "activeDcaCounter": "Bots actifs",
-    "inactiveDcaCounter": "Bots inactifs"
+    "inactiveDcaCounter": "Bots inactifs",
+    "totalSize": "Quantité totale",
+    "totalInvested": "Total investi (USD)",
+    "currentValue": "Valeur actuelle (USD)",
+    "avgPrice": "Prix d'achat moyen",
+    "pnl": "Pertes/Profits (USD)",
+    "pnlPercentage": "PnL (%)"
   }
 }

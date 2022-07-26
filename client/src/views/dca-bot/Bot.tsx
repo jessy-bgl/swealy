@@ -8,6 +8,7 @@ import { useFetchOneDca } from "../../hooks/useDcaQueries";
 import { BotTransactionsSummary } from "./BotTransactionsSummary";
 import { BotInfoDialog } from "./BotInfoDialog";
 import { BotInfo } from "./BotInfo";
+import { BotTransactionsChart } from "./BotTransactionsChart";
 
 const Bot = () => {
   const { t } = useTranslation("common");
@@ -19,9 +20,12 @@ const Bot = () => {
 
   if (fetchDcaQuery.isLoading || !fetchDcaQuery.data) return <div />;
 
+  // TODO : show an error message
+  if (!id) return <div />;
+
   return (
     <>
-      <Grid container direction="column" spacing={1}>
+      <Grid container direction="column" spacing={2}>
         <Grid item>
           <Button
             size="small"
@@ -44,10 +48,10 @@ const Bot = () => {
         <Grid item>
           <Grid container spacing={2} alignItems="stretch">
             <Grid item xs={12} md={4}>
-              <BotTransactionsSummary />
+              <BotTransactionsSummary dcaId={id} />
             </Grid>
             <Grid item xs={12} md={8}>
-              <BotTransactionsSummary />
+              <BotTransactionsChart />
             </Grid>
           </Grid>
         </Grid>
