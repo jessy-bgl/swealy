@@ -15,7 +15,7 @@ const handleCoingeckoApiError = (e: any) => {
     throw new HttpException(
       {
         status: e.response.status || 500,
-        error: `Coingecko API error : ${e.response.data.error}`,
+        error: `Coingecko API error : ${e.response.data.status.error_message}`,
       },
       e.response.status || 500,
     );
