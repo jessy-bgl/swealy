@@ -22,7 +22,7 @@ interface ICreateManualTransactionDTO {
 }
 
 interface IFetchTransactionsOptions {
-  dcaId?: string;
+  dca?: string;
 }
 
 abstract class ITransactionRepository {

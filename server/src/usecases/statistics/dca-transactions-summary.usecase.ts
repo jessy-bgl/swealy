@@ -18,7 +18,7 @@ class DcaTransactionsSummaryUseCase {
     const dca = await this.dcaRepository.fetchOne(id);
     if (!dca) throw new NotFoundException('dca not found');
     const transactions = await this.transactionRepository.fetch({
-      dcaId: id,
+      dca: id,
     });
     const asset = dca.pair.split('/')[0];
     const currentPrice = await this.coinRepository.fetchPrice(asset);
@@ -32,7 +32,8 @@ class DcaTransactionsSummaryUseCase {
       meanBy(transactions, (t) => t.price),
       2,
     );
-    stats.pnl = round(stats.totalSize * currentPrice - stats.totalInvested, 2);
+    stats.currentValue = round(stats.totalSize * currentPrice, 2);
+    stats.pnl = round(stats.currentValue - stats.totalInvested, 2);
     stats.pnlPercentage = round((stats.pnl * 100) / stats.totalInvested, 2);
     return stats;
   };

@@ -8,6 +8,8 @@ class DcaTransactionsSummaryPresenter {
   @ApiProperty()
   totalInvested: number;
   @ApiProperty()
+  currentValue: number;
+  @ApiProperty()
   pnl: number;
   @ApiProperty()
   pnlPercentage: number;
