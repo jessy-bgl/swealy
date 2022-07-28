@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { sumBy, meanBy, round } from 'lodash';
+import { sumBy, sum, round } from 'lodash';
 
 import { IDcaRepository } from '../../domain/repositories/dca.repository.interface';
 import { ICoinRepository } from '../../domain/repositories/coin.repository.interface';
@@ -32,7 +32,8 @@ class DcaTransactionsSummaryUseCase {
       2,
     );
     stats.avgPrice = round(
-      meanBy(transactions, (t) => t.price),
+      sum(transactions.map((tr) => tr.size * tr.price)) /
+        sumBy(transactions, (tr) => tr.size),
       2,
     );
     stats.currentValue = round(stats.totalSize * currentPrice, 2);
