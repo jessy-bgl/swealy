@@ -77,6 +77,7 @@ const BotTransactionsSummary = ({ dcaId }: Props) => {
                   color:
                     data.pnl < 0 ? palette.error.main : palette.success.main,
                 }}
+                sx={{ textAlign: "right" }}
               />
             }
           >
