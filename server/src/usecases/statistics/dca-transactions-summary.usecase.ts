@@ -23,7 +23,10 @@ class DcaTransactionsSummaryUseCase {
     const asset = dca.pair.split('/')[0];
     const currentPrice = await this.coinRepository.fetchPrice(asset);
     const stats = new DcaTransactionsSummaryPresenter();
-    stats.totalSize = sumBy(transactions, (t) => t.size);
+    stats.totalSize = round(
+      sumBy(transactions, (t) => t.size),
+      6,
+    );
     stats.totalInvested = round(
       sumBy(transactions, (t) => t.amount),
       2,
