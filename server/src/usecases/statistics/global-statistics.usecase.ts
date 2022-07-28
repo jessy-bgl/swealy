@@ -28,7 +28,7 @@ const getDcasWithDailyAmount = (dcas: Dca[]) =>
 const getCurrenciesGlobalStats = (dcas: Dca[]): CurrenciesGlobalStats => {
   const activeDcasWithDailyAmount = getDcasWithDailyAmount(dcas);
   const dcasTotalDailyAmount = getDcasTotalDailyAmount(dcas);
-  return _(activeDcasWithDailyAmount)
+  let currenciesGlobalStats = _(activeDcasWithDailyAmount)
     .groupBy('pair')
     .map((dca, pair) => ({
       name: pair.split('/')[0],
@@ -37,6 +37,14 @@ const getCurrenciesGlobalStats = (dcas: Dca[]): CurrenciesGlobalStats => {
       ),
     }))
     .value();
+  currenciesGlobalStats = _(currenciesGlobalStats)
+    .groupBy('name')
+    .map((globalStats, name) => ({
+      name,
+      weight: _.sumBy(globalStats, 'weight'),
+    }))
+    .value();
+  return currenciesGlobalStats;
 };
 
 const getDcaGlobalStats = (dcas: Dca[]) => ({
