@@ -19,6 +19,7 @@ class DcaTransactionsSummaryUseCase {
     if (!dca) throw new NotFoundException('dca not found');
     const transactions = await this.transactionRepository.fetch({
       dca: id,
+      success: true,
     });
     const asset = dca.pair.split('/')[0];
     const currentPrice = await this.coinRepository.fetchPrice(asset);

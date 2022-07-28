@@ -23,6 +23,7 @@ interface ICreateManualTransactionDTO {
 
 interface IFetchTransactionsOptions {
   dca?: string;
+  success?: boolean;
 }
 
 abstract class ITransactionRepository {
