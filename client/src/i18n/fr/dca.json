@@ -41,7 +41,7 @@
     "totalSize": "Quantité totale",
     "totalInvested": "Total investi (USD)",
     "currentValue": "Valeur actuelle (USD)",
-    "avgPrice": "Prix d'achat moyen",
+    "avgPrice": "Prix d'achat moyen (USD)",
     "pnl": "Pertes/Profits (USD)",
     "pnlPercentage": "PnL (%)"
   }
