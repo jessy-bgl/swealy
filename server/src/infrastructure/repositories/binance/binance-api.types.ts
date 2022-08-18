@@ -46,12 +46,14 @@ interface IBinanceApiPlaceOrderParams {
   type: OrderTypesEnum;
   quoteOrderQty: number;
   newOrderRespType: BinanceOrderResponseTypesEnum;
+  recvWindow?: number;
+  // see more on https://binance-docs.github.io/apidocs/spot/en/#new-order-trade
 }
 
 interface IBinanceApiPlacerOrderResult {
   symbol: string;
   orderId: number;
-  orderListId: number; //Unless OCO, value will be -1
+  orderListId: number; // Unless part of an OCO, value will always be -1
   clientOrderId: string;
   transactTime: number;
   price: string;

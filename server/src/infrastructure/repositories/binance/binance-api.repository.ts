@@ -90,6 +90,7 @@ class BinanceApiRepository implements IExchangeApiRepository {
         side: OrderSidesEnum.BUY,
         type: OrderTypesEnum.MARKET,
         quoteOrderQty: dca.amount,
+        recvWindow: 60000,
         newOrderRespType: BinanceOrderResponseTypesEnum.FULL,
       };
       const headers = this.getAuthRequestHeaders(dca.exchange.apiKey);
