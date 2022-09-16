@@ -68,11 +68,16 @@ interface IBinanceApiPlacerOrderResult {
   // see more on https://binance-docs.github.io/apidocs/spot/en/#new-order-trade
 }
 
+interface IServerTimeResult {
+  serverTime: number;
+}
+
 export type {
   IBinanceAuthHttpHeaders,
   IBinanceAuthHttpParams,
   IBinanceApiPlaceOrderParams,
   IBinanceApiPlacerOrderResult,
   IBinanceExchangeInfoResult,
+  IServerTimeResult,
 };
 export { BinanceOrderResponseTypesEnum };
