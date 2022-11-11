@@ -19,6 +19,7 @@ import {
   IBinanceAuthHttpHeaders,
   IBinanceAuthHttpParams,
   IBinanceExchangeInfoResult,
+  IServerTimeResult,
 } from './binance-api.types';
 
 const BINANCE_API_BASE_URL = 'https://api.binance.com';
@@ -45,10 +46,10 @@ class BinanceApiRepository implements IExchangeApiRepository {
     return { 'X-MBX-APIKEY': apiKey };
   }
 
-  private getAuthRequestParams(
+  private async getAuthRequestParams(
     apiSecret: string,
     params?: any,
-  ): IBinanceAuthHttpParams {
+  ): Promise<IBinanceAuthHttpParams> {
     let signature_payload = '';
     if (params) {
       for (const [key, value] of Object.entries(params)) {
@@ -56,7 +57,7 @@ class BinanceApiRepository implements IExchangeApiRepository {
         else signature_payload += `&${key}=${value}`;
       }
     }
-    const timestamp = Date.now().toString();
+    const timestamp = await this.getServerTime();
     signature_payload += params
       ? `&timestamp=${timestamp}`
       : `timestamp=${timestamp}`;
@@ -65,6 +66,20 @@ class BinanceApiRepository implements IExchangeApiRepository {
       .update(signature_payload)
       .digest('hex');
     return { timestamp, signature };
+  }
+
+  private async getServerTime(): Promise<string> {
+    try {
+      const endpoint = `/api/v3/time`;
+      const res = await this.httpService.get<IServerTimeResult>(
+        `${BINANCE_API_BASE_URL}${endpoint}`,
+      );
+      if (!res.data || !res.data.serverTime)
+        throw new Error('serverTime not found');
+      return res.data.serverTime.toString();
+    } catch (e) {
+      handleBinanceApiError(e);
+    }
   }
 
   async checkApiKeyValidity(exchange: Exchange): Promise<void> {
@@ -94,7 +109,7 @@ class BinanceApiRepository implements IExchangeApiRepository {
         newOrderRespType: BinanceOrderResponseTypesEnum.FULL,
       };
       const headers = this.getAuthRequestHeaders(dca.exchange.apiKey);
-      const { timestamp, signature } = this.getAuthRequestParams(
+      const { timestamp, signature } = await this.getAuthRequestParams(
         dca.exchange.apiSecret,
         requestParams,
       );
